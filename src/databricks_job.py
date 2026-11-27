@@ -1,8 +1,4 @@
-"""Databricks Spark/Delta implementation.
-
-The local pipeline is the executable no-cloud reference path. This script is the
-equivalent managed-table implementation intended for a Databricks Python Job.
-"""
+"""Build managed Delta tables from bounded PGN files in Databricks or local Spark."""
 
 from __future__ import annotations
 

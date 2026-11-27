@@ -1,45 +1,54 @@
 # Publication notes
 
-The dashboard is ready to serve from `main:/docs`. No repository remote was created, no push or GitHub Pages deployment was performed, and no cloud or billing settings were changed. The approved pipeline code and Databricks configuration are unchanged.
+The static dashboard is ready for GitHub Pages from `main:/docs`. The outcome captions now wrap within their columns on narrow screens. No dashboard data, pipeline logic or Databricks configuration changed in this revision. Published material contains aggregate statistics only, with no real player names, game IDs, raw PGN or private workspace details.
 
-## Changes
+## Responsive layout verification
 
-- `docs/index.html`, `docs/assets/`: responsive, static analytics dashboard with opening filters, outcome and speed charts, selectable rating buckets, data quality, source and pipeline summary. Relative asset paths and `.nojekyll` support a GitHub Pages project subdirectory.
-- `scripts/export_dashboard.py`: exports aggregate-only JSON from verified Gold CSVs and checks every group against Silver and the input receipt. No actual player names, game IDs or raw PGN are exported.
-- `scripts/test_dashboard.cjs`, `tests/test_dashboard_export.py`: browser interaction and aggregate export checks.
-- All existing Markdown notes were rewritten in plain English. The README links to the intended Pages URL, dashboard source, screenshot and reproduction commands.
+An independent browser check found the white and black outcome captions overlapping at 320 px. Text-range measurements reproduced the same result before the fix. The narrow-screen grid now allows caption wrapping rather than forcing text past the column boundary.
 
-Actual sample: 10,000 Lichess archive records (October 2026), 9,996 accepted, four quarantined, zero inserted on replay. Source time range for valid games: 1 October 2026, 00:00:00–00:08:08 UTC. No full archive claim. [Run evidence](docs/run-evidence.md) gives the counts, checksums and timings.
+| Viewport | Before: white-to-black gap | After | Result |
+| --- | ---: | ---: | --- |
+| 320 px | −1.23 px | 29.41 px | Pass |
+| 360 px | 12.09 px | 42.73 px | Pass |
+| 390 px | 22.09 px | 22.09 px | Pass |
+| 560 px | 78.77 px | 78.77 px | Pass |
+| 768 px | 126.11 px | 126.11 px | Pass |
+| 1,440 px | 276.78 px | 276.78 px | Pass |
 
-## Local checks
+The new browser regression failed on the old layout and passed after the fix. It checks every outcome caption's text bounds against its own column and adjacent captions, as well as the existing interaction and page-width checks.
 
-| Check | Result |
-| --- | --- |
-| `.venv/bin/python -m pytest -ra` | 21 passed, optional Spark module skipped |
-| Full local Spark/Delta suite, using the documented host/JAR setup and 100-game validation sample | 29 passed in 47.33 s |
-| `ruff check .`, `ruff format --check src tests scripts`, `node --check` for both JS files | Passed |
-| Export after the 10,000-game replay | Byte-identical SHA-256 `b299b5a7b654f0be438787cdb76f04ae7be9f78a825e1080a4b02ed76a6a8165` |
-| Playwright 1.65.1 with local Chrome | Passed snapshot totals, opening search/minimum/sort/limit/reset, rating metric and bucket selection, 1,440/390/320 px widths, and no console errors |
-| Pipeline comparison against commit `765bd91` | No differences in `src`, `pyproject.toml`, `databricks.yml` or `resources/chess_lakehouse.job.yml` |
-
-To reproduce the browser check (requires Node.js and installed Google Chrome):
+To reproduce (requires Node.js and installed Google Chrome):
 
 ```bash
 npm --prefix output/dashboard-browser install --no-save playwright@1.65.1
 mkdir -p output/dashboard-preview-server
 ln -sfn "$PWD/docs" output/dashboard-preview-server/chess-data-lakehouse
-.venv/bin/python -m http.server 8765 --bind 127.0.0.1 --directory output/dashboard-preview-server
+.venv/bin/python -m http.server 18765 --bind 127.0.0.1 --directory output/dashboard-preview-server
 ```
 
-While the server runs, in a second terminal at the project root:
+In a second terminal at the project root:
 
 ```bash
 NODE_PATH="$PWD/output/dashboard-browser/node_modules" \
 DASHBOARD_BROWSER_CHANNEL=chrome \
-DASHBOARD_URL=http://127.0.0.1:8765/chess-data-lakehouse/ \
+DASHBOARD_URL=http://127.0.0.1:18765/chess-data-lakehouse/ \
 node scripts/test_dashboard.cjs
 ```
 
-## Deployment
+## Databricks verification
 
-In the repository's GitHub Pages settings, select the `main` branch and `/docs` folder. The intended URL is [https://tasachii.github.io/chess-data-lakehouse/](https://tasachii.github.io/chess-data-lakehouse/). After publication, confirm the HTML, CSS, JavaScript and snapshot JSON load at that URL. The live site was not tested during local development. Databricks runtime and bundle CLI execution also remain unverified.
+Official Databricks CLI bundle validation passed. The serverless job ran successfully twice on the same 10,000-game October 2026 sample. Direct SQL checks confirmed seven managed Delta tables, 10,000 Bronze rows and distinct IDs, 9,996 Silver rows, four quarantined, 9,996 games summed in each of three Gold tables, two run-history rows and zero inserted / 10,000 duplicates on the last run. The dashboard remains a static sample; continuous ingestion and the full archive were not tested.
+
+[Run evidence](docs/run-evidence.md) records source checksums and measurements. [Operations notes](DEV_HANDOFF.md#databricks-run-instructions) include the example deployment and SQL checks.
+
+## Local checks
+
+- `.venv/bin/python -m pytest -ra`: 21 passed, one optional Spark module skipped.
+- Full local PySpark/Delta suite with the 100-game validation sample and explicit host/JAR setup: 29 passed in 45.18 s (45.53 s wall clock). See [run evidence](docs/run-evidence.md).
+- Playwright browser interaction and outcome-caption checks: passed at all six widths.
+- Python lint and formatting, Python compilation, JavaScript syntax and local Markdown links: passed.
+- Snapshot SHA-256 remains `b299b5a7b654f0be438787cdb76f04ae7be9f78a825e1080a4b02ed76a6a8165`.
+
+## GitHub Pages deployment
+
+Select the `main` branch and `/docs` folder in GitHub Pages settings. The intended URL is [https://tasachii.github.io/chess-data-lakehouse/](https://tasachii.github.io/chess-data-lakehouse/). The final live URL must be checked after publication. This revision was committed locally without pushing or changing cloud configuration.

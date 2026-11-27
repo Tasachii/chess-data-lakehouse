@@ -119,11 +119,21 @@ SPARK_LOCAL_IP=127.0.0.1 CHESS_TEST_DELTA=1 \
   .venv/bin/python -m pytest -s -ra
 ```
 
-Independent QA approved the local pipeline at commit `94f58a11304cc11c92e102f3894aabcbdcc80ce9`; the dashboard release leaves that pipeline unchanged. The measured test and run evidence is in [Run evidence](docs/run-evidence.md). The optional locally executed Delta JAR route and browser test commands are in [Operations and validation notes](DEV_HANDOFF.md) and [Publication notes](PUBLICATION_HANDOFF.md).
+Independent testing confirmed the local pipeline at commit `94f58a11304cc11c92e102f3894aabcbdcc80ce9`. The dashboard does not change pipeline behavior. The measured test and run evidence is in [Run evidence](docs/run-evidence.md). The optional locally executed Delta JAR route and browser test commands are in [Operations and validation notes](DEV_HANDOFF.md) and [Publication notes](PUBLICATION_HANDOFF.md).
 
 ## Databricks
 
-The [Databricks bundle](databricks.yml) configures a serverless Python job with managed Delta tables. The local Spark and Delta path has been verified on the synthetic fixture and 100 actual games, including replay and data parity. **Databricks workspace execution and bundle CLI validation have not been verified.** Running the cloud job requires an existing authorized Unity Catalog workspace and may incur charges. See [cloud run instructions](DEV_HANDOFF.md#databricks-run-instructions).
+The [Databricks bundle](databricks.yml) passed official CLI validation and was deployed as a serverless Python job. Two runs completed successfully on the same bounded 10,000-game October sample. Direct SQL queries after the second run confirmed the following results across seven managed Delta tables:
+
+| Cloud verification | Result |
+| --- | ---: |
+| Bronze rows / distinct game IDs | 10,000 / 10,000 |
+| Silver rows / quarantine rows | 9,996 / 4 |
+| Sum of games in each of the three Gold tables | 9,996 |
+| Run history rows | 2 |
+| Second-run inserts / duplicates | 0 / 10,000 |
+
+The replay demonstrates idempotency: it keeps the same unique records and adds no duplicate games. The dashboard is a static snapshot; the Databricks job is a bounded batch, not live continuous ingestion. Local Spark and Delta tests also verified parity on a separate 100-game sample. See [cloud run instructions](DEV_HANDOFF.md#databricks-run-instructions) for an authorized workspace.
 
 ## Source, license and limits
 

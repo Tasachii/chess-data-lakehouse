@@ -1,6 +1,6 @@
 # Measured run evidence
 
-All measurements below are from local runs on 27 November 2026 with Python 3.12. The publisher is the [Lichess Open Database](https://database.lichess.org/), and the source is the [October 2026 rated standard archive](https://database.lichess.org/standard/lichess_db_standard_rated_2026-10.pgn.zst), licensed CC0 1.0. Only bounded prefixes were downloaded; the full archive was not processed.
+Local measurements were recorded on 27 November 2026 with Python 3.12. Databricks SQL results are listed separately below. The publisher is the [Lichess Open Database](https://database.lichess.org/), and the source is the [October 2026 rated standard archive](https://database.lichess.org/standard/lichess_db_standard_rated_2026-10.pgn.zst), licensed CC0 1.0. Only bounded prefixes were downloaded; the full archive was not processed.
 
 ## Dashboard sample
 
@@ -37,12 +37,28 @@ The local pipeline and PySpark/Delta implementation were validated on a smaller 
 
 There were 82 opening groups, 10 rating buckets and three speeds. Local Spark matched all 100 Silver records and all 95 Gold groups. The managed Delta test created and replayed tables for this real sample and the synthetic fixture, with no duplicate keys. With PySpark 3.5.3, Delta 3.3.2 and Java 21, the corrected full suite passed 27 tests in 47.22 s. The 100-game sample is not the dashboard sample.
 
-Independent QA approved the local pipeline at commit `94f58a11304cc11c92e102f3894aabcbdcc80ce9`. The regression cases covered alternate game URLs, incomplete PGN boundaries, truncated Zstandard input, missing fields, overlap and empty delivery, and run lineage. Original independent reproduction scripts passed eight cases; three deliberately truncated files were rejected without publication. The local fixture and real replays preserved all aggregate results.
+Independent testing confirmed the local pipeline at commit `94f58a11304cc11c92e102f3894aabcbdcc80ce9`. The regression cases covered alternate game URLs, incomplete PGN boundaries, truncated Zstandard input, missing fields, overlap and empty delivery, and run lineage. Original independent reproduction scripts passed eight cases; three deliberately truncated files were rejected without publication. The local fixture and real replays preserved all aggregate results.
 
 ## Dashboard release verification
 
-The local base suite, including two aggregate-export tests, passed 21 tests with the optional Spark module skipped. The full local Spark/Delta suite passed 29 tests in 47.33 s (47.65 s wall clock), using the original 100-game validation sample. Browser checks exercised the 10,000-game dashboard at 1,440, 390 and 320 pixel widths, including opening search, filters, sorting, rating selection and absence of JavaScript errors. The pipeline source and Databricks configuration are unchanged from the independently approved version.
+The local base suite, including two aggregate-export tests, passed 21 tests with the optional Spark module skipped. The full local Spark/Delta suite passed 29 tests in 45.18 s (45.53 s wall clock) on the final layout revision, using the original 100-game validation sample. Browser checks exercised the 10,000-game dashboard at 320, 360, 390, 560, 768 and 1,440 pixel widths. Opening search, filters, sorting and rating selection passed with no JavaScript errors. A 320 px outcome-caption overlap was reproduced and fixed: the measured horizontal gap between white and black captions improved from −1.23 px to 29.41 px. All six widths now pass the caption containment and overlap checks. Pipeline behavior and Databricks configuration are unchanged.
+
+## Databricks cloud verification
+
+Official Databricks CLI bundle validation passed. The deployed serverless job ran twice successfully on the same bounded 10,000-game October 2026 sample and created seven managed Delta tables. SQL queries after the second execution verified:
+
+| Check | Observed |
+| --- | ---: |
+| Bronze rows / distinct IDs | 10,000 / 10,000 |
+| Silver rows | 9,996 |
+| Quarantine rows | 4 |
+| Sum of `games` in each of the three Gold tables | 9,996 |
+| `ingestion_runs` rows | 2 |
+| Last run `inserted` | 0 |
+| Last run `duplicates` | 10,000 |
+
+The cloud result confirms that the same input can be replayed without duplicate records. It does not demonstrate continuous ingestion or processing of the full archive.
 
 ## Limitations
 
-Runtime depends on the machine and network; these measurements are not a scale benchmark. The archive prefix is not a random or representative sample. Databricks bundle YAML and script references were checked locally, but the CLI and workspace execution were not verified. No cloud services or billing changes were used.
+Runtime depends on the machine and network; these measurements are not a scale benchmark. The archive prefix is not a random or representative sample. The dashboard is a static snapshot, and the serverless job was verified only for the bounded sample described above.

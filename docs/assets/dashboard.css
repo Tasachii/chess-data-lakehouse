@@ -850,7 +850,7 @@ input::placeholder {
   }
   .outcome-stat {
     display: grid;
-    grid-template-columns: 9px 1fr;
+    grid-template-columns: 9px minmax(0, 1fr);
     gap: 3px 5px;
     align-items: center;
   }
@@ -860,6 +860,8 @@ input::placeholder {
   .outcome-stat span {
     font-size: 10px;
     grid-column: 2;
+    white-space: normal;
+    overflow-wrap: anywhere;
   }
   .section-title {
     margin: 29px 0 12px;

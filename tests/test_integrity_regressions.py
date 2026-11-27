@@ -1,4 +1,4 @@
-"""Regression cases for TEST1-01 through TEST1-04."""
+"""Test game IDs, record boundaries, truncated input and source lineage."""
 
 import hashlib
 import json

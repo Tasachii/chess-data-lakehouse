@@ -1,6 +1,6 @@
 # Operations and validation notes
 
-These notes explain how to run, inspect and reproduce the lakehouse. The local pipeline passed independent QA at commit `94f58a11304cc11c92e102f3894aabcbdcc80ce9`. The dashboard adds an aggregate exporter, tests and static files; the approved pipeline is unchanged. Databricks workspace execution remains unverified.
+These notes explain how to run, inspect and reproduce the lakehouse. The local pipeline passed independent testing at commit `94f58a11304cc11c92e102f3894aabcbdcc80ce9`. The dashboard adds an aggregate exporter, tests and static files without changing pipeline behavior. Databricks CLI validation, deployment, two serverless job runs and the subsequent SQL checks also passed.
 
 ## Local replay and lineage
 
@@ -51,7 +51,20 @@ Generate `data/real_sample_100.pgn` using the 100-game download command in the R
 
 ## Databricks run instructions
 
-The following is a documented deployment path, not a record of a successful cloud run. It requires an existing authorized Unity Catalog workspace, the Databricks CLI, serverless Jobs permission and the ability to create tables and read/write a volume. Cloud compute may incur charges.
+The official Databricks CLI successfully validated the bundle, which was deployed as a serverless job. Both cloud runs succeeded on the same 10,000-game October 2026 sample. SQL queries verified all seven managed Delta tables:
+
+| Cloud check after the second run | Verified result |
+| --- | ---: |
+| Bronze rows | 10,000 |
+| Distinct Bronze game IDs | 10,000 |
+| Silver rows | 9,996 |
+| Quarantine rows | 4 |
+| Games summed in each Gold table | 9,996 |
+| Run history rows | 2 |
+| Last run inserted | 0 |
+| Last run duplicates | 10,000 |
+
+These counts show the replay did not add duplicates. This was two bounded runs, not continuous ingestion of new games. The example commands below use the public bundle's sample schema and volume names; they do not identify any particular workspace. Running them requires an authorized Unity Catalog workspace, Databricks CLI, serverless Jobs permission and table/volume permissions. Cloud compute may incur charges.
 
 1. Create a dedicated schema and volume in the workspace:
 
@@ -60,25 +73,30 @@ The following is a documented deployment path, not a record of a successful clou
    CREATE VOLUME IF NOT EXISTS main.chess_portfolio.input;
    ```
 
-2. Generate the bounded 100-game sample from the README. The default Job parameters refer to that sample. Upload only the decompressed PGN file and use its receipt values for the bundle:
+2. Generate the bounded 10,000-game dashboard sample from the README. The default bundle is configured for 100 games, so override the input path and record bound. Upload only the decompressed PGN and use its receipt metadata:
 
    ```bash
-   databricks fs cp data/real_sample_100.pgn dbfs:/Volumes/main/chess_portfolio/input/real_sample_100.pgn
-   export BUNDLE_VAR_retrieved_at_utc=$(python3 -c 'import json; print(json.load(open("data/real_sample_100.pgn.receipt.json"))["retrieved_at_utc"])')
-   export BUNDLE_VAR_expected_source_sha256=$(python3 -c 'import json; print(json.load(open("data/real_sample_100.pgn.receipt.json"))["source_sha256"])')
+   databricks fs cp data/dashboard_sample_10000.pgn dbfs:/Volumes/main/chess_portfolio/input/dashboard_sample_10000.pgn
+   export BUNDLE_VAR_source_path=/Volumes/main/chess_portfolio/input/dashboard_sample_10000.pgn
+   export BUNDLE_VAR_requested_max_games=10000
+   export BUNDLE_VAR_retrieved_at_utc=$(python3 -c 'import json; print(json.load(open("data/dashboard_sample_10000.pgn.receipt.json"))["retrieved_at_utc"])')
+   export BUNDLE_VAR_expected_source_sha256=$(python3 -c 'import json; print(json.load(open("data/dashboard_sample_10000.pgn.receipt.json"))["source_sha256"])')
    databricks bundle validate -t dev
    databricks bundle deploy -t dev
    databricks bundle run -t dev chess_lakehouse
    ```
 
-3. Run again and check the managed tables. With a fresh schema and the known 100-game sample, the expected counts (from local Delta tests) are 100 Bronze, 100 Silver and 0 quarantine:
+3. Run the same job again, then check the managed tables. With a fresh schema and the verified 10,000-game sample, the expected results are listed above:
 
    ```sql
    SELECT COUNT(*) AS bronze_rows, COUNT(DISTINCT game_id) AS unique_ids
    FROM main.chess_portfolio.bronze_games;
    SELECT COUNT(*) FROM main.chess_portfolio.silver_games;
    SELECT COUNT(*) FROM main.chess_portfolio.quarantine_games;
-   SELECT * FROM main.chess_portfolio.gold_time_control_metrics ORDER BY speed;
+   SELECT SUM(games) FROM main.chess_portfolio.gold_opening_metrics;
+   SELECT SUM(games) FROM main.chess_portfolio.gold_rating_metrics;
+   SELECT SUM(games) FROM main.chess_portfolio.gold_time_control_metrics;
+   SELECT COUNT(*) FROM main.chess_portfolio.ingestion_runs;
    SELECT run_id, batch_id, attempted, duplicates, inserted, accepted, quarantined
    FROM main.chess_portfolio.ingestion_runs ORDER BY run_at_utc;
    ```

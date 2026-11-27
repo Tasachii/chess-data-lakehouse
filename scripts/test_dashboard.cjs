@@ -2,6 +2,40 @@
 const assert = require("node:assert/strict");
 const { chromium } = require("playwright");
 
+async function assertOutcomeCaptions(page, width) {
+  const captions = await page
+    .locator(".outcome-stat span")
+    .evaluateAll((nodes) =>
+      nodes.map((node) => {
+        const range = document.createRange();
+        range.selectNodeContents(node);
+        const text = range.getBoundingClientRect();
+        const container = node.parentElement.getBoundingClientRect();
+        return {
+          label: node.textContent,
+          left: text.left,
+          right: text.right,
+          containerLeft: container.left,
+          containerRight: container.right,
+        };
+      }),
+    );
+  assert.equal(captions.length, 3);
+  for (const [index, caption] of captions.entries()) {
+    assert.ok(
+      caption.left >= caption.containerLeft &&
+        caption.right <= caption.containerRight,
+      `Outcome caption overflows its column at ${width}px: ${caption.label}`,
+    );
+    if (index > 0) {
+      assert.ok(
+        caption.left >= captions[index - 1].right,
+        `Outcome captions overlap at ${width}px: ${captions[index - 1].label} / ${caption.label}`,
+      );
+    }
+  }
+}
+
 async function main() {
   const browser = await chromium.launch({
     headless: true,
@@ -124,7 +158,7 @@ async function main() {
         path: process.env.DASHBOARD_SCREENSHOT,
         fullPage: false,
       });
-    for (const width of [390, 320]) {
+    for (const width of [320, 360, 390, 560, 768, 1440]) {
       await page.setViewportSize({ width, height: 844 });
       assert.ok(
         await page.evaluate(
@@ -132,13 +166,14 @@ async function main() {
         ),
         `Unexpected page overflow at ${width}px`,
       );
+      await assertOutcomeCaptions(page, width);
       await page.locator("#opening-search").fill("Caro-Kann");
       assert.ok((await page.locator("#opening-list .opening-row").count()) > 0);
       await page.locator("#opening-search").fill("");
     }
     assert.deepEqual(errors, []);
     console.log(
-      "PASS desktop/mobile: snapshot, counts, search, filter, sort, limit, reset, rating metric, bar selection, responsive widths, no console errors",
+      "PASS desktop/mobile: snapshot, counts, search, filter, sort, limit, reset, rating metric, bar selection, responsive widths, outcome caption layout, no console errors",
     );
   } finally {
     await browser.close();

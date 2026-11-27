@@ -312,10 +312,12 @@
             <code id="source-hash"></code>
           </div>
           <div>
-            <span class="badge subtle">VERIFIED LOCALLY</span>
+            <span class="badge subtle">LOCAL + CLOUD VERIFIED</span>
             <p>
-              Local Python and PySpark/Delta paths were tested. Databricks
-              workspace execution has not been verified.
+              Local tests and two Databricks serverless runs passed. SQL
+              confirmed 10,000 Bronze records, 9,996 valid games, 4 quarantined
+              and zero new records on replay. The dashboard remains a static
+              snapshot.
             </p>
             <a
               class="text-link"
