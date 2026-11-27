@@ -17,7 +17,7 @@ existing Databricks workspace.
   No workspace credentials, account creation, billing, or cloud resources were used.
 
 Developer remediation evidence is in [DEV_HANDOFF.md](DEV_HANDOFF.md) and historical runs in
-[`docs/run-evidence.md`](docs/run-evidence.md). Independent QA retest is pending.
+[`docs/run-evidence.md`](docs/run-evidence.md). Independent QA approved the local MVP: 27 local PySpark/Delta tests passed, all eight original independent cases passed, and all four integrity/lineage findings were resolved. The tested code snapshot is commit `94f58a11304cc11c92e102f3894aabcbdcc80ce9`; actual Databricks workspace execution remains unverified.
 
 ## Architecture
 
