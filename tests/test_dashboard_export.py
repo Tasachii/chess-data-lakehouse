@@ -1,6 +1,7 @@
 import json
 import subprocess
 import sys
+from collections import defaultdict
 from pathlib import Path
 
 from chess_lakehouse.local_pipeline import run_pipeline
@@ -12,7 +13,7 @@ def test_checked_in_snapshot_contains_only_grouped_metrics():
     snapshot = json.loads((ROOT / "docs/assets/snapshot.json").read_text())
     counts = snapshot["counts"]
     outcomes = snapshot["outcomes"]
-    assert snapshot["schema_version"] == 1
+    assert snapshot["schema_version"] == 2
     assert counts["bronze"] == snapshot["source"]["requested_games"]
     assert counts["bronze"] == counts["silver"] + counts["quarantine"]
     assert sum(outcomes.values()) == counts["silver"]
@@ -44,6 +45,50 @@ def test_dashboard_snapshot_contains_verified_100000_game_opening_families():
             )
             == counts
         )
+
+
+def test_context_and_extra_marts_reconcile_to_full_snapshot():
+    snapshot = json.loads((ROOT / "docs/assets/snapshot.json").read_text())
+    context = snapshot["marts"]["opening_context"]
+    columns = [
+        "opening",
+        "eco",
+        "rating_bucket",
+        "speed",
+        "games",
+        "white_wins",
+        "black_wins",
+        "draws",
+    ]
+    assert context["columns"] == columns
+    assert len(context["rows"]) == 18_342
+    rows = [dict(zip(columns, row, strict=True)) for row in context["rows"]]
+    metrics = ("games", "white_wins", "black_wins", "draws")
+    assert all(row["games"] == sum(row[key] for key in metrics[1:]) for row in rows)
+    for dimension in ("opening", "rating_bucket", "speed"):
+        rolled = defaultdict(lambda: dict.fromkeys(metrics, 0))
+        for row in rows:
+            for key in metrics:
+                rolled[row[dimension]][key] += row[key]
+        expected = {
+            row["label"]: {key: row[key] for key in metrics}
+            for row in snapshot["groups"][dimension]
+        }
+        assert dict(rolled) == expected
+    for table in ("rating_gap_metrics", "termination_metrics", "length_metrics"):
+        rows = snapshot["marts"][table]
+        assert sum(row["games"] for row in rows) == snapshot["counts"]["silver"]
+        assert {key: sum(row[key] for row in rows) for key in metrics[1:]} == snapshot["outcomes"]
+    assert snapshot["coverage"] == {
+        "eco_known": 99_633,
+        "termination_known": 99_875,
+        "length_known": 99_633,
+        "total_plies": 6_638_521,
+    }
+    length = snapshot["marts"]["length_metrics"]
+    assert sum(row["total_plies"] for row in length) == snapshot["coverage"]["total_plies"]
+    assert sum(row["known_length_games"] for row in length) == snapshot["coverage"]["length_known"]
+    assert next(row for row in length if row["label"] == "Unknown")["games"] == 242
 
 
 def test_export_rejects_synthetic_fixture(tmp_path):

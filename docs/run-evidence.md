@@ -2,7 +2,49 @@
 
 Local measurements were recorded on 27 November 2026 with Python 3.12. Databricks SQL results are listed separately below. The publisher is the [Lichess Open Database](https://database.lichess.org/), and the source is the [October 2026 rated standard archive](https://database.lichess.org/standard/lichess_db_standard_rated_2026-10.pgn.zst), licensed CC0 1.0. Only bounded prefixes were downloaded; the full archive was not processed.
 
-## Current 100,000-game dashboard sample
+## Current v0.3 opening analytics (100,000 games)
+
+Version 0.3 rebuilds the same verified October 2026 prefix in a fresh local output directory. The original file SHA-256 and receipt are unchanged. The first run inserted 100,000, and replay inserted zero. Bronze / Silver / quarantine = 100,000 / 99,875 / 125. The final local run took 12.87 s; replay took 13.87 s. Both exports matched byte-for-byte. Current [aggregate snapshot](assets/snapshot.json) SHA-256: `71c078b99c9ec5f2177166704fd5c8a99512cca8082d190c9b2bbbcca94bb239`. No player-level rows are exported.
+
+### PGN field audit
+
+| Field or annotation | Nonempty or known, raw (100,000) | Nonempty or known, accepted (99,875) | Use |
+| --- | ---: | ---: | --- |
+| Opening, WhiteElo, BlackElo, TimeControl, UTCDate/UTCTime | 100,000 each | 99,875 each | Validated group dimensions and pre-game rating gap |
+| ECO tag | 100,000 nonempty | 99,633 valid standard codes | 242 accepted records are `Unknown` |
+| Termination | 100,000 | 99,875 recognized | Grouped exactly as reported; unknown category supported |
+| WhiteRatingDiff / BlackRatingDiff | 99,642 each | 99,562 each | Post-game rating changes, not the pre-game Elo gap; not exported |
+| Mainline ply count | — | 99,633 known | 242 result-only games have unknown length |
+| Games with clock annotations | 99,633 | 99,633 | Coverage audited; no move-time metrics |
+| Games with eval annotations | 10,455 | 10,441 | Sparse and partially annotated; no eval metrics |
+
+The lexical mainline parser found 6,638,521 half-moves in 99,633 accepted games, from 1 to 548 plies; the mean is 66.6 plies. Braced comments are removed, and only records with SAN-shaped tokens and a matching final result are counted. Variations or unsupported tokens return null. This is not a chess legality check. The source has clock tags for all of those known plies, but a clock reading is not elapsed move time; the sample does not justify a move-time or engine-quality metric. The other 242 accepted games remain in outcome statistics and the Unknown length bucket.
+
+| Termination | Games |
+| --- | ---: |
+| Normal | 66,293 |
+| Time forfeit | 33,188 |
+| Abandoned | 373 |
+| Insufficient material | 20 |
+| Rules infraction | 1 |
+
+### New marts and parity
+
+| Gold mart | Group rows |
+| --- | ---: |
+| Opening, average rating and speed | 2,018 / 15 / 4 |
+| Opening context (opening × ECO × rating × speed) | 18,342 |
+| Signed rating gap | 7 |
+| Termination | 5 |
+| Mainline length | 8 |
+
+All seven marts reconcile to 99,875 games / 49,550 White wins / 46,550 Black wins / 3,775 draws. The exporter validates each group against Silver, including total plies and known length counts. The 18,342 context rows also roll up exactly to the original three marginal groupings. A separate local Spark run read the actual ten files via a glob and matched every one of the 20,399 Gold rows, including count fields, length totals and rounded rates (33.42 s wall clock). The Spark check was transformation parity, not a 100,000-game managed Delta write or cloud run.
+
+The original binary-float Python rounding gave 0.4813 for 77/160; Spark half-even gave 0.4812. Version 0.3 aligns stored rates with Decimal half-even at four decimals and includes an exact tie regression. All counts are unchanged and UI rates are derived from integer counts, not rounded rates.
+
+The [chunk manifest](assets/sample-chunks-manifest.json) was generated from the original source: ten files of exactly 10,000 games, 23,193,716–23,614,481 bytes each, with matching per-file receipts. Recombining them with a separating newline gives the original source hash. A local managed Delta fixture verified the multi-file glob, per-file hashes, replay and fresh-schema guard. The 100,000-game v0.3 cloud Job has not been run.
+
+## Previous 100,000-game v0.2 dashboard sample
 
 The sample was downloaded and processed locally using the same bounded pipeline. This is a prefix of the October 2026 archive, not a random sample of all games.
 
@@ -19,7 +61,7 @@ The sample was downloaded and processed locally using the same bounded pipeline.
 | Gold opening / rating / speed groups | 2,018 / 15 / 4 |
 | White wins / black wins / draws | 49,550 / 46,550 / 3,775 |
 
-All 125 quarantined records have an invalid time control; 25 also have an invalid result. An independent streaming parse of the raw PGN confirmed 100,000 distinct canonical game IDs, the exact valid/quarantined ID sets, timestamp range, outcomes and all 2,037 Gold group rows. Each dimension totals 99,875 validated games. The original 10,000-game decompressed input is a byte-identical prefix of the expanded sample. The first and replay exports matched byte for byte, with SHA-256 `690ce5d3c295703d92082b33ce540c09dbbb8a81a5e3cca2434c45bfe64176e1`. The [current snapshot](assets/snapshot.json) contains aggregates only. Reproduce it with the [README commands](../README.md#reproduce-the-snapshot).
+All 125 quarantined records have an invalid time control; 25 also have an invalid result. An independent streaming parse of the raw PGN confirmed 100,000 distinct canonical game IDs, the exact valid/quarantined ID sets, timestamp range, outcomes and all 2,037 Gold group rows. Each dimension totals 99,875 validated games. The original 10,000-game decompressed input is a byte-identical prefix of the expanded sample. The first and replay exports matched byte for byte, with SHA-256 `690ce5d3c295703d92082b33ce540c09dbbb8a81a5e3cca2434c45bfe64176e1`. That v0.2 snapshot is preserved in Git history and ignored local evidence. The current v0.3 dashboard uses the same source bytes, with additional fields and aggregate marts.
 
 Opening search shortcuts use literal name matches in the real Lichess opening labels, including variations. Results are not causal estimates of opening strength.
 

@@ -43,11 +43,11 @@
             <span id="archive-month">Loading snapshot</span>
           </p>
           <h1 id="title">
-            The games behind<br />the numbers<span class="period">.</span>
+            Every opening<br />has a context<span class="period">.</span>
           </h1>
           <p class="intro-copy">
-            A bounded window into rated chess on Lichess, from raw game records
-            to verified, anonymous aggregates.
+            Compare the outcomes of real Lichess openings by color, rating and
+            time control. Every number comes from a bounded, verified sample.
           </p>
         </div>
         <aside class="snapshot-note" aria-label="Snapshot details">
@@ -109,9 +109,12 @@
         <div class="section-title" id="openings">
           <div>
             <p class="eyebrow">Explore the Gold layer</p>
-            <h2>Patterns in the sample</h2>
+            <h2>Opening study</h2>
           </div>
-          <p>Each chart is a separate grouping of the same validated games.</p>
+          <p>
+            Compare opening outcomes within a rating and time-control slice.
+            Other charts show the full sample.
+          </p>
         </div>
         <div class="analytics-grid">
           <section class="panel openings-panel" aria-labelledby="opening-title">
@@ -122,14 +125,58 @@
               </div>
               <span class="pill" id="opening-groups">—</span>
             </div>
-            <div class="filters">
+            <div class="opening-perspective">
+              <div>
+                <span class="filter-label">Color perspective</span>
+                <div
+                  class="segmented"
+                  role="group"
+                  aria-label="Color perspective"
+                >
+                  <button
+                    type="button"
+                    id="perspective-white"
+                    aria-pressed="true"
+                  >
+                    White</button
+                  ><button
+                    type="button"
+                    id="perspective-black"
+                    aria-pressed="false"
+                  >
+                    Black
+                  </button>
+                </div>
+              </div>
+              <p id="perspective-note">
+                White win rates use all games in the selected opening and slice.
+              </p>
+            </div>
+            <div class="filters study-filters">
               <label class="search-field" for="opening-search"
-                >Search opening<input
+                >Opening or ECO<input
                   id="opening-search"
                   type="search"
-                  placeholder="e.g. Italian Game"
+                  placeholder="e.g. Italian Game, C50"
                   autocomplete="off"
               /></label>
+              <label for="opening-group"
+                >Group by<select id="opening-group">
+                  <option value="family">Opening family</option>
+                  <option value="opening">Opening name</option>
+                  <option value="eco">ECO code</option>
+                </select></label
+              >
+              <label for="opening-rating"
+                >Average Elo<select id="opening-rating">
+                  <option value="all">All ratings</option>
+                </select></label
+              >
+              <label for="opening-speed"
+                >Time control<select id="opening-speed">
+                  <option value="all">All speeds</option>
+                </select></label
+              >
               <label for="opening-result"
                 >Game result<select id="opening-result">
                   <option value="all">All games</option>
@@ -141,6 +188,7 @@
               <label for="opening-sort"
                 >Sort by<select id="opening-sort">
                   <option value="games">Most played</option>
+                  <option value="perspective">Perspective win rate</option>
                   <option value="white_wins">White win rate</option>
                   <option value="black_wins">Black win rate</option>
                   <option value="draws">Draw rate</option>
@@ -152,6 +200,8 @@
                   <option value="5">5+</option>
                   <option value="20">20+</option>
                   <option value="50">50+</option>
+                  <option value="100">100+</option>
+                  <option value="500">500+</option>
                 </select></label
               >
             </div>
@@ -159,8 +209,10 @@
               class="opening-shortcuts"
               aria-label="Opening search shortcuts"
             >
-              <span>Explore openings</span>
+              <span>White opening ideas</span>
               <div class="quick-picks" id="opening-quick-picks"></div>
+              <span class="shortcut-label">Black defenses</span>
+              <div class="quick-picks" id="defense-quick-picks"></div>
             </div>
             <div class="chart-toolbar">
               <span id="opening-summary" role="status" aria-live="polite"></span
@@ -173,22 +225,38 @@
                 </select></label
               >
             </div>
-            <div class="legend">
-              <span><i class="dot white"></i>White win</span
-              ><span><i class="dot black"></i>Black win</span
-              ><span><i class="dot draw"></i>Draw</span>
+            <div id="opening-list" class="opening-table-wrap">
+              <table
+                class="opening-table"
+                aria-label="Opening outcomes"
+                role="table"
+              >
+                <thead>
+                  <tr role="row">
+                    <th scope="col">Opening / ECO</th>
+                    <th scope="col" id="opening-games-heading">Games</th>
+                    <th scope="col" class="white-column">White wins</th>
+                    <th scope="col" class="black-column">Black wins</th>
+                    <th scope="col">Draws</th>
+                  </tr>
+                </thead>
+                <tbody id="opening-body"></tbody>
+              </table>
             </div>
-            <div id="opening-list" class="opening-list"></div>
             <div id="opening-empty" class="empty" hidden>
               <strong>No matching openings</strong>
-              <p>Try a shorter search or a lower minimum.</p>
+              <p>
+                Try another opening or ECO, a wider rating/time-control slice,
+                or a lower minimum.
+              </p>
               <button id="reset-filters" type="button">Reset filters</button>
             </div>
             <p class="panel-foot">
-              Bar widths compare matching game counts. The result filter selects
-              wins for White, wins for Black, or draws; rates always use all
-              games in each opening. Opening labels describe the game, not an
-              exclusive opening for either side. Small groups are noisy.
+              Rates always use all games in the selected group and slice. A
+              result filter changes the matching count, not the denominator.
+              Opening family means the label before the first colon; the
+              shortcut labels are searches, not exclusive assignments to one
+              color. Small samples are noisy.
             </p>
           </section>
           <div class="side-stack">
@@ -227,6 +295,11 @@
                 Only validated Silver records contribute to Gold metrics.
                 Quarantined games are excluded.
               </p>
+              <div
+                class="coverage-list"
+                id="coverage-list"
+                aria-label="Optional field coverage"
+              ></div>
             </section>
           </div>
         </div>
@@ -261,6 +334,68 @@
             are descriptive, not estimates of player skill.
           </p>
         </section>
+        <div class="section-title" id="context">
+          <div>
+            <p class="eyebrow">Full sample</p>
+            <h2>Results in context</h2>
+          </div>
+          <p>
+            Descriptive associations, not causal effects. Counts are shown for
+            every group.
+          </p>
+        </div>
+        <div class="context-grid">
+          <section class="panel context-panel" aria-labelledby="gap-title">
+            <div class="panel-heading">
+              <div>
+                <h3 id="gap-title">Rating gap &amp; outcomes</h3>
+                <p>
+                  White Elo minus Black Elo. Negative means Black is rated
+                  higher.
+                </p>
+              </div>
+            </div>
+            <div class="legend">
+              <span><i class="dot white"></i>White win</span
+              ><span><i class="dot black"></i>Black win</span
+              ><span><i class="dot draw"></i>Draw</span>
+            </div>
+            <div id="gap-list" class="context-list"></div>
+            <p class="panel-foot">
+              Each bar spans 100% of its group. Sample sizes differ; rates are
+              descriptive.
+            </p>
+          </section>
+          <section
+            class="panel context-panel"
+            aria-labelledby="termination-title"
+          >
+            <div class="panel-heading">
+              <div>
+                <h3 id="termination-title">Game endings</h3>
+                <p>Termination labels as reported by Lichess.</p>
+              </div>
+            </div>
+            <div id="termination-list" class="context-list"></div>
+            <p class="panel-foot">
+              Missing or unsupported termination tags are Unknown.
+            </p>
+          </section>
+          <section class="panel context-panel" aria-labelledby="length-title">
+            <div class="panel-heading">
+              <div>
+                <h3 id="length-title">Game length</h3>
+                <p>Number of half-moves (plies) in the mainline.</p>
+              </div>
+            </div>
+            <div class="length-summary" id="length-summary"></div>
+            <div id="length-list" class="context-list"></div>
+            <p class="panel-foot">
+              One ply is one player's move. Unknown includes result-only or
+              unsupported move text; average excludes unknown length.
+            </p>
+          </section>
+        </div>
         <section
           class="pipeline"
           id="pipeline"
@@ -331,10 +466,10 @@
           <div>
             <span class="badge subtle">LOCAL + CLOUD VERIFIED</span>
             <p>
-              The 100,000-game dashboard sample was processed locally. Two
-              Databricks serverless runs used a separate 10,000-game sample; SQL
-              confirmed 10,000 Bronze records, 9,996 valid games, 4 quarantined
-              and zero new records on replay. No live ingestion.
+              The enriched 100,000-game dashboard sample was processed locally.
+              Two Databricks serverless runs used a separate 10,000-game sample;
+              SQL confirmed 10,000 Bronze records, 9,996 valid games, 4
+              quarantined and zero new records on replay. No live ingestion.
             </p>
             <a
               class="text-link"

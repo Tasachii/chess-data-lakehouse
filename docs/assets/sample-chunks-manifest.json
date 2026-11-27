@@ -1,0 +1,89 @@
+{
+  "games_per_file": 10000,
+  "parent_source_sha256": "96e4ef9dd84f2e646f1604da2e47b4f686a2725186a3d026534ca9e742a3b031",
+  "parts": [
+    {
+      "bytes": 23614481,
+      "file": "part-001.pgn",
+      "first_record": 1,
+      "games": 10000,
+      "last_record": 10000,
+      "source_sha256": "24a50c38d31691401b5ef3b5fa246c4941e56d4223c54d397d0ef6c9b13c3030"
+    },
+    {
+      "bytes": 23231157,
+      "file": "part-002.pgn",
+      "first_record": 10001,
+      "games": 10000,
+      "last_record": 20000,
+      "source_sha256": "9d81d6a3c266ac93262ce28d5f09e04a9488ec356a675a4bb8a53350002f5417"
+    },
+    {
+      "bytes": 23461425,
+      "file": "part-003.pgn",
+      "first_record": 20001,
+      "games": 10000,
+      "last_record": 30000,
+      "source_sha256": "b35233b7c06ef02941361908519c640e5f5e49b65cdb105c0cee2f0dae3357f6"
+    },
+    {
+      "bytes": 23349655,
+      "file": "part-004.pgn",
+      "first_record": 30001,
+      "games": 10000,
+      "last_record": 40000,
+      "source_sha256": "615aa6fc834e0b932ced499d2e7b6fba0e6d274bd928a12c4f10e20270ec7c63"
+    },
+    {
+      "bytes": 23429912,
+      "file": "part-005.pgn",
+      "first_record": 40001,
+      "games": 10000,
+      "last_record": 50000,
+      "source_sha256": "d7668834b71d7c95e5b9fa6e84d6d8e21526e8084749b5153d40c54b9f16bc98"
+    },
+    {
+      "bytes": 23487793,
+      "file": "part-006.pgn",
+      "first_record": 50001,
+      "games": 10000,
+      "last_record": 60000,
+      "source_sha256": "2443b02d75e254bc479f89e5eed722b63e9667a08925de90a6cfdbc8827ed079"
+    },
+    {
+      "bytes": 23323161,
+      "file": "part-007.pgn",
+      "first_record": 60001,
+      "games": 10000,
+      "last_record": 70000,
+      "source_sha256": "13bae91b14967b61a90271f6afc4df4e941258f9d723848c38fa67ca98fde239"
+    },
+    {
+      "bytes": 23530312,
+      "file": "part-008.pgn",
+      "first_record": 70001,
+      "games": 10000,
+      "last_record": 80000,
+      "source_sha256": "7385ed63a2c3cd14fc9f68c13222af46be8c56fac73209ac0698fca9e3874d9d"
+    },
+    {
+      "bytes": 23542726,
+      "file": "part-009.pgn",
+      "first_record": 80001,
+      "games": 10000,
+      "last_record": 90000,
+      "source_sha256": "2bc64091d466b63dfb7f14fc5f25e06a15e0f7a1b2548a10a114536c6da5c7b9"
+    },
+    {
+      "bytes": 23193716,
+      "file": "part-010.pgn",
+      "first_record": 90001,
+      "games": 10000,
+      "last_record": 100000,
+      "source_sha256": "af07ba9b61adea15c4723b3adfd88ef9dd77f6a0b0997a5e690a80351ec94ed2"
+    }
+  ],
+  "retrieved_at_utc": "2026-11-27T15:19:51.529546+00:00",
+  "source_url": "https://database.lichess.org/standard/lichess_db_standard_rated_2026-10.pgn.zst",
+  "total_games": 100000
+}

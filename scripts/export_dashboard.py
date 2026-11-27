@@ -9,6 +9,8 @@ import re
 from collections import Counter, defaultdict
 from pathlib import Path
 
+from chess_lakehouse.analytics import ANALYTICS_DIMENSIONS
+
 DIMENSIONS = {
     "opening": "opening_metrics.csv",
     "rating_bucket": "rating_metrics.csv",
@@ -37,6 +39,9 @@ def export_snapshot(lakehouse: Path, destination: Path) -> dict:
     # Read only fields required to verify grouped counts and measure the UTC time range.
     # Never serialize entire Silver records or Bronze/quarantine rows.
     expected = {key: defaultdict(Counter) for key in DIMENSIONS}
+    expected_analytics = {key: defaultdict(Counter) for key in ANALYTICS_DIMENSIONS}
+    expected_lengths = defaultdict(Counter)
+    coverage: Counter = Counter()
     results: Counter = Counter()
     played_at = []
     with (lakehouse / "silver/games.jsonl").open(encoding="utf-8") as handle:
@@ -47,6 +52,16 @@ def export_snapshot(lakehouse: Path, destination: Path) -> dict:
             played_at.append(row["played_at"])
             for dim in DIMENSIONS:
                 expected[dim][row[dim]][outcome] += 1
+            for table, dimensions in ANALYTICS_DIMENSIONS.items():
+                key = tuple(row[dim] for dim in dimensions)
+                expected_analytics[table][key][outcome] += 1
+            coverage["eco_known"] += row["eco"] != "Unknown"
+            coverage["termination_known"] += row["termination"] != "Unknown"
+            coverage["length_known"] += row["plies"] is not None
+            coverage["total_plies"] += row["plies"] or 0
+            length = expected_lengths[(row["length_bucket"],)]
+            length["known_length_games"] += int(row["plies"] is not None)
+            length["total_plies"] += row["plies"] or 0
     if len(played_at) != counts["silver"] or not played_at:
         raise ValueError("Silver count does not match the manifest or is empty")
 
@@ -80,8 +95,51 @@ def export_snapshot(lakehouse: Path, destination: Path) -> dict:
             raise ValueError(f"Gold total mismatch: {dim}")
         groups[dim] = sorted(rows, key=lambda row: row["label"])
 
+    marts = {}
+    for table, dimensions in ANALYTICS_DIMENSIONS.items():
+        rows = []
+        keys = set()
+        with (lakehouse / "gold" / f"{table}.csv").open(newline="", encoding="utf-8") as handle:
+            for row in csv.DictReader(handle):
+                key = tuple(row[dim] for dim in dimensions)
+                games, wins, draws = (int(row[k]) for k in ("games", "white_wins", "draws"))
+                black = games - wins - draws
+                actual = Counter({"1-0": wins, "0-1": black, "1/2-1/2": draws})
+                if key in keys or games <= 0 or actual != expected_analytics[table].get(key):
+                    raise ValueError(f"Analytics Gold mismatch for {table}: {key}")
+                if abs(float(row["white_win_rate"]) - wins / games) > 0.0000500001:
+                    raise ValueError(f"Analytics rate mismatch for {table}: {key}")
+                keys.add(key)
+                counts_row = {
+                    "games": games,
+                    "white_wins": wins,
+                    "black_wins": black,
+                    "draws": draws,
+                }
+                if table == "opening_context":
+                    rows.append([*key, games, wins, black, draws])
+                else:
+                    exported = {"label": key[0], **counts_row}
+                    if table == "length_metrics":
+                        length_fields = {
+                            k: int(row[k]) for k in ("known_length_games", "total_plies")
+                        }
+                        if Counter(length_fields) != expected_lengths[key]:
+                            raise ValueError(f"Length aggregate mismatch: {key}")
+                        exported.update(length_fields)
+                    rows.append(exported)
+        if keys != set(expected_analytics[table]):
+            raise ValueError(f"Analytics groups do not match Silver: {table}")
+        if table == "opening_context":
+            marts[table] = {
+                "columns": [*dimensions, "games", "white_wins", "black_wins", "draws"],
+                "rows": sorted(rows),
+            }
+        else:
+            marts[table] = sorted(rows, key=lambda row: row["label"])
+
     snapshot = {
-        "schema_version": 1,
+        "schema_version": 2,
         "source": {
             "url": manifest["source_url"],
             "month": source_match.group(1),
@@ -101,10 +159,12 @@ def export_snapshot(lakehouse: Path, destination: Path) -> dict:
             "draws": results["1/2-1/2"],
         },
         "groups": groups,
+        "marts": marts,
+        "coverage": dict(coverage),
     }
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_text(
-        json.dumps(snapshot, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        json.dumps(snapshot, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8"
     )
     return snapshot
 
