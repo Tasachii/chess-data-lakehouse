@@ -1,0 +1,40 @@
+[Event "Rated Blitz game"]
+[Site "https://lichess.org/alpha001"]
+[UTCDate "2026.01.02"]
+[UTCTime "10:00:00"]
+[White "alice"]
+[Black "bob"]
+[Result "1-0"]
+[WhiteElo "1500"]
+[BlackElo "1700"]
+[TimeControl "300+0"]
+[Opening "Sicilian Defense"]
+
+1. e4 c5 2. Nf3 d6 1-0
+
+[Event "Duplicate delivery"]
+[Site "https://lichess.org/alpha001"]
+[UTCDate "2026.01.02"]
+[UTCTime "10:00:00"]
+[White "alice"]
+[Black "bob"]
+[Result "1-0"]
+[WhiteElo "1500"]
+[BlackElo "1700"]
+[TimeControl "300+0"]
+[Opening "Sicilian Defense"]
+
+1. e4 c5 2. Nf3 d6 1-0
+
+[Event "Malformed game"]
+[Site "https://lichess.org/bad00001"]
+[UTCDate "2026.01.02"]
+[UTCTime "11:00:00"]
+[White "carol"]
+[Black "dan"]
+[Result "*"]
+[WhiteElo "not-a-rating"]
+[BlackElo "1800"]
+[TimeControl "-"]
+
+1. d4 d5 *

@@ -1,0 +1,44 @@
+resources:
+  jobs:
+    chess_lakehouse:
+      name: chess-data-lakehouse
+      max_concurrent_runs: 1
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
+        - name: schema
+          default: ${var.schema}
+        - name: source_path
+          default: ${var.source_path}
+        - name: source_url
+          default: ${var.source_url}
+        - name: requested_max_games
+          default: ${var.requested_max_games}
+        - name: expected_source_sha256
+          default: ${var.expected_source_sha256}
+        - name: retrieved_at_utc
+          default: ${var.retrieved_at_utc}
+      tasks:
+        - task_key: build_lakehouse
+          spark_python_task:
+            python_file: ../src/databricks_job.py
+            parameters:
+              - --source-path
+              - "{{job.parameters.source_path}}"
+              - --catalog
+              - "{{job.parameters.catalog}}"
+              - --schema
+              - "{{job.parameters.schema}}"
+              - --source-url
+              - "{{job.parameters.source_url}}"
+              - --requested-max-games
+              - "{{job.parameters.requested_max_games}}"
+              - --expected-source-sha256
+              - "{{job.parameters.expected_source_sha256}}"
+              - --retrieved-at-utc
+              - "{{job.parameters.retrieved_at_utc}}"
+          environment_key: default
+      environments:
+        - environment_key: default
+          spec:
+            environment_version: "2"
