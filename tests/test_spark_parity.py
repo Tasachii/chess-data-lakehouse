@@ -368,3 +368,32 @@ def test_spark_half_even_and_optional_fields(spark, tmp_path):
         analytics_gold_metrics(frame, "opening_context").first(),
     ):
         assert row.games == 160 and row.white_wins == 77 and row.white_win_rate == 0.4812
+
+
+def test_scale_checkpoint_groups_match_independent_stream(spark, tmp_path):
+    import csv
+
+    import zstandard
+
+    from chess_lakehouse.source import download_bounded_sample
+    from scripts.scale_sample import independent_silver, spark_gold, verify_chunks
+    from scripts.split_sample import split_sample
+
+    packed = tmp_path / "source.zst"
+    packed.write_bytes(zstandard.ZstdCompressor().compress(FIXTURE.read_bytes()))
+    source = tmp_path / "sample.pgn"
+    download_bounded_sample(packed.as_uri(), source, 3)
+    chunks = tmp_path / "chunks"
+    split_sample(source, chunks, 1)
+    _, parts = verify_chunks(chunks, 3)
+    gold_dir = tmp_path / "gold"
+    gold_dir.mkdir()
+    counts, groups = spark_gold(spark, chunks, parts, gold_dir)
+    assert counts == {"bronze": 2, "silver": 1, "quarantine": 1}
+    valid = list(independent_silver(chunks, parts, counts))
+    expected = {**aggregate_gold(valid), **aggregate_analytics(valid)}
+    assert groups == {name: len(rows) for name, rows in expected.items()}
+    for name, rows in expected.items():
+        with (gold_dir / f"{name}.csv").open(newline="") as handle:
+            actual = list(csv.DictReader(handle))
+        assert actual == [{key: str(value) for key, value in row.items()} for row in rows]

@@ -7,9 +7,10 @@ import csv
 import json
 import re
 from collections import Counter, defaultdict
+from collections.abc import Iterable
 from pathlib import Path
 
-from chess_lakehouse.analytics import ANALYTICS_DIMENSIONS
+from chess_lakehouse.analytics import ANALYTICS_DIMENSIONS, rounded_rate
 
 DIMENSIONS = {
     "opening": "opening_metrics.csv",
@@ -23,6 +24,20 @@ SOURCE_PATTERN = re.compile(
 
 def export_snapshot(lakehouse: Path, destination: Path) -> dict:
     manifest = json.loads((lakehouse / "manifests/latest.json").read_text())
+    history = [json.loads(p.read_text()) for p in (lakehouse / "manifests/runs").glob("*.json")]
+    if not history or {run["batch_id"] for run in history} != {manifest["batch_id"]}:
+        raise ValueError("Dashboard export requires one distinct source batch")
+
+    with (lakehouse / "silver/games.jsonl").open(encoding="utf-8") as handle:
+        return export_verified_snapshot(
+            manifest, (json.loads(line) for line in handle), lakehouse / "gold", destination
+        )
+
+
+def export_verified_snapshot(
+    manifest: dict, silver_rows: Iterable[dict], gold_dir: Path, destination: Path
+) -> dict:
+    """Validate every Gold group against a stream of independently normalized games."""
     source_match = SOURCE_PATTERN.fullmatch(manifest["source_url"])
     if not source_match or manifest["source_kind"] != "lichess_public":
         raise ValueError("The published dashboard requires a real Lichess standard-rated sample")
@@ -32,10 +47,6 @@ def export_snapshot(lakehouse: Path, destination: Path) -> dict:
     counts = manifest["cumulative_counts"]
     if counts["bronze"] != bound or counts["silver"] + counts["quarantine"] != bound:
         raise ValueError("Use a fresh single-sample lakehouse; counts must reconcile to the bound")
-    history = [json.loads(p.read_text()) for p in (lakehouse / "manifests/runs").glob("*.json")]
-    if not history or {run["batch_id"] for run in history} != {manifest["batch_id"]}:
-        raise ValueError("Dashboard export requires one distinct source batch")
-
     # Read only fields required to verify grouped counts and measure the UTC time range.
     # Never serialize entire Silver records or Bronze/quarantine rows.
     expected = {key: defaultdict(Counter) for key in DIMENSIONS}
@@ -43,32 +54,34 @@ def export_snapshot(lakehouse: Path, destination: Path) -> dict:
     expected_lengths = defaultdict(Counter)
     coverage: Counter = Counter()
     results: Counter = Counter()
-    played_at = []
-    with (lakehouse / "silver/games.jsonl").open(encoding="utf-8") as handle:
-        for line in handle:
-            row = json.loads(line)
-            outcome = row["result"]
-            results[outcome] += 1
-            played_at.append(row["played_at"])
-            for dim in DIMENSIONS:
-                expected[dim][row[dim]][outcome] += 1
-            for table, dimensions in ANALYTICS_DIMENSIONS.items():
-                key = tuple(row[dim] for dim in dimensions)
-                expected_analytics[table][key][outcome] += 1
-            coverage["eco_known"] += row["eco"] != "Unknown"
-            coverage["termination_known"] += row["termination"] != "Unknown"
-            coverage["length_known"] += row["plies"] is not None
-            coverage["total_plies"] += row["plies"] or 0
-            length = expected_lengths[(row["length_bucket"],)]
-            length["known_length_games"] += int(row["plies"] is not None)
-            length["total_plies"] += row["plies"] or 0
-    if len(played_at) != counts["silver"] or not played_at:
+    first_game = last_game = None
+    accepted = 0
+    for row in silver_rows:
+        outcome = row["result"]
+        results[outcome] += 1
+        accepted += 1
+        played_at = row["played_at"]
+        first_game = played_at if first_game is None else min(first_game, played_at)
+        last_game = played_at if last_game is None else max(last_game, played_at)
+        for dim in DIMENSIONS:
+            expected[dim][row[dim]][outcome] += 1
+        for table, dimensions in ANALYTICS_DIMENSIONS.items():
+            key = tuple(row[dim] for dim in dimensions)
+            expected_analytics[table][key][outcome] += 1
+        coverage["eco_known"] += row["eco"] != "Unknown"
+        coverage["termination_known"] += row["termination"] != "Unknown"
+        coverage["length_known"] += row["plies"] is not None
+        coverage["total_plies"] += row["plies"] or 0
+        length = expected_lengths[(row["length_bucket"],)]
+        length["known_length_games"] += int(row["plies"] is not None)
+        length["total_plies"] += row["plies"] or 0
+    if accepted != counts["silver"] or not accepted:
         raise ValueError("Silver count does not match the manifest or is empty")
 
     groups = {}
     for dim, filename in DIMENSIONS.items():
         rows = []
-        with (lakehouse / "gold" / filename).open(newline="", encoding="utf-8") as handle:
+        with (gold_dir / filename).open(newline="", encoding="utf-8") as handle:
             for row in csv.DictReader(handle):
                 label = row[dim]
                 wins = int(row["white_wins"])
@@ -78,7 +91,7 @@ def export_snapshot(lakehouse: Path, destination: Path) -> dict:
                 actual = {"1-0": wins, "0-1": black_wins, "1/2-1/2": draws}
                 if Counter(actual) != expected[dim][label] or games <= 0:
                     raise ValueError(f"Gold mismatch for {dim}: {label}")
-                if abs(float(row["white_win_rate"]) - wins / games) > 0.0000500001:
+                if float(row["white_win_rate"]) != rounded_rate(wins, games):
                     raise ValueError(f"Gold rate mismatch for {dim}: {label}")
                 rows.append(
                     {
@@ -99,7 +112,7 @@ def export_snapshot(lakehouse: Path, destination: Path) -> dict:
     for table, dimensions in ANALYTICS_DIMENSIONS.items():
         rows = []
         keys = set()
-        with (lakehouse / "gold" / f"{table}.csv").open(newline="", encoding="utf-8") as handle:
+        with (gold_dir / f"{table}.csv").open(newline="", encoding="utf-8") as handle:
             for row in csv.DictReader(handle):
                 key = tuple(row[dim] for dim in dimensions)
                 games, wins, draws = (int(row[k]) for k in ("games", "white_wins", "draws"))
@@ -107,7 +120,7 @@ def export_snapshot(lakehouse: Path, destination: Path) -> dict:
                 actual = Counter({"1-0": wins, "0-1": black, "1/2-1/2": draws})
                 if key in keys or games <= 0 or actual != expected_analytics[table].get(key):
                     raise ValueError(f"Analytics Gold mismatch for {table}: {key}")
-                if abs(float(row["white_win_rate"]) - wins / games) > 0.0000500001:
+                if float(row["white_win_rate"]) != rounded_rate(wins, games):
                     raise ValueError(f"Analytics rate mismatch for {table}: {key}")
                 keys.add(key)
                 counts_row = {
@@ -147,8 +160,8 @@ def export_snapshot(lakehouse: Path, destination: Path) -> dict:
             "license_url": manifest["source_license_url"],
             "sha256": manifest["source_sha256"],
             "retrieved_at_utc": manifest["retrieved_at_utc"],
-            "first_game_utc": min(played_at),
-            "last_game_utc": max(played_at),
+            "first_game_utc": first_game,
+            "last_game_utc": last_game,
             "requested_games": bound,
             "pipeline_version": manifest["pipeline_version"],
         },
