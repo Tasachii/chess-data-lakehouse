@@ -1,0 +1,163 @@
+{
+  "checkpoints": [
+    {
+      "counts": {
+        "bronze": 100000,
+        "quarantine": 125,
+        "silver": 99875
+      },
+      "coverage": {
+        "eco_known": 99633,
+        "length_known": 99633,
+        "termination_known": 99875,
+        "total_plies": 6638521
+      },
+      "gold_groups": {
+        "length_metrics": 8,
+        "opening_context": 18342,
+        "opening_metrics": 2018,
+        "rating_gap_metrics": 7,
+        "rating_metrics": 15,
+        "termination_metrics": 5,
+        "time_control_metrics": 4
+      },
+      "outcomes": {
+        "black_wins": 46550,
+        "draws": 3775,
+        "white_wins": 49550
+      },
+      "snapshot_sha256": "71c078b99c9ec5f2177166704fd5c8a99512cca8082d190c9b2bbbcca94bb239",
+      "source": {
+        "first_game_utc": "2026-10-01T00:00:00Z",
+        "last_game_utc": "2026-10-01T01:22:41Z",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "month": "2026-10",
+        "pipeline_version": "0.3.0",
+        "requested_games": 100000,
+        "retrieved_at_utc": "2026-11-27T15:19:51.529546+00:00",
+        "sha256": "96e4ef9dd84f2e646f1604da2e47b4f686a2725186a3d026534ca9e742a3b031",
+        "url": "https://database.lichess.org/standard/lichess_db_standard_rated_2026-10.pgn.zst"
+      },
+      "spark_and_receipt_seconds": 30.02,
+      "total_seconds": 41.16,
+      "verified_files": 10
+    },
+    {
+      "counts": {
+        "bronze": 250000,
+        "quarantine": 255,
+        "silver": 249745
+      },
+      "coverage": {
+        "eco_known": 249274,
+        "length_known": 249274,
+        "termination_known": 249745,
+        "total_plies": 16586462
+      },
+      "gold_groups": {
+        "length_metrics": 8,
+        "opening_context": 26606,
+        "opening_metrics": 2310,
+        "rating_gap_metrics": 7,
+        "rating_metrics": 15,
+        "termination_metrics": 5,
+        "time_control_metrics": 4
+      },
+      "outcomes": {
+        "black_wins": 116162,
+        "draws": 9350,
+        "white_wins": 124233
+      },
+      "snapshot_sha256": "6db8b3924f542a4a1028f0d044a7cede5a13a0539e5a827ea82b0f193d411e11",
+      "source": {
+        "first_game_utc": "2026-10-01T00:00:00Z",
+        "last_game_utc": "2026-10-01T03:32:47Z",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "month": "2026-10",
+        "pipeline_version": "0.3.0",
+        "requested_games": 250000,
+        "retrieved_at_utc": "2026-11-27T16:25:22.161984+00:00",
+        "sha256": "3fecaca105bd739688263a566036b957bce796d81ba503f43aacaff6a3434056",
+        "url": "https://database.lichess.org/standard/lichess_db_standard_rated_2026-10.pgn.zst"
+      },
+      "spark_and_receipt_seconds": 61.45,
+      "total_seconds": 88.95,
+      "verified_files": 25
+    },
+    {
+      "counts": {
+        "bronze": 1000000,
+        "quarantine": 1024,
+        "silver": 998976
+      },
+      "coverage": {
+        "eco_known": 997485,
+        "length_known": 997485,
+        "termination_known": 998976,
+        "total_plies": 65810996
+      },
+      "gold_groups": {
+        "length_metrics": 8,
+        "opening_context": 42618,
+        "opening_metrics": 2675,
+        "rating_gap_metrics": 7,
+        "rating_metrics": 15,
+        "termination_metrics": 5,
+        "time_control_metrics": 4
+      },
+      "outcomes": {
+        "black_wins": 463906,
+        "draws": 37776,
+        "white_wins": 497294
+      },
+      "snapshot_sha256": "0bc49de7258a0424657a469074be3963c207f7ef5f7d1b110d8b764177988c5a",
+      "source": {
+        "first_game_utc": "2026-10-01T00:00:00Z",
+        "last_game_utc": "2026-10-01T10:45:58Z",
+        "license": "CC0-1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "month": "2026-10",
+        "pipeline_version": "0.3.0",
+        "requested_games": 1000000,
+        "retrieved_at_utc": "2026-11-27T16:25:22.161984+00:00",
+        "sha256": "6050321afa4d758518168b63f58b5845f2dec4947a1ce92c6d6b25b6c70905a0",
+        "url": "https://database.lichess.org/standard/lichess_db_standard_rated_2026-10.pgn.zst"
+      },
+      "spark_and_receipt_seconds": 192.74,
+      "total_seconds": 300.13,
+      "verified_files": 100
+    }
+  ],
+  "checks": {
+    "all_selected_file_hashes_and_attempted_counts_match": true,
+    "cloud_runs_in_this_local_scale_check": false,
+    "every_gold_group_matches_independent_python_counts_and_exact_rates": true,
+    "first_100000_chunk_entries_match_historical_manifest": true,
+    "historical_100000_snapshot_byte_identical": true,
+    "independent_reexport_byte_identical": true,
+    "managed_delta_writes_in_this_local_scale_check": false
+  },
+  "download": {
+    "bytes": 2321066081,
+    "max_rss_bytes": 93028352,
+    "records": 1000000,
+    "wall_seconds": 221.06
+  },
+  "driver_memory": "4g",
+  "engine": "PySpark 3.5.3",
+  "host_memory_bytes": 17179869184,
+  "independent_reexport_seconds": 117.37,
+  "java": "21.0.2",
+  "local_master": "local[2]",
+  "minimum_observed_free_disk_gib_rounded": 28,
+  "snapshot_bytes": 3783288,
+  "snapshot_gzip_bytes": 338923,
+  "split": {
+    "files": 100,
+    "games_per_file": 10000,
+    "max_rss_bytes": 547504128,
+    "wall_seconds": 14.92
+  }
+}

@@ -1,6 +1,6 @@
 # Operations and validation notes
 
-These notes explain how to run, inspect and reproduce the lakehouse. The local pipeline passed independent testing at commit `94f58a11304cc11c92e102f3894aabcbdcc80ce9`. The v0.3 dashboard adds optional Silver fields and four Gold marts while retaining the original validation and deduplication behavior. The v0.3 Databricks bundle passed CLI validation and deployment, two serverless job runs on the 100,000-game sample, and the subsequent SQL checks. The previous 10,000-game [live dashboard](https://tasachii.github.io/chess-data-lakehouse/) and [hosted CI](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046) both passed verification. The enriched 100,000-game dashboard was exported and tested locally.
+These notes explain how to run, inspect and reproduce the lakehouse. The local pipeline passed independent testing at commit `94f58a11304cc11c92e102f3894aabcbdcc80ce9`. The v0.3 dashboard adds optional Silver fields and four Gold marts while retaining the original validation and deduplication behavior. The v0.3 Databricks bundle passed CLI validation and deployment, two serverless job runs on the 100,000-game sample, and the subsequent SQL checks. The previous 10,000-game [live dashboard](https://tasachii.github.io/chess-data-lakehouse/) and [hosted CI](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046) both passed verification. The expanded one-million-game dashboard was exported and verified locally with Spark. Cloud verification remains at 100,000 games.
 
 ## Local replay and lineage
 
@@ -50,13 +50,37 @@ CHESS_REAL_SAMPLE="$PWD/data/real_sample_100.pgn" \
 
 Generate `data/real_sample_100.pgn` using the 100-game download command in the README before running. The local tests create temporary managed Delta tables and compare the real Silver fields and all Gold metrics. The fresh optional Spark/Delta installation and explicit matching JAR route also passed for the earlier release in [hosted CI](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046). The automatic Maven resolver was not separately tested.
 
+## Local Spark scale check
+
+For larger samples, use `scripts/scale_sample.py` instead of the in-memory JSONL pipeline. It reads one bounded PGN chunk per Spark input file, uses the same stable IDs, validation rules and Gold functions as the Databricks job, and caches only the compact analytics projection on disk. It checks each input file’s SHA-256 and attempted record count in Spark. A separate Python pass streams the original PGN, keeps only unique IDs and grouped counts, and reconciles all seven Spark Gold marts before exporting a dashboard. No full Bronze or Silver JSON copy is written. This path measures local transformations and aggregate export, not a managed Delta write or cloud replay.
+
+```bash
+.venv/bin/python -m pip install -e '.[dev,spark]'
+SOURCE_URL=https://database.lichess.org/standard/lichess_db_standard_rated_2026-10.pgn.zst
+.venv/bin/chess-lakehouse download \
+  --url "$SOURCE_URL" --output data/dashboard_sample_1000000.pgn --max-games 1000000
+.venv/bin/python scripts/split_sample.py \
+  --input data/dashboard_sample_1000000.pgn \
+  --output output/scale-1m/chunks --games-per-file 10000
+for games in 100000 250000 1000000; do
+  SPARK_LOCAL_IP=127.0.0.1 PYSPARK_PYTHON="$PWD/.venv/bin/python" \
+    .venv/bin/python -m scripts.scale_sample \
+      --chunks output/scale-1m/chunks --games "$games" \
+      --output "output/scale-1m/checkpoint-$games"
+done
+```
+
+Use new checkpoint output directories. Each writes seven Gold CSVs, an aggregate-only `snapshot.json`, and a `report.json` with source, counts, group counts and timings. The full sample reads a single `part-*.pgn` glob; checkpoints read a verified prefix of the ordered manifest. The runner checks for at least 15 GiB of free storage before and during major stages. The measured machine has 16 GiB RAM; the local Spark driver is configured for 4 GiB and two cores. Monitor disk and memory during larger runs. The CLI’s streaming downloader stages files and preserves existing samples on a short or failed download.
+
+If PySpark 3.5.3 is available outside the virtual environment, use the host-site-packages route from the previous section, without Delta configuration, for the scale check. The script does not need Databricks credentials or local Delta JARs. Do not run several large Spark checkpoints concurrently on a small machine.
+
 ## Databricks run instructions
 
 The previous v0.2 serverless job passed official CLI validation and ran twice successfully on the same 10,000-game October 2026 sample. SQL verified the seven original managed Delta tables: Bronze 10,000 rows and distinct IDs, Silver 9,996, quarantine 4, all three Gold tables summed to 9,996, two run-history rows, and zero inserts / 10,000 duplicates on replay. These are historical cloud results, not a claim about v0.3 or the 100,000-game input.
 
 ### Prepare the bounded v0.3 cloud input
 
-The local 100,000-game source is 234,164,347 decompressed bytes. Spark's binary-file reader creates one row per file, so upload ten bounded files instead of one large input. This strategy was verified in local Spark glob tests and both Databricks executions. Regenerate the original source if needed using the README, then:
+The local 100,000-game source is 234,164,347 decompressed bytes. Spark's binary-file reader creates one row per file, so upload ten bounded files instead of one large input. This strategy was verified in local Spark glob tests and both Databricks executions. Regenerate the original 100,000-game source using the bounded download command with `--max-games 100000` and `--output data/dashboard_sample_100000.pgn`, then:
 
 ```bash
 .venv/bin/python scripts/split_sample.py \
@@ -106,5 +130,11 @@ FROM main.chess_portfolio_v3.ingestion_runs GROUP BY run_id;
 ```
 
 Check `SUM(games)` in `gold_opening_metrics`, `gold_rating_metrics`, `gold_time_control_metrics`, `gold_opening_context`, `gold_rating_gap_metrics`, `gold_termination_metrics`, and `gold_length_metrics`. Cumulative totals are repeated on history rows; do not sum them. The verified v0.3 runs used the bounded sample, not the full archive or continuous ingestion. The job assumes immutable input and serial invocations and does not provide cross-table atomicity.
+
+### Planned incremental expansion to 1,000,000 games (not executed)
+
+The verified v0.3 schema and volume can be reused because the first ten entries of the [one-million-game manifest](docs/assets/sample-chunks-1m-manifest.json) exactly match the historical cloud sample and the job schema is unchanged. Confirm the existing ten file hashes in the workspace before any transfer. The remaining 90 files (`part-011.pgn` through `part-100.pgn`) would extend the same input volume; do not replace the original ten or upload additional files outside the manifest. Check available storage and compute quota first.
+
+Use one job invocation over the full `part-*.pgn` glob with `requested_max_games=10000` per file. The single-file expected SHA argument stays blank. Compare all 100 per-file SHA-256 and attempted counts against the expanded manifest, preserving the existing 20 history rows. Based on the local reconciliation, the expected incremental result is 900,000 inserts, 100,000 duplicate attempts, 1,000,000 distinct Bronze rows, 998,976 Silver rows and 1,024 quarantine rows, with 120 history rows after one additional successful invocation. All seven Gold marts should sum to 998,976 games across 45,332 groups. These are expected checks, not measured cloud results. A further replay, if approved, should add zero distinct records and 1,000,000 duplicate attempts. Stop on quota failure; no new workspace, billing upgrade or cloud changes are needed for the local check.
 
 References: [job task types](https://docs.databricks.com/aws/en/dev-tools/bundles/job-task-types), [bundle settings](https://docs.databricks.com/aws/en/dev-tools/bundles/settings), [serverless limitations](https://docs.databricks.com/aws/en/compute/serverless/limitations), [Delta Lake quickstart](https://docs.delta.io/quick-start/).

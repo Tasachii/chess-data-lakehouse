@@ -1,42 +1,62 @@
-# Publication notes — v0.3 opening analytics
+# Publication notes — one-million-game snapshot
 
-The enriched 100,000-game dashboard is ready for independent review and publication from `main:/docs`. The [earlier dashboard](https://tasachii.github.io/chess-data-lakehouse/) and [hosted CI](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046) were verified for the previous release. The new v0.3 live site and hosted CI are still awaiting verification. Databricks verification for v0.3 is complete: two successful serverless runs on the 100,000-game sample and direct SQL checks.
+The one-million-game dashboard and its local Spark pipeline are ready for independent testing. The changes are on `scale-1m`; the 100,000-game dashboard on `main` remains unchanged. The new website and hosted CI have not been verified remotely. Databricks was verified on the earlier 100,000-game prefix only.
 
-## What changed
-
-- The 100,000-game v0.2 baseline is preserved at `4753c4a`. Version 0.3 retains stable IDs, validation and the original Gold groupings, adds ECO, termination, signed rating gap and nullable lexical mainline plies to Silver, and adds four Gold marts. Older schemas are rejected before writes; rebuild the same source in a fresh schema or output directory.
-- The opening table shows White wins, Black wins and draws with counts and rates. Opening-family/name/ECO search, White/Black perspective, result, average Elo, speed and minimum game filters work against the same opening-context mart. The remaining charts show the full sample. No player-level data is published.
-- The half-even rounding contract matches Python and Spark, including the 77/160 exact tie. Rates are computed from integer counts, not rounded rates.
-
-## Data evidence
+## Measured local results
 
 | Check | Result |
+| --- | ---: |
+| Actual bounded input | 1,000,000 records / 2,321,066,081 bytes |
+| Download / chunk split | 221.06 s / 14.92 s |
+| Input files | 100 × 10,000 records |
+| Bronze / Silver / quarantine | 1,000,000 / 998,976 / 1,024 |
+| White wins / Black wins / draws | 497,294 / 463,906 / 37,776 |
+| Opening labels / opening-context groups | 2,675 / 42,618 |
+| Gold marts / total groups | 7 / 45,332 |
+| Spark + receipt checks / full independent reconciliation | 192.74 s / 300.13 s |
+| Second independent export | 117.37 s; identical snapshot SHA-256 |
+| Aggregate JSON / locally gzipped size | 3,783,288 / 338,923 bytes |
+
+The actual source is the October 2026 Lichess rated standard archive prefix, covering validated games from 1 October 2026, 00:00:00–10:45:58 UTC. It is not a representative sample of the full month. The decompressed PGN SHA-256 is `6050321afa4d758518168b63f58b5845f2dec4947a1ce92c6d6b25b6c70905a0`; the aggregate snapshot SHA-256 is `0bc49de7258a0424657a469074be3963c207f7ef5f7d1b110d8b764177988c5a`.
+
+All 100 chunk SHA-256 values and attempted counts matched the [manifest](docs/assets/sample-chunks-1m-manifest.json); the first ten entries match the verified historical 100,000-game manifest. The independently streamed Python pass matched all seven Gold marts and their exact half-even rates; each mart sums to 998,976 games. A second independent export produced the same snapshot bytes. The final 100,000-game checkpoint also reproduced the historical dashboard SHA-256 exactly. All checkpoint results, including the 250,000-game run, are recorded in the [local run report](docs/assets/scale-run-report.json) and [run evidence](docs/run-evidence.md).
+
+The original Python JSONL pipeline and Databricks job were not rewritten. The downloader now writes and hashes games incrementally, with staged publication to protect successful previous downloads. The local Spark runner writes only Gold CSVs, the public aggregate snapshot and a report; temporary analytics data is removed. It does not produce full persistent Delta tables. The local test machine has 16 GiB RAM; Spark used two local cores, a 4 GiB driver heap and disk-backed scratch space. The lowest sampled free disk was about 28 GiB, above the 15 GiB stop threshold.
+
+## Verify locally
+
+The portable reproduction commands are in [README](README.md#reproduce-the-snapshot) and [operations notes](DEV_HANDOFF.md#local-spark-scale-check). The local checkpoints used the original 100,000-game chunk directory and the expanded chunk directory, respectively:
+
+```bash
+HOST_SITE_PACKAGES=$(python3.12 -c 'import sysconfig; print(sysconfig.get_paths()["purelib"])')
+export PYTHONPATH="$PWD/src:$HOST_SITE_PACKAGES"
+SPARK_LOCAL_IP=127.0.0.1 PYSPARK_PYTHON="$PWD/.venv/bin/python" \
+  .venv/bin/python -m scripts.scale_sample \
+  --chunks output/dashboard-100000/chunks --games 100000 \
+  --output output/scale-1m/checkpoint-100k-final
+SPARK_LOCAL_IP=127.0.0.1 PYSPARK_PYTHON="$PWD/.venv/bin/python" \
+  .venv/bin/python -m scripts.scale_sample \
+  --chunks output/scale-1m/chunks --games 250000 \
+  --output output/scale-1m/checkpoint-250k
+SPARK_LOCAL_IP=127.0.0.1 PYSPARK_PYTHON="$PWD/.venv/bin/python" \
+  .venv/bin/python -m scripts.scale_sample \
+  --chunks output/scale-1m/chunks --games 1000000 \
+  --output output/scale-1m/checkpoint-1m
+```
+
+The measured PySpark installation used the host PySpark 3.5.3 and Java 21 route in the operations notes. Use new output directories when repeating these commands. Only the parent PGN, chunk files and aggregate evidence are needed; all raw files stay ignored by Git.
+
+| Verification | Result |
 | --- | --- |
-| Actual source | 100,000 records / 234,164,347 bytes, original receipt and SHA unchanged |
-| v0.3 local Bronze / Silver / quarantine | 100,000 / 99,875 / 125 |
-| Local first/replay inserts | 100,000 / 0 |
-| Local first/replay wall time | 12.87 s / 13.87 s |
-| Opening-context rows | 18,342 |
-| Known ECO / termination / mainline length | 99,633 / 99,875 / 99,633 accepted games |
-| Full 100,000-game local Spark glob check | All 20,399 rows across 7 Gold marts match Python counts, length metrics and rounded rates; 33.42 s wall clock |
-| Current snapshot SHA-256 | `71c078b99c9ec5f2177166704fd5c8a99512cca8082d190c9b2bbbcca94bb239` (identical on local replay) |
+| `python -m pytest -ra` | 40 passed; optional Spark module skipped |
+| Full local Spark/Delta tests with real 100-game fixture | 51 passed in 78.94 s |
+| `ruff check .` / `ruff format --check src tests scripts` | Passed |
+| `node --check` for dashboard and browser test | Passed |
+| Markdown links and anchors | All 39 local targets passed |
+| Playwright against one-million-game snapshot | Passed filters, exact counts and rates, reset, empty states, six viewport widths, no browser errors |
+| Screenshots | [Desktop](docs/assets/dashboard-preview.png) and [filtered opening study](docs/assets/opening-study.png) captured from the actual one-million-game site; 320 px mobile also inspected |
 
-The source prefix covers 1 October 2026, 00:00:00–01:22:41 UTC. All 125 quarantined records have invalid time controls; 25 also have invalid results. Unknown ECO and mainline length remain explicit categories. Clock and eval tags were audited, not used as elapsed-time or engine-quality metrics. [Run evidence](docs/run-evidence.md) records actual field coverage, sample counts and limitations. The compact aggregate JSON is 1,652,287 bytes uncompressed (146,953 bytes when locally gzipped); it contains no usernames, game IDs or PGN.
-
-## Verified Databricks runs
-
-CLI validation and deployment passed. Two serverless job runs completed successfully in a fresh v0.3 schema, reading ten 10,000-game files through one glob per run. Direct SQL confirmed 100,000 Bronze rows and distinct IDs, 99,875 Silver rows, 125 quarantined, 11 managed Delta tables and seven Gold marts each summing to 99,875 games (20,399 groups overall). All ten per-file hashes and attempted counts matched the [chunk manifest](docs/assets/sample-chunks-manifest.json) in both runs. There are 20 history rows, with zero inserts and 100,000 duplicate attempts on replay.
-
-The previous 10,000-game cloud results are retained as historical evidence. The dashboard is an aggregate snapshot exported locally; the cloud job is a bounded batch, not continuous ingestion or a full-archive run. See [operations notes](DEV_HANDOFF.md#databricks-run-instructions) and [run evidence](docs/run-evidence.md#databricks-cloud-verification).
-
-## Local verification
-
-- Fresh editable v0.3.0 install and base Python suite: 34 passed (optional Spark module skipped), `pip check` passed; full local Spark/Delta suite: 44 passed in 96.63 s with the separate 100-game validation fixture. Full 100,000-game Spark transformation parity tested independently as described above.
-- `ruff check .`, `ruff format --check src tests scripts`, Python compilation, JavaScript syntax, `actionlint` and all 28 local Markdown links passed.
-- Playwright compared actual table labels, counts and rates for Italian/Ruy Lopez/Black defenses, ECO search, rating and speed slices, minimum counts, empty/reset states, all outcome filters and all six viewport widths from 320 to 1,440 px. No console errors. Real desktop and mobile screenshots were inspected.
-- [Dashboard screenshot](docs/assets/dashboard-preview.png) and [filtered opening table](docs/assets/opening-study.png) are captured from the actual v0.3 UI.
-
-To run the browser check, use Node.js, Playwright and local Chrome:
+To repeat the browser checks, install Playwright and serve the docs folder locally:
 
 ```bash
 npm --prefix output/dashboard-browser install --no-save playwright@1.65.1
@@ -54,13 +74,8 @@ DASHBOARD_URL=http://127.0.0.1:18767/chess-data-lakehouse/ \
 node scripts/test_dashboard.cjs
 ```
 
-### Developer smoke review
+## Databricks status
 
-| Angle | Assessment | Evidence and remaining limits |
-| --- | ---: | --- |
-| Product/CTO | 8/10 | Focused bounded analysis, CC0 attribution, private raw data, repeatable source, chunk strategy; two successful bounded cloud runs; no full-archive or continuous ingestion test. |
-| Tech lead | 9/10 | Shared contracts, exact count/rate parity, version guards, clean lint, repeatable tests; no hosted CI result for this revision yet. |
-| UX/UI | 8.5/10 | Clear color perspective, exact context filters, explicit results/denominators, mobile table and empty states; no formal screen-reader audit. |
-| QA | 9/10 | Actual sample, local Delta/glob fixture, tie/unknown/receipt regressions, exact browser checks, stable export; independent release QA and live retest remain pending. |
+The historical 100,000-game v0.3 cloud results remain verified: two successful serverless runs, 100,000 unique Bronze rows, 99,875 Silver, 125 quarantine, 11 Delta tables, seven Gold marts each summing to 99,875, all ten file receipts matching twice, 20 history rows and zero inserts / 100,000 duplicate attempts on replay.
 
-These are developer smoke-review ratings, not independent release sign-off. The cloud results above were verified separately. The cloud-status text update passed all 31 local Markdown link and anchor checks and the existing Playwright dashboard test at six viewport widths. The HTML structure and aggregate snapshot SHA-256 were unchanged. No pipeline code, data, configuration, push or additional cloud execution was involved.
+A proposed incremental expansion would reuse that schema and volume, transfer only the remaining 90 verified chunks, and run one glob of all 100 files. Expected checks are 900,000 new inserts, 100,000 duplicate attempts and 120 cumulative history rows, followed by full Gold reconciliation with the local results. The [operations notes](DEV_HANDOFF.md#planned-incremental-expansion-to-1000000-games-not-executed) describe the plan. These are expectations, not cloud measurements. No new cloud run or upload was performed for this handoff. The dashboard is a static snapshot, not live ingestion or a full-archive analysis.

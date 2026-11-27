@@ -1,0 +1,809 @@
+{
+  "games_per_file": 10000,
+  "parent_source_sha256": "6050321afa4d758518168b63f58b5845f2dec4947a1ce92c6d6b25b6c70905a0",
+  "parts": [
+    {
+      "bytes": 23614481,
+      "file": "part-001.pgn",
+      "first_record": 1,
+      "games": 10000,
+      "last_record": 10000,
+      "source_sha256": "24a50c38d31691401b5ef3b5fa246c4941e56d4223c54d397d0ef6c9b13c3030"
+    },
+    {
+      "bytes": 23231157,
+      "file": "part-002.pgn",
+      "first_record": 10001,
+      "games": 10000,
+      "last_record": 20000,
+      "source_sha256": "9d81d6a3c266ac93262ce28d5f09e04a9488ec356a675a4bb8a53350002f5417"
+    },
+    {
+      "bytes": 23461425,
+      "file": "part-003.pgn",
+      "first_record": 20001,
+      "games": 10000,
+      "last_record": 30000,
+      "source_sha256": "b35233b7c06ef02941361908519c640e5f5e49b65cdb105c0cee2f0dae3357f6"
+    },
+    {
+      "bytes": 23349655,
+      "file": "part-004.pgn",
+      "first_record": 30001,
+      "games": 10000,
+      "last_record": 40000,
+      "source_sha256": "615aa6fc834e0b932ced499d2e7b6fba0e6d274bd928a12c4f10e20270ec7c63"
+    },
+    {
+      "bytes": 23429912,
+      "file": "part-005.pgn",
+      "first_record": 40001,
+      "games": 10000,
+      "last_record": 50000,
+      "source_sha256": "d7668834b71d7c95e5b9fa6e84d6d8e21526e8084749b5153d40c54b9f16bc98"
+    },
+    {
+      "bytes": 23487793,
+      "file": "part-006.pgn",
+      "first_record": 50001,
+      "games": 10000,
+      "last_record": 60000,
+      "source_sha256": "2443b02d75e254bc479f89e5eed722b63e9667a08925de90a6cfdbc8827ed079"
+    },
+    {
+      "bytes": 23323161,
+      "file": "part-007.pgn",
+      "first_record": 60001,
+      "games": 10000,
+      "last_record": 70000,
+      "source_sha256": "13bae91b14967b61a90271f6afc4df4e941258f9d723848c38fa67ca98fde239"
+    },
+    {
+      "bytes": 23530312,
+      "file": "part-008.pgn",
+      "first_record": 70001,
+      "games": 10000,
+      "last_record": 80000,
+      "source_sha256": "7385ed63a2c3cd14fc9f68c13222af46be8c56fac73209ac0698fca9e3874d9d"
+    },
+    {
+      "bytes": 23542726,
+      "file": "part-009.pgn",
+      "first_record": 80001,
+      "games": 10000,
+      "last_record": 90000,
+      "source_sha256": "2bc64091d466b63dfb7f14fc5f25e06a15e0f7a1b2548a10a114536c6da5c7b9"
+    },
+    {
+      "bytes": 23193716,
+      "file": "part-010.pgn",
+      "first_record": 90001,
+      "games": 10000,
+      "last_record": 100000,
+      "source_sha256": "af07ba9b61adea15c4723b3adfd88ef9dd77f6a0b0997a5e690a80351ec94ed2"
+    },
+    {
+      "bytes": 23527278,
+      "file": "part-011.pgn",
+      "first_record": 100001,
+      "games": 10000,
+      "last_record": 110000,
+      "source_sha256": "5a157876019ed7241a2adc947f5d58e254eb36f12023b551a9a6ee0558b50fa1"
+    },
+    {
+      "bytes": 23232958,
+      "file": "part-012.pgn",
+      "first_record": 110001,
+      "games": 10000,
+      "last_record": 120000,
+      "source_sha256": "4a77771a8bb1d8566fe784c30a4c6ae897e81b0f4b208c8e73aed9ccc0c40f96"
+    },
+    {
+      "bytes": 23429309,
+      "file": "part-013.pgn",
+      "first_record": 120001,
+      "games": 10000,
+      "last_record": 130000,
+      "source_sha256": "6cd2a31a67511c31b9ebb963226a637e031532a5358190c07272152d40c5bcf7"
+    },
+    {
+      "bytes": 23208968,
+      "file": "part-014.pgn",
+      "first_record": 130001,
+      "games": 10000,
+      "last_record": 140000,
+      "source_sha256": "62dc40053876701830d0cab45e5297b51225282629549acf2eda0380a02f170c"
+    },
+    {
+      "bytes": 23371580,
+      "file": "part-015.pgn",
+      "first_record": 140001,
+      "games": 10000,
+      "last_record": 150000,
+      "source_sha256": "cf0aee95fc8fe612ca15beee1f96b052a0a01c84e2891d6ed9d07329a89a5920"
+    },
+    {
+      "bytes": 23463122,
+      "file": "part-016.pgn",
+      "first_record": 150001,
+      "games": 10000,
+      "last_record": 160000,
+      "source_sha256": "925e9e991c370cdf97e89650123c6ad613a392b8095fe4726f07b3143054d41a"
+    },
+    {
+      "bytes": 23398237,
+      "file": "part-017.pgn",
+      "first_record": 160001,
+      "games": 10000,
+      "last_record": 170000,
+      "source_sha256": "2b13fabf33a0cddaca59e0ea4abd21d2edbd11c5c31a53c8b112c21b1b2bce1f"
+    },
+    {
+      "bytes": 23246389,
+      "file": "part-018.pgn",
+      "first_record": 170001,
+      "games": 10000,
+      "last_record": 180000,
+      "source_sha256": "8469fc82a633a3b2367a1c736202973cca25a525de16d2f7c065993c2cd1d09c"
+    },
+    {
+      "bytes": 23423607,
+      "file": "part-019.pgn",
+      "first_record": 180001,
+      "games": 10000,
+      "last_record": 190000,
+      "source_sha256": "e7c40ddd2571e0fa9e6340317387270d1180eea95391f6f913c1ac1d5bece47b"
+    },
+    {
+      "bytes": 23431176,
+      "file": "part-020.pgn",
+      "first_record": 190001,
+      "games": 10000,
+      "last_record": 200000,
+      "source_sha256": "96a62db92530353fc4d5d2c8c926ab04bf368f0bb4dd04301effd532b12a6453"
+    },
+    {
+      "bytes": 23321920,
+      "file": "part-021.pgn",
+      "first_record": 200001,
+      "games": 10000,
+      "last_record": 210000,
+      "source_sha256": "c0b0e838e99dc04e631e14fdd254e1864cfc694452d2fd4b68b65ea9e838c45c"
+    },
+    {
+      "bytes": 23297199,
+      "file": "part-022.pgn",
+      "first_record": 210001,
+      "games": 10000,
+      "last_record": 220000,
+      "source_sha256": "1c753d44891d36a375b5a8d237deb8635a3230b69d2277ad18dd09adf59e830d"
+    },
+    {
+      "bytes": 23284081,
+      "file": "part-023.pgn",
+      "first_record": 220001,
+      "games": 10000,
+      "last_record": 230000,
+      "source_sha256": "766825424ffc560a56ffa0204506fa33cc3dc38814252771daa7a23ae2604831"
+    },
+    {
+      "bytes": 23220263,
+      "file": "part-024.pgn",
+      "first_record": 230001,
+      "games": 10000,
+      "last_record": 240000,
+      "source_sha256": "8089e8e6ffdd75f75f56ae38804674e292896cf3bd533cad84bd419361f5e38c"
+    },
+    {
+      "bytes": 23316434,
+      "file": "part-025.pgn",
+      "first_record": 240001,
+      "games": 10000,
+      "last_record": 250000,
+      "source_sha256": "b62bcfcd5f62379413a3505699bee40c09f1ba3d62e8da99c5d5d8da65159cf6"
+    },
+    {
+      "bytes": 23301780,
+      "file": "part-026.pgn",
+      "first_record": 250001,
+      "games": 10000,
+      "last_record": 260000,
+      "source_sha256": "f9970578b7741a0a43b6b9c6429c44a202af5a4ae674b9b91af8ee559935bb94"
+    },
+    {
+      "bytes": 23173236,
+      "file": "part-027.pgn",
+      "first_record": 260001,
+      "games": 10000,
+      "last_record": 270000,
+      "source_sha256": "4316902dc0bed552f467daba7cd92d2cfdb113a3e93456b56f9ba3005a587ab2"
+    },
+    {
+      "bytes": 23175002,
+      "file": "part-028.pgn",
+      "first_record": 270001,
+      "games": 10000,
+      "last_record": 280000,
+      "source_sha256": "327f5311c1ed7915dc74a115bb4489efd8274ef782eb2606ba56e92a6fd66334"
+    },
+    {
+      "bytes": 23087593,
+      "file": "part-029.pgn",
+      "first_record": 280001,
+      "games": 10000,
+      "last_record": 290000,
+      "source_sha256": "010592ba2c1f4a00f7e5a53ffcc1baae7c6347c022c98f1e9cf6dea89bc0d6a9"
+    },
+    {
+      "bytes": 23174068,
+      "file": "part-030.pgn",
+      "first_record": 290001,
+      "games": 10000,
+      "last_record": 300000,
+      "source_sha256": "10bc1ffee3b48e06b53c14380c6423774fcb78dc642f951effe1e302b8a54e22"
+    },
+    {
+      "bytes": 23287178,
+      "file": "part-031.pgn",
+      "first_record": 300001,
+      "games": 10000,
+      "last_record": 310000,
+      "source_sha256": "28a54e071ae3b49800aa29cd687c8136179f53643503b84714a2fcea81147f2d"
+    },
+    {
+      "bytes": 23346301,
+      "file": "part-032.pgn",
+      "first_record": 310001,
+      "games": 10000,
+      "last_record": 320000,
+      "source_sha256": "06e239ba9be450e398fa632d3353d43e2f5a31b91e75e098f8036ef7a163bcc9"
+    },
+    {
+      "bytes": 23089039,
+      "file": "part-033.pgn",
+      "first_record": 320001,
+      "games": 10000,
+      "last_record": 330000,
+      "source_sha256": "d77e050789dcdcd745752d9804e49dace57b12531662e5329e91f9fb54b70a62"
+    },
+    {
+      "bytes": 23242163,
+      "file": "part-034.pgn",
+      "first_record": 330001,
+      "games": 10000,
+      "last_record": 340000,
+      "source_sha256": "c09b00aa5146af02c2c0c3500d8f2c8b800ec182ce7ace167b039ecbe797fd3b"
+    },
+    {
+      "bytes": 23043217,
+      "file": "part-035.pgn",
+      "first_record": 340001,
+      "games": 10000,
+      "last_record": 350000,
+      "source_sha256": "dafd87adb64a087ef54b7b5528ef2b17b8040c6294aa83fbced5238d55d0c74b"
+    },
+    {
+      "bytes": 23125522,
+      "file": "part-036.pgn",
+      "first_record": 350001,
+      "games": 10000,
+      "last_record": 360000,
+      "source_sha256": "c1519ad4a656438291529f277250ab9b3bfd65c7886af9a3db4c80f4d4082e9d"
+    },
+    {
+      "bytes": 22595909,
+      "file": "part-037.pgn",
+      "first_record": 360001,
+      "games": 10000,
+      "last_record": 370000,
+      "source_sha256": "8a42e64cf1e6aa7c07185098431997c29e96925fd36040820340a07d4f4f30a1"
+    },
+    {
+      "bytes": 23270111,
+      "file": "part-038.pgn",
+      "first_record": 370001,
+      "games": 10000,
+      "last_record": 380000,
+      "source_sha256": "086bbe6383054db9228aa71e9283e16ca00e19353633418427a1f41fbcac7f38"
+    },
+    {
+      "bytes": 23217745,
+      "file": "part-039.pgn",
+      "first_record": 380001,
+      "games": 10000,
+      "last_record": 390000,
+      "source_sha256": "442559d1a300f24b50af6ad62f1a1250a3e323ee8e750e68bb935a711d19c39e"
+    },
+    {
+      "bytes": 23057139,
+      "file": "part-040.pgn",
+      "first_record": 390001,
+      "games": 10000,
+      "last_record": 400000,
+      "source_sha256": "cd5a751d259879966c324eeb34e7e05d8512dfa746337cbe14d991d4fa18a96d"
+    },
+    {
+      "bytes": 23156617,
+      "file": "part-041.pgn",
+      "first_record": 400001,
+      "games": 10000,
+      "last_record": 410000,
+      "source_sha256": "a2bc2bbe593f19076f89161c880bde1174ca520d29be3f7ddc87bbdf03ceff2f"
+    },
+    {
+      "bytes": 23153531,
+      "file": "part-042.pgn",
+      "first_record": 410001,
+      "games": 10000,
+      "last_record": 420000,
+      "source_sha256": "dc377b3ffffe20bf5259d4e92e8db532beea82ecbdc60dfd30ba0db56ea089de"
+    },
+    {
+      "bytes": 23224547,
+      "file": "part-043.pgn",
+      "first_record": 420001,
+      "games": 10000,
+      "last_record": 430000,
+      "source_sha256": "f68504351c7b5a66bcbdd8bc6414232da69e93dde1db0d32fd9d353bd9a6af72"
+    },
+    {
+      "bytes": 23111968,
+      "file": "part-044.pgn",
+      "first_record": 430001,
+      "games": 10000,
+      "last_record": 440000,
+      "source_sha256": "654fadcc00b9e223a66369b286b3338db5861881a30eabd58439e839f44b7682"
+    },
+    {
+      "bytes": 23127538,
+      "file": "part-045.pgn",
+      "first_record": 440001,
+      "games": 10000,
+      "last_record": 450000,
+      "source_sha256": "1911977ea01b78aa6e6c31e229bdcead62c38598d440ea9d7b13b3780753b2ca"
+    },
+    {
+      "bytes": 23187442,
+      "file": "part-046.pgn",
+      "first_record": 450001,
+      "games": 10000,
+      "last_record": 460000,
+      "source_sha256": "8a2c79ffc5ba116403696405bd25ca6f1591c2c09864e8158a6bbfa9d0c200b6"
+    },
+    {
+      "bytes": 23180778,
+      "file": "part-047.pgn",
+      "first_record": 460001,
+      "games": 10000,
+      "last_record": 470000,
+      "source_sha256": "c4470debe311249531e53864d5a05df897946c9d1a5dd41593677bda38742a05"
+    },
+    {
+      "bytes": 23171613,
+      "file": "part-048.pgn",
+      "first_record": 470001,
+      "games": 10000,
+      "last_record": 480000,
+      "source_sha256": "a460f76400f58f7daa6218fe0f33c9bbcb29167cb2dbaab67c3886eeebeb4feb"
+    },
+    {
+      "bytes": 23198491,
+      "file": "part-049.pgn",
+      "first_record": 480001,
+      "games": 10000,
+      "last_record": 490000,
+      "source_sha256": "4c73b7d5b060ebc89256a90938b17429fbb3f8ffa45c3ab6fadf8387e76653bf"
+    },
+    {
+      "bytes": 23477723,
+      "file": "part-050.pgn",
+      "first_record": 490001,
+      "games": 10000,
+      "last_record": 500000,
+      "source_sha256": "45d54a8e178478f2281467cef9555e918d0abc76be371f93da79c7e893916741"
+    },
+    {
+      "bytes": 23104025,
+      "file": "part-051.pgn",
+      "first_record": 500001,
+      "games": 10000,
+      "last_record": 510000,
+      "source_sha256": "c0c5e570eeace6e4c1a30d360b89034e6f803bd241ca34ef13f52f9562d5ecd5"
+    },
+    {
+      "bytes": 22965220,
+      "file": "part-052.pgn",
+      "first_record": 510001,
+      "games": 10000,
+      "last_record": 520000,
+      "source_sha256": "e93789ad92311b8fb2d137404741a5aaf743c99f2564e83c28dfc2a128e4ae85"
+    },
+    {
+      "bytes": 23137043,
+      "file": "part-053.pgn",
+      "first_record": 520001,
+      "games": 10000,
+      "last_record": 530000,
+      "source_sha256": "8765f0b91f89e8d3f4d7b1dfc18baddcdc80fed3d9c0f0e3cc77b1cbb213a06c"
+    },
+    {
+      "bytes": 22892163,
+      "file": "part-054.pgn",
+      "first_record": 530001,
+      "games": 10000,
+      "last_record": 540000,
+      "source_sha256": "c7970873b19abd94c31ca56700a3085bc72c39a54062142e579a9970de0d3c10"
+    },
+    {
+      "bytes": 23056531,
+      "file": "part-055.pgn",
+      "first_record": 540001,
+      "games": 10000,
+      "last_record": 550000,
+      "source_sha256": "d1fa9ced5b161a8b5235b76db3d47551d416a89f4dde6d0809cfd189d03f7e96"
+    },
+    {
+      "bytes": 23056646,
+      "file": "part-056.pgn",
+      "first_record": 550001,
+      "games": 10000,
+      "last_record": 560000,
+      "source_sha256": "f773bc8af8eb34f4e6888f3e74d4a0aa846f5a239c97734f85ca383a6b6158a0"
+    },
+    {
+      "bytes": 23171684,
+      "file": "part-057.pgn",
+      "first_record": 560001,
+      "games": 10000,
+      "last_record": 570000,
+      "source_sha256": "e34048c274957a8205c453fa5e0a72f4bcadc35ff1b2a6759d5141324bb278f4"
+    },
+    {
+      "bytes": 23361344,
+      "file": "part-058.pgn",
+      "first_record": 570001,
+      "games": 10000,
+      "last_record": 580000,
+      "source_sha256": "018326beffa2acb7bc37d83544387a13909da88f3cf3856b6da38c4ce739410d"
+    },
+    {
+      "bytes": 23083806,
+      "file": "part-059.pgn",
+      "first_record": 580001,
+      "games": 10000,
+      "last_record": 590000,
+      "source_sha256": "b2c25898eb7df75c14367b1b8732e5f7a582f7f2c3469fedd479d994550e804a"
+    },
+    {
+      "bytes": 23090818,
+      "file": "part-060.pgn",
+      "first_record": 590001,
+      "games": 10000,
+      "last_record": 600000,
+      "source_sha256": "c885ba906c1c093d83b52ef5851bc735658123ab97f0d897a8f620096739a9da"
+    },
+    {
+      "bytes": 23139050,
+      "file": "part-061.pgn",
+      "first_record": 600001,
+      "games": 10000,
+      "last_record": 610000,
+      "source_sha256": "862eda8540aac3ae745134ce56bba2d4b38e395cabddfa98c8d397ae7239742b"
+    },
+    {
+      "bytes": 23138283,
+      "file": "part-062.pgn",
+      "first_record": 610001,
+      "games": 10000,
+      "last_record": 620000,
+      "source_sha256": "db5226b4c70e4275f2b612684a5cbe378e82e7c7f91e52f83c7c5d24104cd1fe"
+    },
+    {
+      "bytes": 22961381,
+      "file": "part-063.pgn",
+      "first_record": 620001,
+      "games": 10000,
+      "last_record": 630000,
+      "source_sha256": "83f473b842ab39ced1a52f8a6f0933fbf36bdbaaa5699c535ea8a02f7bec16d8"
+    },
+    {
+      "bytes": 23120932,
+      "file": "part-064.pgn",
+      "first_record": 630001,
+      "games": 10000,
+      "last_record": 640000,
+      "source_sha256": "8bb0aeebda2a7cfcc5a79b347c4549f4d6ba9230d26c8d27f5784701986e0df1"
+    },
+    {
+      "bytes": 22987625,
+      "file": "part-065.pgn",
+      "first_record": 640001,
+      "games": 10000,
+      "last_record": 650000,
+      "source_sha256": "968e5673bbef79d2aaa7748b628f208bfadaf7c809d1f76b33f129746c067d67"
+    },
+    {
+      "bytes": 22972546,
+      "file": "part-066.pgn",
+      "first_record": 650001,
+      "games": 10000,
+      "last_record": 660000,
+      "source_sha256": "42c6034298c849487617a17df21ddd27194ed9d64ab6654e2d0328233c6e35d7"
+    },
+    {
+      "bytes": 22966038,
+      "file": "part-067.pgn",
+      "first_record": 660001,
+      "games": 10000,
+      "last_record": 670000,
+      "source_sha256": "98f8f63d9af24c4ad7791e52a7e62d416c85ab5fa193e6a2456f60637cf79746"
+    },
+    {
+      "bytes": 23253121,
+      "file": "part-068.pgn",
+      "first_record": 670001,
+      "games": 10000,
+      "last_record": 680000,
+      "source_sha256": "b57a6e798fe2677c2c2a36a82844cf19e87bb21fdb18ffbbdede8fd983cb0a63"
+    },
+    {
+      "bytes": 23035178,
+      "file": "part-069.pgn",
+      "first_record": 680001,
+      "games": 10000,
+      "last_record": 690000,
+      "source_sha256": "552596125d370e1ce89198f5feedb8030d415d51cf15cf1f5e97a23a461ebddc"
+    },
+    {
+      "bytes": 23127144,
+      "file": "part-070.pgn",
+      "first_record": 690001,
+      "games": 10000,
+      "last_record": 700000,
+      "source_sha256": "8f9803de7e3456b7165f8e336c0bfd1708a43e6d8c7bb5cc501cf83c32962d65"
+    },
+    {
+      "bytes": 23253060,
+      "file": "part-071.pgn",
+      "first_record": 700001,
+      "games": 10000,
+      "last_record": 710000,
+      "source_sha256": "e8719c9e8bff7a7df0243d1408ade82bd30b16bb08769bc6a3b7f91cddf8c55e"
+    },
+    {
+      "bytes": 23123063,
+      "file": "part-072.pgn",
+      "first_record": 710001,
+      "games": 10000,
+      "last_record": 720000,
+      "source_sha256": "d6e49ab16567fbe3dfa5d4b349b479d8b12cae9cd20aacfc5af4b5d56b6f6fc6"
+    },
+    {
+      "bytes": 23162946,
+      "file": "part-073.pgn",
+      "first_record": 720001,
+      "games": 10000,
+      "last_record": 730000,
+      "source_sha256": "5fe1a4f787f932c6265cb27a43dc1414a4d6a27031c47348790734ea20395625"
+    },
+    {
+      "bytes": 23069278,
+      "file": "part-074.pgn",
+      "first_record": 730001,
+      "games": 10000,
+      "last_record": 740000,
+      "source_sha256": "bd1900bfc8add8655237dbfde5b429a261a9bf2fe6a994f76dff444ea3b591ad"
+    },
+    {
+      "bytes": 23035204,
+      "file": "part-075.pgn",
+      "first_record": 740001,
+      "games": 10000,
+      "last_record": 750000,
+      "source_sha256": "6c75a114d1c1d2a39096a6c845e7476cfbe44b53d66a26559ea275f4df87c808"
+    },
+    {
+      "bytes": 23057667,
+      "file": "part-076.pgn",
+      "first_record": 750001,
+      "games": 10000,
+      "last_record": 760000,
+      "source_sha256": "f942825f64de40bdd9aca482565e3d86e7452be920a264275ce6372458e8a566"
+    },
+    {
+      "bytes": 23244958,
+      "file": "part-077.pgn",
+      "first_record": 760001,
+      "games": 10000,
+      "last_record": 770000,
+      "source_sha256": "ea1f778cf5b33a047b78ffb85665bf5c584111f033dab67bf7aa04812a963b97"
+    },
+    {
+      "bytes": 23135721,
+      "file": "part-078.pgn",
+      "first_record": 770001,
+      "games": 10000,
+      "last_record": 780000,
+      "source_sha256": "9412a11a513f860e5922ba6fb67d42183edb0415ec22bdfa433e5b794ee90f4e"
+    },
+    {
+      "bytes": 23321103,
+      "file": "part-079.pgn",
+      "first_record": 780001,
+      "games": 10000,
+      "last_record": 790000,
+      "source_sha256": "5800fbf4a199c64210dc955934fee37168a8552aa32eb5f032a37da718e5b4bd"
+    },
+    {
+      "bytes": 23326518,
+      "file": "part-080.pgn",
+      "first_record": 790001,
+      "games": 10000,
+      "last_record": 800000,
+      "source_sha256": "2b5307e13e65e643d75cc7f6d5480bdaba157f4845ab11bb89629976bda3c3d1"
+    },
+    {
+      "bytes": 23328269,
+      "file": "part-081.pgn",
+      "first_record": 800001,
+      "games": 10000,
+      "last_record": 810000,
+      "source_sha256": "f332b320f92fa29e38e7c87af9166047e044d99eea4ddaecf72e0a9e5c5605fc"
+    },
+    {
+      "bytes": 23215997,
+      "file": "part-082.pgn",
+      "first_record": 810001,
+      "games": 10000,
+      "last_record": 820000,
+      "source_sha256": "ff3debfcd09ab03ea0917ea174b12e6659f6538d55b3b48984ef6b7a07f90bc1"
+    },
+    {
+      "bytes": 23103859,
+      "file": "part-083.pgn",
+      "first_record": 820001,
+      "games": 10000,
+      "last_record": 830000,
+      "source_sha256": "4e1b17334eb31d313bfdedd499ce73f60e16859d4d814ef2507022a3e61b8829"
+    },
+    {
+      "bytes": 23288906,
+      "file": "part-084.pgn",
+      "first_record": 830001,
+      "games": 10000,
+      "last_record": 840000,
+      "source_sha256": "55ce54527680ea206a7fad266791f1ba0236570ec178082a311c3510037a5614"
+    },
+    {
+      "bytes": 23278508,
+      "file": "part-085.pgn",
+      "first_record": 840001,
+      "games": 10000,
+      "last_record": 850000,
+      "source_sha256": "d4b0dfd9c152bba8dc1bf56c0d267ed89cb31e07c6e0d92a4fb4b1c605f385bc"
+    },
+    {
+      "bytes": 23143507,
+      "file": "part-086.pgn",
+      "first_record": 850001,
+      "games": 10000,
+      "last_record": 860000,
+      "source_sha256": "d8ab756a66b1f61fe3b04bedefc895f4c70b3a16d253ef86d2972cace0b5477d"
+    },
+    {
+      "bytes": 22978732,
+      "file": "part-087.pgn",
+      "first_record": 860001,
+      "games": 10000,
+      "last_record": 870000,
+      "source_sha256": "0989d5d10cd8b86d6fd02a4f78b9156a6b0f437d941279f9dd265d962a4be1de"
+    },
+    {
+      "bytes": 23204278,
+      "file": "part-088.pgn",
+      "first_record": 870001,
+      "games": 10000,
+      "last_record": 880000,
+      "source_sha256": "d1d1308b42dbe5c840c473263a6d63d94c08a7add9dd27d71778e0c6afeac371"
+    },
+    {
+      "bytes": 23223033,
+      "file": "part-089.pgn",
+      "first_record": 880001,
+      "games": 10000,
+      "last_record": 890000,
+      "source_sha256": "94cd85d57f56f4594dc7695f2d480afb03a6e4afba453043a27cd423c3630569"
+    },
+    {
+      "bytes": 23016294,
+      "file": "part-090.pgn",
+      "first_record": 890001,
+      "games": 10000,
+      "last_record": 900000,
+      "source_sha256": "746953cb477c27d56701739d79227b3f272bde4b2a6765685b5b058db21c07b8"
+    },
+    {
+      "bytes": 23119100,
+      "file": "part-091.pgn",
+      "first_record": 900001,
+      "games": 10000,
+      "last_record": 910000,
+      "source_sha256": "f1d2dd87f75af0fe9b5eb940c9675bffe51c991c807a7937b627e3979440e6e2"
+    },
+    {
+      "bytes": 23125774,
+      "file": "part-092.pgn",
+      "first_record": 910001,
+      "games": 10000,
+      "last_record": 920000,
+      "source_sha256": "9f381e3ec717168be8ecc29786041493d245933fa5f2e2540af472a4d1377df8"
+    },
+    {
+      "bytes": 23125106,
+      "file": "part-093.pgn",
+      "first_record": 920001,
+      "games": 10000,
+      "last_record": 930000,
+      "source_sha256": "6620e7c37a1a9041441c1b29ac497d6ad8f2799f03a2d9b7bbc7c46d87ad6b00"
+    },
+    {
+      "bytes": 23433262,
+      "file": "part-094.pgn",
+      "first_record": 930001,
+      "games": 10000,
+      "last_record": 940000,
+      "source_sha256": "22b1867f1a341846179ec817e611276e11e53e512757684ebd35eda5dc07e7e1"
+    },
+    {
+      "bytes": 23218026,
+      "file": "part-095.pgn",
+      "first_record": 940001,
+      "games": 10000,
+      "last_record": 950000,
+      "source_sha256": "cdf29d43c66fac88586713c9ec1cebe7f7cc9ef85bbb8a0fbc50fffad9538fcc"
+    },
+    {
+      "bytes": 23351601,
+      "file": "part-096.pgn",
+      "first_record": 950001,
+      "games": 10000,
+      "last_record": 960000,
+      "source_sha256": "93c604c778898b623dc2142a82e394f7725e315619e8bb4e0533e985549bc8fe"
+    },
+    {
+      "bytes": 23238884,
+      "file": "part-097.pgn",
+      "first_record": 960001,
+      "games": 10000,
+      "last_record": 970000,
+      "source_sha256": "28e9383046da484e9dc6cd9cf9d56578a8df9b07fda746b795f20613d59c215e"
+    },
+    {
+      "bytes": 23224323,
+      "file": "part-098.pgn",
+      "first_record": 970001,
+      "games": 10000,
+      "last_record": 980000,
+      "source_sha256": "176496df94239880fe2c01732d1176608971e86097e8fef51ee9bfa3855da42f"
+    },
+    {
+      "bytes": 23373710,
+      "file": "part-099.pgn",
+      "first_record": 980001,
+      "games": 10000,
+      "last_record": 990000,
+      "source_sha256": "5edfeb32aa88c87600f993b7c4d2d232774e59fce4cde98a0c3e43bfb5e503b7"
+    },
+    {
+      "bytes": 23211607,
+      "file": "part-100.pgn",
+      "first_record": 990001,
+      "games": 10000,
+      "last_record": 1000000,
+      "source_sha256": "7f56dab52d307aa62f92d164776aa48eab2f9c96a4c8d592236400401c500cf8"
+    }
+  ],
+  "retrieved_at_utc": "2026-11-27T16:25:22.161984+00:00",
+  "source_url": "https://database.lichess.org/standard/lichess_db_standard_rated_2026-10.pgn.zst",
+  "total_games": 1000000
+}

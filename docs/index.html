@@ -425,8 +425,8 @@
               <span class="step-number bronze-tag">02 · Bronze</span>
               <h3>Keep the source</h3>
               <p>
-                Deduplicate by stable game ID and retain raw records locally
-                with batch lineage.
+                Deduplicate by stable game ID and retain private source files
+                or Bronze tables with batch lineage.
               </p>
             </article>
             <article>
@@ -464,12 +464,13 @@
             <code id="source-hash"></code>
           </div>
           <div>
-            <span class="badge subtle">LOCAL + CLOUD VERIFIED</span>
+            <span class="badge subtle">LOCAL SPARK VERIFIED</span>
             <p>
-              This snapshot was exported locally. Two Databricks serverless runs
-              processed the same 100,000-game sample; SQL confirmed 100,000
-              unique Bronze records, 99,875 valid games, 125 quarantined and zero
-              new records on replay. No live ingestion.
+              Local Spark checked all 100 source files, and a separate Python
+              pass reconciled all seven Gold marts for this 1,000,000-game sample.
+              Databricks cloud verification covers the earlier 100,000-game
+              prefix: two successful runs and zero new records on replay.
+              No live ingestion.
             </p>
             <a
               class="text-link"

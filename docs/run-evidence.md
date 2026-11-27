@@ -2,9 +2,39 @@
 
 Local measurements were recorded on 27 November 2026 with Python 3.12. Databricks SQL results are listed separately below. The publisher is the [Lichess Open Database](https://database.lichess.org/), and the source is the [October 2026 rated standard archive](https://database.lichess.org/standard/lichess_db_standard_rated_2026-10.pgn.zst), licensed CC0 1.0. Only bounded prefixes were downloaded; the full archive was not processed.
 
-## Current v0.3 opening analytics (100,000 games)
+## Current local Spark scale check (1,000,000 games)
 
-Version 0.3 rebuilds the same verified October 2026 prefix in a fresh local output directory. The original file SHA-256 and receipt are unchanged. The first run inserted 100,000, and replay inserted zero. Bronze / Silver / quarantine = 100,000 / 99,875 / 125. The final local run took 12.87 s; replay took 13.87 s. Both exports matched byte-for-byte. Current [aggregate snapshot](assets/snapshot.json) SHA-256: `71c078b99c9ec5f2177166704fd5c8a99512cca8082d190c9b2bbbcca94bb239`. No player-level rows are exported.
+The first 1,000,000 records of the October 2026 rated standard archive were downloaded on 27 November at 16:25:22 UTC. The bounded decompressed PGN contains 2,321,066,081 bytes with SHA-256 `6050321afa4d758518168b63f58b5845f2dec4947a1ce92c6d6b25b6c70905a0`. The streaming downloader took 221.06 s; process maximum RSS was 93,028,352 bytes. Splitting into 100 files of exactly 10,000 records took 14.92 s; each file contains 22,595,909–23,614,481 bytes. The [chunk manifest](assets/sample-chunks-1m-manifest.json) verifies the exact reconstructed parent hash and all file receipts. The first ten entries match the earlier 100,000-game cloud sample byte-for-byte.
+
+The scale runner uses PySpark 3.5.3 / Java 21 on a 16 GiB machine with `local[2]`, a 4 GiB driver heap and disk-backed temporary storage. It checks every selected file’s SHA-256 and attempted record count in Spark, deduplicates by canonical ID, and independently streams the PGN with Python to verify every Gold group and exact half-even rate. The full sample uses one glob; the 250,000-game checkpoint uses the first 25 files. Minimum sampled free disk space was about 28 GiB; no out-of-memory failure occurred.
+
+| Checkpoint | Files | Unique Bronze | Silver | Quarantine | Gold groups | Spark + receipts (s) | Total with independent check (s) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 100,000 | 10 | 100,000 | 99,875 | 125 | 20,399 | 30.02 | 41.16 |
+| 250,000 | 25 | 250,000 | 249,745 | 255 | 28,955 | 61.45 | 88.95 |
+| 1,000,000 | 100 | 1,000,000 | 998,976 | 1,024 | 45,332 | 192.74 | 300.13 |
+
+The final 100,000-game checkpoint used the original receipt and reproduced the previous dashboard SHA-256 exactly. A second independent streamed verification and export of the one-million-game Gold results took 117.37 s and produced an identical snapshot; the Spark transformation itself was not rerun at one million games. The [machine-readable run report](assets/scale-run-report.json) includes all checkpoint source hashes, outcomes, field coverage and timings. The one-million-game snapshot is 3,783,288 bytes (338,923 bytes when locally gzipped), with SHA-256 `0bc49de7258a0424657a469074be3963c207f7ef5f7d1b110d8b764177988c5a`.
+
+| Gold mart | Group rows |
+| --- | ---: |
+| Opening | 2,675 |
+| Average rating | 15 |
+| Speed | 4 |
+| Opening context | 42,618 |
+| Signed rating gap | 7 |
+| Termination | 5 |
+| Mainline length | 8 |
+
+Each mart sums to 998,976 validated games: 497,294 White wins, 463,906 Black wins and 37,776 draws. There are 997,485 known ECO codes and mainline lengths, with 65,810,996 total known half-moves. The accepted game time range is 00:00:00–10:45:58 UTC on October 1. The extract is a prefix, not a representative sample of the full month. No individual game or player records are included in the [dashboard snapshot](assets/snapshot.json).
+
+The base Python suite passed 40 tests with one optional Spark module skipped. The full local Spark/Delta suite passed 51 tests in 78.94 s, including the separate 100-game real validation sample and the multi-file scale fixture. Ruff lint and formatting, JavaScript syntax, and the browser test all passed. The browser checked the actual one-million-game snapshot at 320, 360, 390, 560, 768 and 1,440 px, including both color perspectives, opening names and ECO, rating and speed slices, minimum counts, exact outcomes, reset and empty states.
+
+These are local Spark transformation and export measurements, not managed Delta table writes or a Databricks run at one million games. Cloud verification remains the earlier 100,000-game sample described below.
+
+## Historical v0.3 opening analytics (100,000 games)
+
+Version 0.3 rebuilds the same verified October 2026 prefix in a fresh local output directory. The original file SHA-256 and receipt are unchanged. The first run inserted 100,000, and replay inserted zero. Bronze / Silver / quarantine = 100,000 / 99,875 / 125. The final local run took 12.87 s; replay took 13.87 s. Both exports matched byte-for-byte. The historical aggregate snapshot (preserved in Git at `4e2c3e2`) has SHA-256: `71c078b99c9ec5f2177166704fd5c8a99512cca8082d190c9b2bbbcca94bb239`. No player-level rows are exported.
 
 ### PGN field audit
 
@@ -119,11 +149,11 @@ The local base suite, including two aggregate-export tests, passed 21 tests with
 
 ## GitHub Pages and CI verification
 
-The previous 10,000-game GitHub Pages release built commit `b6387d4`. The [live dashboard](https://tasachii.github.io/chess-data-lakehouse/) returned HTTP 200 and passed independent live checks, including byte-for-byte comparison of deployed assets with the committed files. Both the Python/dashboard and Spark/Delta fixture jobs completed successfully in [Chess Lakehouse CI run 46021313046](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046). The hosted jobs did not require cloud credentials or real archive downloads. The 100,000-game dashboard has been verified locally; its new GitHub Pages deployment and hosted CI are still awaiting verification.
+The previous 10,000-game GitHub Pages release built commit `b6387d4`. The [live dashboard](https://tasachii.github.io/chess-data-lakehouse/) returned HTTP 200 and passed independent live checks, including byte-for-byte comparison of deployed assets with the committed files. Both the Python/dashboard and Spark/Delta fixture jobs completed successfully in [Chess Lakehouse CI run 46021313046](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046). The hosted jobs did not require cloud credentials or real archive downloads. The one-million-game dashboard has been verified locally; its GitHub Pages deployment and hosted CI are still awaiting verification.
 
 ## Databricks cloud verification
 
-### Current v0.3 (100,000 games)
+### Verified v0.3 (100,000 games)
 
 Official Databricks CLI bundle validation and deployment passed. Two actual serverless job runs completed successfully in a fresh v0.3 schema. Each run read the same ten 10,000-game files through a single glob. Direct SQL queries after the second run confirmed:
 
@@ -140,7 +170,7 @@ Official Databricks CLI bundle validation and deployment passed. Two actual serv
 | Replay `inserted` (sum) | 0 |
 | Replay `duplicates` (sum) | 100,000 |
 
-The replay added no new game records. These SQL checks confirm the bounded cloud run and its replay; the dashboard file itself was exported locally.
+The replay added no new game records. These SQL checks confirm the bounded cloud run and its replay. The expanded one-million-game dashboard was exported from local Spark results, not this cloud schema.
 
 ### Historical v0.2 (10,000 games)
 
