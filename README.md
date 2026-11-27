@@ -4,9 +4,9 @@ I enjoy chess and wanted to see how different openings fare at different ratings
 
 **Try it now:** [Live dashboard](https://tasachii.github.io/chess-data-lakehouse/) · [Dashboard source](docs/index.html) · [Download aggregate data (JSON)](docs/assets/snapshot.json)
 
-| One million games at a glance | Italian Game study by rating and time control |
+| Search and compare openings | Italian Game study by rating and time control |
 | --- | --- |
-| ![Dashboard showing one million sampled games](docs/assets/dashboard-preview.png) | ![Italian Game filtered by rating and time control, with White wins, Black wins and draws](docs/assets/opening-study.png) |
+| ![Opening search and results from one million sampled games](docs/assets/dashboard-preview.png) | ![Italian Game filtered by rating and time control, with White wins, Black wins and draws](docs/assets/opening-study.png) |
 
 ## Contents
 
@@ -20,10 +20,10 @@ I enjoy chess and wanted to see how different openings fare at different ratings
 
 ## Explore the dashboard
 
-- Search for openings such as Italian Game, Ruy Lopez or Sicilian Defense. You can also search by ECO, a standard chess opening classification code such as `C50`.
+- Start with the opening search at the top. Use quick choices such as Italian Game, Ruy Lopez or Sicilian Defense, or type an opening name or ECO code (a standard chess opening classification, such as `C50`). On mobile, scroll the quick choices to see more.
 - Compare White wins, Black wins and draws for an opening. Switch the color perspective to emphasize the side you play.
 - Filter by average Elo (the mean of both players' ratings), time control and minimum game count. For example, try Italian Game with an average Elo of 1600–1799, Blitz and at least 20 games.
-- Explore how rating differences, game lengths and reasons for game endings relate to outcomes across the whole sample.
+- Below the opening results, find the sample totals, rating and time-control charts, rating differences, game lengths and game endings. The data pipeline and source details are at the bottom.
 
 The opening family groups variations by the name before the first colon. Win rates use all games in the selected opening group and rating/time-control slice, even when a result filter is applied. The opening suggestions are search shortcuts, not recommendations or exclusive assignments to one color.
 

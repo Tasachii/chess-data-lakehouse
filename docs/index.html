@@ -14,7 +14,7 @@
     <script src="assets/dashboard.js" defer></script>
   </head>
   <body>
-    <a class="skip" href="#main">Skip to analytics</a>
+    <a class="skip" href="#main">Skip to openings</a>
     <header class="topbar">
       <div class="wrap topbar-inner">
         <a class="brand" href="./" aria-label="Chess Data Lakehouse home"
@@ -25,8 +25,10 @@
           ></a
         >
         <nav aria-label="Main navigation">
-          <a href="#openings">Analytics</a><a href="#pipeline">Pipeline</a
-          ><a
+          <a href="#openings">Openings</a>
+          <a href="#sample">Sample</a>
+          <a href="#pipeline">Pipeline</a>
+          <a
             class="source-link"
             href="https://github.com/tasachii/chess-data-lakehouse"
             >Repository <span aria-hidden="true">↗</span></a
@@ -34,30 +36,12 @@
         </nav>
       </div>
     </header>
-    <main id="main" class="wrap">
+    <main id="main" class="wrap" tabindex="-1">
       <section class="intro" aria-labelledby="title">
-        <div>
-          <p class="eyebrow">
-            <span class="status-dot"></span> Archive analysis
-            <span class="slash">/</span>
-            <span id="archive-month">Loading snapshot</span>
-          </p>
-          <h1 id="title">
-            Every opening<br />has a context<span class="period">.</span>
-          </h1>
-          <p class="intro-copy">
-            Compare the outcomes of real Lichess openings by color, rating and
-            time control. Every number comes from a bounded, verified sample.
-          </p>
-        </div>
-        <aside class="snapshot-note" aria-label="Snapshot details">
-          <span class="badge">STATIC SNAPSHOT</span>
-          <p id="sample-window">Loading the archive window…</p>
-          <span id="retrieved" class="muted"></span>
-          <p class="small">
-            First records of the archive, not a random sample. No live feed.
-          </p>
-        </aside>
+        <h1 id="title">Explore chess openings</h1>
+        <p class="intro-copy">
+          Compare one million Lichess games by opening.
+        </p>
       </section>
       <p id="load-status" class="load-status" role="status">
         Loading aggregate snapshot…
@@ -68,62 +52,35 @@
         </p></noscript
       >
       <div id="dashboard" hidden>
-        <section class="kpis" aria-label="Snapshot totals">
-          <article class="kpi">
-            <span class="kpi-label">Sampled games</span
-            ><strong id="sample-count">—</strong
-            ><span>Bronze · ingested records</span>
-          </article>
-          <article class="kpi">
-            <span class="kpi-label">Validated games</span
-            ><strong id="valid-count">—</strong
-            ><span id="valid-caption">Silver · usable records</span>
-          </article>
-          <article class="kpi">
-            <span class="kpi-label">Opening groups</span
-            ><strong id="opening-count">—</strong
-            ><span>Distinct opening labels</span>
-          </article>
-          <article class="kpi">
-            <span class="kpi-label">White win rate</span
-            ><strong id="white-rate">—</strong
-            ><span>Across validated games</span>
-          </article>
-        </section>
-        <section class="outcome-card panel" aria-labelledby="outcome-title">
-          <div class="outcome-head">
-            <div>
-              <p class="eyebrow">Match results</p>
-              <h2 id="outcome-title">How the games ended</h2>
-            </div>
-            <span class="chart-note" id="outcome-total"></span>
-          </div>
-          <div
-            class="outcome-track"
-            id="outcome-track"
-            role="img"
-            aria-label="Game outcomes"
-          ></div>
-          <div class="outcome-stats" id="outcome-stats"></div>
-        </section>
-        <div class="section-title" id="openings">
-          <div>
-            <p class="eyebrow">Explore the Gold layer</p>
-            <h2>Opening study</h2>
-          </div>
-          <p>
-            Compare opening outcomes within a rating and time-control slice.
-            Other charts show the full sample.
-          </p>
-        </div>
         <div class="analytics-grid">
-          <section class="panel openings-panel" aria-labelledby="opening-title">
-            <div class="panel-heading">
-              <div>
-                <h3 id="opening-title">Opening explorer</h3>
-                <p>Find openings and compare their outcomes.</p>
+          <section class="panel openings-panel" id="openings" aria-labelledby="opening-title">
+            <h2 id="opening-title" class="visually-hidden">Compare openings</h2>
+            <div class="opening-entry">
+              <div class="search-control">
+                <div class="search-heading">
+                  <label for="opening-search">Search opening or ECO</label>
+                  <span class="pill" id="opening-groups">—</span>
+                </div>
+                <input
+                  id="opening-search"
+                  type="search"
+                  placeholder="e.g. Italian Game, C50"
+                  autocomplete="off"
+                />
               </div>
-              <span class="pill" id="opening-groups">—</span>
+              <div class="opening-shortcuts" role="group" aria-label="Opening shortcuts">
+                <div class="shortcut-group">
+                  <div class="shortcut-heading">
+                    <span class="shortcut-label">White openings</span>
+                    <span class="shortcut-hint">Scroll for more</span>
+                  </div>
+                  <div class="quick-picks" id="opening-quick-picks"></div>
+                </div>
+                <div class="shortcut-group">
+                  <span class="shortcut-label">Black defenses</span>
+                  <div class="quick-picks" id="defense-quick-picks"></div>
+                </div>
+              </div>
             </div>
             <div class="opening-perspective">
               <div>
@@ -149,17 +106,10 @@
                 </div>
               </div>
               <p id="perspective-note">
-                White win rates use all games in the selected opening and slice.
+                White win rates use all games in the selected group.
               </p>
             </div>
             <div class="filters study-filters">
-              <label class="search-field" for="opening-search"
-                >Opening or ECO<input
-                  id="opening-search"
-                  type="search"
-                  placeholder="e.g. Italian Game, C50"
-                  autocomplete="off"
-              /></label>
               <label for="opening-group"
                 >Group by<select id="opening-group">
                   <option value="family">Opening family</option>
@@ -205,15 +155,6 @@
                 </select></label
               >
             </div>
-            <div
-              class="opening-shortcuts"
-              aria-label="Opening search shortcuts"
-            >
-              <span>White opening ideas</span>
-              <div class="quick-picks" id="opening-quick-picks"></div>
-              <span class="shortcut-label">Black defenses</span>
-              <div class="quick-picks" id="defense-quick-picks"></div>
-            </div>
             <div class="chart-toolbar">
               <span id="opening-summary" role="status" aria-live="polite"></span
               ><label class="inline-label" for="opening-limit"
@@ -252,25 +193,75 @@
               <button id="reset-filters" type="button">Reset filters</button>
             </div>
             <p class="panel-foot">
-              Rates always use all games in the selected group and slice. A
-              result filter changes the matching count, not the denominator.
-              Opening family means the label before the first colon; the
-              shortcut labels are searches, not exclusive assignments to one
-              color. Small samples are noisy.
+              Win rates use all games in the selected group and rating/time-control slice.
+              A result filter changes the matching count, not the win rate.
+              Opening families group names before the first colon. Shortcuts are
+              searches, not recommendations. Small samples are noisy.
             </p>
+          </section>
+          <section class="sample-section" id="sample" aria-labelledby="sample-title">
+            <div class="section-title">
+              <h2 id="sample-title">Sample overview</h2>
+              <p>These results and charts use all validated games.</p>
+            </div>
+            <aside class="snapshot-note" aria-label="Snapshot details">
+              <span class="badge">STATIC SNAPSHOT</span>
+              <span class="snapshot-month"><span class="status-dot"></span> <span id="archive-month">Loading month</span></span>
+              <p id="sample-window">Loading the archive window…</p>
+              <span id="retrieved" class="muted"></span>
+              <p class="small">
+                First games in the archive, not a random sample. No live feed.
+              </p>
+            </aside>
+            <section class="kpis" aria-label="Snapshot totals">
+              <article class="kpi">
+                <span class="kpi-label">Sampled games</span
+                ><strong id="sample-count">—</strong
+                ><span>Unique source records</span>
+              </article>
+              <article class="kpi">
+                <span class="kpi-label">Validated games</span
+                ><strong id="valid-count">—</strong
+                ><span id="valid-caption">Games used for statistics</span>
+              </article>
+              <article class="kpi">
+                <span class="kpi-label">Opening groups</span
+                ><strong id="opening-count">—</strong
+                ><span>Distinct opening labels</span>
+              </article>
+              <article class="kpi">
+                <span class="kpi-label">White win rate</span
+                ><strong id="white-rate">—</strong
+                ><span>Across validated games</span>
+              </article>
+            </section>
+            <section class="outcome-card panel" aria-labelledby="outcome-title">
+              <div class="outcome-head">
+                <div>
+                  <h3 id="outcome-title">Game outcomes</h3>
+                </div>
+                <span class="chart-note" id="outcome-total"></span>
+              </div>
+              <div
+                class="outcome-track"
+                id="outcome-track"
+                role="img"
+                aria-label="Game outcomes"
+              ></div>
+              <div class="outcome-stats" id="outcome-stats"></div>
+            </section>
           </section>
           <div class="side-stack">
             <section class="panel speed-panel" aria-labelledby="speed-title">
               <div class="panel-heading">
                 <div>
                   <h3 id="speed-title">Time controls</h3>
-                  <p>Estimated game duration</p>
+                  <p>Estimated time per game</p>
                 </div>
               </div>
               <div id="speed-list" class="speed-list"></div>
               <p class="panel-foot">
-                Speed = initial seconds + 40 × increment. Bullet includes
-                ultrabullet.
+                Estimated time = starting seconds + 40 × increment. Bullet includes ultrabullet.
               </p>
             </section>
             <section
@@ -279,21 +270,19 @@
             >
               <div class="panel-heading">
                 <div>
-                  <p class="eyebrow">Data quality</p>
-                  <h3 id="integrity-title">From records to results</h3>
+                  <h3 id="integrity-title">Games kept and rejected</h3>
                 </div>
                 <span class="check" aria-hidden="true">✓</span>
               </div>
               <div class="quality-steps">
-                <div><span>Ingested</span><b id="quality-bronze">—</b></div>
+                <div><span>Received</span><b id="quality-bronze">—</b></div>
                 <div><span>Validated</span><b id="quality-silver">—</b></div>
                 <div class="quarantine">
-                  <span>Quarantined</span><b id="quality-quarantine">—</b>
+                  <span>Rejected</span><b id="quality-quarantine">—</b>
                 </div>
               </div>
               <p class="small">
-                Only validated Silver records contribute to Gold metrics.
-                Quarantined games are excluded.
+                Only validated games count toward the statistics.
               </p>
               <div
                 class="coverage-list"
@@ -306,8 +295,8 @@
         <section class="panel rating-panel" aria-labelledby="rating-title">
           <div class="panel-heading rating-heading">
             <div>
-              <h3 id="rating-title">Average rating distribution</h3>
-              <p>Mean White and Black Elo, grouped into 200-point buckets.</p>
+              <h3 id="rating-title">Average player rating</h3>
+              <p>Mean of White and Black Elo, grouped in 200-point bands.</p>
             </div>
             <label for="rating-metric"
               >Measure<select id="rating-metric">
@@ -318,6 +307,7 @@
               </select></label
             >
           </div>
+          <p class="rating-scroll-note">Scroll the chart to see more ratings.</p>
           <div
             class="rating-chart"
             id="rating-chart"
@@ -330,28 +320,24 @@
             aria-live="polite"
           ></div>
           <p class="panel-foot">
-            Select a bar for exact counts. Rate bars use a 0–100% scale; rates
-            are descriptive, not estimates of player skill.
+            Select a bar to see exact game counts and results. Rates describe the sample, not player skill.
           </p>
         </section>
         <div class="section-title" id="context">
           <div>
-            <p class="eyebrow">Full sample</p>
-            <h2>Results in context</h2>
+            <h2>Results across the sample</h2>
           </div>
           <p>
-            Descriptive associations, not causal effects. Counts are shown for
-            every group.
+            Compare groups across all validated games. These results do not prove cause and effect.
           </p>
         </div>
         <div class="context-grid">
           <section class="panel context-panel" aria-labelledby="gap-title">
             <div class="panel-heading">
               <div>
-                <h3 id="gap-title">Rating gap &amp; outcomes</h3>
+                <h3 id="gap-title">Rating difference</h3>
                 <p>
-                  White Elo minus Black Elo. Negative means Black is rated
-                  higher.
+                  White’s Elo minus Black’s. Negative means Black is rated higher.
                 </p>
               </div>
             </div>
@@ -362,8 +348,7 @@
             </div>
             <div id="gap-list" class="context-list"></div>
             <p class="panel-foot">
-              Each bar spans 100% of its group. Sample sizes differ; rates are
-              descriptive.
+              Each bar shows the outcome split for its group. Sample sizes differ.
             </p>
           </section>
           <section
@@ -373,26 +358,25 @@
             <div class="panel-heading">
               <div>
                 <h3 id="termination-title">Game endings</h3>
-                <p>Termination labels as reported by Lichess.</p>
+                <p>How Lichess recorded each game ending.</p>
               </div>
             </div>
             <div id="termination-list" class="context-list"></div>
             <p class="panel-foot">
-              Missing or unsupported termination tags are Unknown.
+              Missing or unsupported reasons are Unknown.
             </p>
           </section>
           <section class="panel context-panel" aria-labelledby="length-title">
             <div class="panel-heading">
               <div>
                 <h3 id="length-title">Game length</h3>
-                <p>Number of half-moves (plies) in the mainline.</p>
+                <p>Number of individual moves by either player.</p>
               </div>
             </div>
             <div class="length-summary" id="length-summary"></div>
             <div id="length-list" class="context-list"></div>
             <p class="panel-foot">
-              One ply is one player's move. Unknown includes result-only or
-              unsupported move text; average excludes unknown length.
+              One half-move is one player’s turn. Unknown lengths are excluded from the average.
             </p>
           </section>
         </div>
@@ -403,8 +387,7 @@
         >
           <div class="section-title">
             <div>
-              <p class="eyebrow">The engineering behind the chart</p>
-              <h2 id="pipeline-title">A reproducible lakehouse</h2>
+              <h2 id="pipeline-title">How the games are processed</h2>
             </div>
             <a
               class="text-link"
@@ -415,41 +398,37 @@
           <div class="pipeline-grid">
             <article>
               <span class="step-number">01 · Extract</span>
-              <h3>Bounded PGN</h3>
+              <h3>Download games</h3>
               <p>
-                Stream a Zstandard archive up to a fixed record limit. Record
-                the source, checksum and retrieval time.
+                Download a fixed number of games from the archive, recording the source, checksum and time.
               </p>
             </article>
             <article>
               <span class="step-number bronze-tag">02 · Bronze</span>
-              <h3>Keep the source</h3>
+              <h3>Remove duplicates</h3>
               <p>
-                Deduplicate by stable game ID and retain private source files
-                or Bronze tables with batch lineage.
+                Keep each game ID once. Store raw files or Bronze tables privately and track their source.
               </p>
             </article>
             <article>
               <span class="step-number silver-tag">03 · Silver</span>
-              <h3>Validate &amp; type</h3>
+              <h3>Validate games</h3>
               <p>
-                Check analytics fields, timestamps, ratings and time controls;
-                quarantine invalid records.
+                Check ratings, dates, results and time controls. Keep invalid records separate.
               </p>
             </article>
             <article>
               <span class="step-number gold-tag">04 · Gold</span>
-              <h3>Group &amp; export</h3>
+              <h3>Group results</h3>
               <p>
-                Aggregate openings, rating buckets and speed. Publish only group
-                labels and counts.
+                Calculate counts and outcomes by opening, rating and other game details. Publish only grouped results.
               </p>
             </article>
           </div>
         </section>
         <section class="provenance" aria-labelledby="provenance-title">
           <div>
-            <h3 id="provenance-title">Source &amp; reproducibility</h3>
+            <h3 id="provenance-title">Data source and verification</h3>
             <p>
               Public rated standard games from
               <a href="https://database.lichess.org/">Lichess Open Database</a>,
@@ -460,7 +439,7 @@
                 >CC0 1.0</a
               >. Project code is MIT licensed.
             </p>
-            <p>SHA-256 of the bounded decompressed PGN:</p>
+            <p>Source file SHA-256 (decompressed PGN):</p>
             <code id="source-hash"></code>
           </div>
           <div>
