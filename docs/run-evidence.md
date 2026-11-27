@@ -42,7 +42,7 @@ All seven marts reconcile to 99,875 games / 49,550 White wins / 46,550 Black win
 
 The original binary-float Python rounding gave 0.4813 for 77/160; Spark half-even gave 0.4812. Version 0.3 aligns stored rates with Decimal half-even at four decimals and includes an exact tie regression. All counts are unchanged and UI rates are derived from integer counts, not rounded rates.
 
-The [chunk manifest](assets/sample-chunks-manifest.json) was generated from the original source: ten files of exactly 10,000 games, 23,193,716–23,614,481 bytes each, with matching per-file receipts. Recombining them with a separating newline gives the original source hash. A local managed Delta fixture verified the multi-file glob, per-file hashes, replay and fresh-schema guard. The 100,000-game v0.3 cloud Job has not been run.
+The [chunk manifest](assets/sample-chunks-manifest.json) was generated from the original source: ten files of exactly 10,000 games, 23,193,716–23,614,481 bytes each, with matching per-file receipts. Recombining them with a separating newline gives the original source hash. A local managed Delta fixture verified the multi-file glob, per-file hashes, replay and fresh-schema guard. Both subsequent Databricks runs used these same ten files; the SQL checks are recorded below.
 
 ## Previous 100,000-game v0.2 dashboard sample
 
@@ -74,7 +74,7 @@ Opening search shortcuts use literal name matches in the real Lichess opening la
 | English Opening | 89 | 3,048 | 1,561 | 1,354 | 133 |
 | Scotch Game | 35 | 1,888 | 955 | 870 | 63 |
 
-The result selector filters these matches by White wins, Black wins or draws while retaining all games in each opening as the win-rate denominator. Playwright passed exact shortcut, result-count, rate-denominator and reset checks, plus all six responsive widths. The base suite passed 22 tests with one optional Spark module skipped; the full local suite (with the separate 100-game Spark validation input) passed 30 tests in 42.05 s. The cloud job has only been verified on the smaller 10,000-game sample.
+The result selector filters these matches by White wins, Black wins or draws while retaining all games in each opening as the win-rate denominator. Playwright passed exact shortcut, result-count, rate-denominator and reset checks, plus all six responsive widths. The base suite passed 22 tests with one optional Spark module skipped; the full local suite (with the separate 100-game Spark validation input) passed 30 tests in 42.05 s. This v0.2 expanded sample was tested locally; the subsequent v0.3 cloud verification is recorded below.
 
 ## Original 10,000-game dashboard sample
 
@@ -97,7 +97,7 @@ The four quarantined records have invalid time-control fields. The three Gold di
 | Average rating bucket | 14 |
 | Speed | 4 |
 
-The original snapshot (SHA-256 `b299b5a7b654f0be438787cdb76f04ae7be9f78a825e1080a4b02ed76a6a8165`) is retained in Git history and in ignored local evidence. It is the sample used for the verified Databricks runs, not the current dashboard dataset.
+The original snapshot (SHA-256 `b299b5a7b654f0be438787cdb76f04ae7be9f78a825e1080a4b02ed76a6a8165`) is retained in Git history and in ignored local evidence. It is the sample used for the historical v0.2 Databricks runs, not the current dashboard dataset.
 
 ## Pipeline validation sample (100 games)
 
@@ -119,9 +119,30 @@ The local base suite, including two aggregate-export tests, passed 21 tests with
 
 ## GitHub Pages and CI verification
 
-The previous 10,000-game GitHub Pages release built commit `b6387d4`. The [live dashboard](https://tasachii.github.io/chess-data-lakehouse/) returned HTTP 200 and passed independent live checks, including byte-for-byte comparison of deployed assets with the committed files. Both the Python/dashboard and Spark/Delta fixture jobs completed successfully in [Chess Lakehouse CI run 46021313046](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046). The hosted jobs did not require cloud credentials or real archive downloads. The 100,000-game update is verified locally and has not yet been pushed or deployed.
+The previous 10,000-game GitHub Pages release built commit `b6387d4`. The [live dashboard](https://tasachii.github.io/chess-data-lakehouse/) returned HTTP 200 and passed independent live checks, including byte-for-byte comparison of deployed assets with the committed files. Both the Python/dashboard and Spark/Delta fixture jobs completed successfully in [Chess Lakehouse CI run 46021313046](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046). The hosted jobs did not require cloud credentials or real archive downloads. The 100,000-game dashboard has been verified locally; its new GitHub Pages deployment and hosted CI are still awaiting verification.
 
 ## Databricks cloud verification
+
+### Current v0.3 (100,000 games)
+
+Official Databricks CLI bundle validation and deployment passed. Two actual serverless job runs completed successfully in a fresh v0.3 schema. Each run read the same ten 10,000-game files through a single glob. Direct SQL queries after the second run confirmed:
+
+| Check | Observed |
+| --- | ---: |
+| Bronze rows / distinct IDs | 100,000 / 100,000 |
+| Silver rows | 99,875 |
+| Quarantine rows | 125 |
+| Managed Delta tables | 11 |
+| Sum of `games` in each of the seven Gold marts | 99,875 |
+| Total Gold group rows | 20,399 |
+| File SHA-256 and attempted counts matching the [chunk manifest](assets/sample-chunks-manifest.json) | 10 of 10 in each run |
+| `ingestion_runs` rows | 20 (10 per run) |
+| Replay `inserted` (sum) | 0 |
+| Replay `duplicates` (sum) | 100,000 |
+
+The replay added no new game records. These SQL checks confirm the bounded cloud run and its replay; the dashboard file itself was exported locally.
+
+### Historical v0.2 (10,000 games)
 
 Official Databricks CLI bundle validation passed. The deployed serverless job ran twice successfully on the same bounded 10,000-game October 2026 sample and created seven managed Delta tables. SQL queries after the second execution verified:
 
@@ -135,8 +156,8 @@ Official Databricks CLI bundle validation passed. The deployed serverless job ra
 | Last run `inserted` | 0 |
 | Last run `duplicates` | 10,000 |
 
-The cloud result confirms that the same input can be replayed without duplicate records. It does not demonstrate continuous ingestion or processing of the full archive.
+This earlier result remains separate from the v0.3 cloud verification above. Both releases confirmed replay without duplicate game records.
 
 ## Limitations
 
-Runtime depends on the machine and network; these measurements are not a scale benchmark. The archive prefix is not a random or representative sample. The dashboard is a static snapshot, and the serverless job was verified only for the bounded sample described above.
+Runtime depends on the machine and network; these measurements are not a scale benchmark. The archive prefix is not a random or representative sample. The dashboard is a static snapshot, and the serverless job was verified only for the bounded samples described above, not continuous ingestion or the full archive.

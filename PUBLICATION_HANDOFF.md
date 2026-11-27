@@ -1,6 +1,6 @@
 # Publication notes — v0.3 opening analytics
 
-The enriched 100,000-game dashboard is ready for independent review and publication from `main:/docs`. The previous live release and cloud results remain separate: the [earlier dashboard](https://tasachii.github.io/chess-data-lakehouse/) and [hosted CI](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046) were verified, and Databricks ran two 10,000-game v0.2 jobs. The new v0.3 site, CI job and Databricks deployment have not been run remotely.
+The enriched 100,000-game dashboard is ready for independent review and publication from `main:/docs`. The [earlier dashboard](https://tasachii.github.io/chess-data-lakehouse/) and [hosted CI](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046) were verified for the previous release. The new v0.3 live site and hosted CI are still awaiting verification. Databricks verification for v0.3 is complete: two successful serverless runs on the 100,000-game sample and direct SQL checks.
 
 ## What changed
 
@@ -23,9 +23,11 @@ The enriched 100,000-game dashboard is ready for independent review and publicat
 
 The source prefix covers 1 October 2026, 00:00:00–01:22:41 UTC. All 125 quarantined records have invalid time controls; 25 also have invalid results. Unknown ECO and mainline length remain explicit categories. Clock and eval tags were audited, not used as elapsed-time or engine-quality metrics. [Run evidence](docs/run-evidence.md) records actual field coverage, sample counts and limitations. The compact aggregate JSON is 1,652,287 bytes uncompressed (146,953 bytes when locally gzipped); it contains no usernames, game IDs or PGN.
 
-## Cloud preparation (not executed)
+## Verified Databricks runs
 
-The [chunk manifest](docs/assets/sample-chunks-manifest.json) records ten 10,000-game files and exact SHA-256 values. Each file is about 23–24 MB. The splitter verified that the reconstructed parent matches the original source. Prepare the files with `scripts/split_sample.py` and use a single `part-*.pgn` glob Job with a fresh v0.3 schema; leave the single-file expected SHA blank, check the per-file bound and independently match all ten SQL `ingestion_runs` hashes/counts with the manifest. See [operations notes](DEV_HANDOFF.md#databricks-run-instructions). Local managed Delta fixture tests verified multi-file ingestion, replay, and the legacy-schema guard. The prior 10,000-game cloud schema is untouched; a v0.3 100,000-game cloud run remains to be verified.
+CLI validation and deployment passed. Two serverless job runs completed successfully in a fresh v0.3 schema, reading ten 10,000-game files through one glob per run. Direct SQL confirmed 100,000 Bronze rows and distinct IDs, 99,875 Silver rows, 125 quarantined, 11 managed Delta tables and seven Gold marts each summing to 99,875 games (20,399 groups overall). All ten per-file hashes and attempted counts matched the [chunk manifest](docs/assets/sample-chunks-manifest.json) in both runs. There are 20 history rows, with zero inserts and 100,000 duplicate attempts on replay.
+
+The previous 10,000-game cloud results are retained as historical evidence. The dashboard is an aggregate snapshot exported locally; the cloud job is a bounded batch, not continuous ingestion or a full-archive run. See [operations notes](DEV_HANDOFF.md#databricks-run-instructions) and [run evidence](docs/run-evidence.md#databricks-cloud-verification).
 
 ## Local verification
 
@@ -56,9 +58,9 @@ node scripts/test_dashboard.cjs
 
 | Angle | Assessment | Evidence and remaining limits |
 | --- | ---: | --- |
-| Product/CTO | 8/10 | Focused bounded analysis, CC0 attribution, private raw data, repeatable source, chunk strategy; new cloud resource behavior is unverified. |
+| Product/CTO | 8/10 | Focused bounded analysis, CC0 attribution, private raw data, repeatable source, chunk strategy; two successful bounded cloud runs; no full-archive or continuous ingestion test. |
 | Tech lead | 9/10 | Shared contracts, exact count/rate parity, version guards, clean lint, repeatable tests; no hosted CI result for this revision yet. |
 | UX/UI | 8.5/10 | Clear color perspective, exact context filters, explicit results/denominators, mobile table and empty states; no formal screen-reader audit. |
 | QA | 9/10 | Actual sample, local Delta/glob fixture, tie/unknown/receipt regressions, exact browser checks, stable export; independent release QA and live retest remain pending. |
 
-These are developer smoke-review ratings, not independent release sign-off. No push or cloud execution was performed.
+These are developer smoke-review ratings, not independent release sign-off. The cloud results above were verified separately. The cloud-status text update passed all 31 local Markdown link and anchor checks and the existing Playwright dashboard test at six viewport widths. The HTML structure and aggregate snapshot SHA-256 were unchanged. No pipeline code, data, configuration, push or additional cloud execution was involved.

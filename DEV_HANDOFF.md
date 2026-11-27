@@ -1,6 +1,6 @@
 # Operations and validation notes
 
-These notes explain how to run, inspect and reproduce the lakehouse. The local pipeline passed independent testing at commit `94f58a11304cc11c92e102f3894aabcbdcc80ce9`. The v0.3 dashboard adds optional Silver fields and four Gold marts while retaining the original validation and deduplication behavior. Databricks CLI validation, deployment, two serverless job runs and the subsequent SQL checks also passed. The previous 10,000-game [live dashboard](https://tasachii.github.io/chess-data-lakehouse/) and [hosted CI](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046) both passed verification. The enriched 100,000-game v0.3 update was processed and tested locally.
+These notes explain how to run, inspect and reproduce the lakehouse. The local pipeline passed independent testing at commit `94f58a11304cc11c92e102f3894aabcbdcc80ce9`. The v0.3 dashboard adds optional Silver fields and four Gold marts while retaining the original validation and deduplication behavior. The v0.3 Databricks bundle passed CLI validation and deployment, two serverless job runs on the 100,000-game sample, and the subsequent SQL checks. The previous 10,000-game [live dashboard](https://tasachii.github.io/chess-data-lakehouse/) and [hosted CI](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046) both passed verification. The enriched 100,000-game dashboard was exported and tested locally.
 
 ## Local replay and lineage
 
@@ -56,7 +56,7 @@ The previous v0.2 serverless job passed official CLI validation and ran twice su
 
 ### Prepare the bounded v0.3 cloud input
 
-The local 100,000-game source is 234,164,347 decompressed bytes. Spark's binary-file reader creates one row per file, so upload ten bounded files instead of one large input. This strategy was checked locally with a real split and Spark glob tests. Regenerate the original source if needed using the README, then:
+The local 100,000-game source is 234,164,347 decompressed bytes. Spark's binary-file reader creates one row per file, so upload ten bounded files instead of one large input. This strategy was verified in local Spark glob tests and both Databricks executions. Regenerate the original source if needed using the README, then:
 
 ```bash
 .venv/bin/python scripts/split_sample.py \
@@ -66,7 +66,7 @@ The local 100,000-game source is 234,164,347 decompressed bytes. Spark's binary-
 
 Use a new output directory if the chunks already exist. The splitter checks the parent's receipt and size, produces per-file receipts and a manifest, and verifies that rejoining the files with one separating newline reproduces the parent bytes. The [100,000-game chunk manifest](docs/assets/sample-chunks-manifest.json) records ten actual SHA-256 values and 10,000 records per file. Files range from 23,193,716 to 23,614,481 bytes. It contains metadata only, not raw games.
 
-### Planned v0.3 serverless run (not yet executed)
+### Reproduce the verified v0.3 serverless runs
 
 Use an authorized workspace and keep the verified v0.2 schema unchanged. The example uses a fresh generic schema and volume, `main.chess_portfolio_v3`. If retaining the old Job configuration is necessary, deploy this version as a separate bundle deployment. Cloud compute may incur charges.
 
@@ -91,7 +91,7 @@ databricks bundle run -t dev chess_lakehouse
 
 This is one job reading the ten PGN files via a glob. The requested bound is per file. The optional expected SHA argument accepts one file only, so it is blank for the glob; the Job records each file's computed SHA-256 and record count in `ingestion_runs`. Compare all ten source basenames, hashes and `attempted` counts with the local manifest after each successful run. Never upload receipts or raw PGN to a public repository. Repeat the same job only after checking the first run.
 
-Expected results from the local 100,000-game run (not yet cloud measurements): 100,000 distinct Bronze IDs, 99,875 Silver, 125 quarantine, each of seven Gold marts summing to 99,875, 10 history rows per run, and summed inserts 100,000 on the first run and 0 on replay. A successful fresh deployment creates eleven managed Delta tables (the seven original plus four new Gold marts).
+Both actual v0.3 serverless runs completed successfully after CLI validation and deployment in a fresh schema. Direct SQL confirmed 100,000 Bronze rows and distinct IDs, 99,875 Silver rows, 125 quarantine rows, 11 managed Delta tables, and seven Gold marts each summing to 99,875 games (20,399 groups in total). All ten file hashes and attempted counts matched the local manifest in both runs. The history contains 20 rows, ten per run; the replay inserted zero new records and counted 100,000 duplicate attempts.
 
 ```sql
 SELECT COUNT(*) AS bronze_rows, COUNT(DISTINCT game_id) AS unique_ids
@@ -105,6 +105,6 @@ SELECT run_id, COUNT(*) AS files, SUM(attempted) AS attempted,
 FROM main.chess_portfolio_v3.ingestion_runs GROUP BY run_id;
 ```
 
-Check `SUM(games)` in `gold_opening_metrics`, `gold_rating_metrics`, `gold_time_control_metrics`, `gold_opening_context`, `gold_rating_gap_metrics`, `gold_termination_metrics`, and `gold_length_metrics`. Cumulative totals are repeated on history rows; do not sum them. The v0.3 Job has not been deployed or run in Databricks. It assumes immutable input and serial Job invocations and does not provide cross-table atomicity.
+Check `SUM(games)` in `gold_opening_metrics`, `gold_rating_metrics`, `gold_time_control_metrics`, `gold_opening_context`, `gold_rating_gap_metrics`, `gold_termination_metrics`, and `gold_length_metrics`. Cumulative totals are repeated on history rows; do not sum them. The verified v0.3 runs used the bounded sample, not the full archive or continuous ingestion. The job assumes immutable input and serial invocations and does not provide cross-table atomicity.
 
 References: [job task types](https://docs.databricks.com/aws/en/dev-tools/bundles/job-task-types), [bundle settings](https://docs.databricks.com/aws/en/dev-tools/bundles/settings), [serverless limitations](https://docs.databricks.com/aws/en/compute/serverless/limitations), [Delta Lake quickstart](https://docs.delta.io/quick-start/).

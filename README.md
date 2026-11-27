@@ -71,7 +71,7 @@ Use a fresh output directory for v0.3 or a different sample. Older v0.2 outputs 
 
 Open [http://localhost:8765/](http://localhost:8765/). Search opening names, family names or ECO codes (for example `C50`). White opening ideas and Black defenses are shortcuts to real Lichess labels. Select an average-Elo bucket, speed and minimum games to compare a meaningful slice. The table explicitly shows White wins, Black wins and draws with counts and rates. Select a color perspective to emphasize its win rate, or a result filter to count only matching outcomes. Rates always divide by all games in the selected opening group and slice. Family means the label before the first colon; it is not an official taxonomy or an exclusive assignment to one color. The separate rating-gap, termination and length charts show the full sample.
 
-The site uses plain HTML, CSS and JavaScript. It requires no build step, server API or account. The earlier 10,000-game release was published on GitHub Pages from `main:/docs` and passed independent live checks. This enriched 100,000-game update has been tested locally and is ready for publication; it has not yet been deployed.
+The site uses plain HTML, CSS and JavaScript. It requires no build step, server API or account. The earlier 10,000-game release was published on GitHub Pages from `main:/docs` and passed independent live checks. This enriched 100,000-game dashboard has passed local tests and is ready for publication on GitHub Pages; its new live deployment has not yet been verified.
 
 ## Architecture
 
@@ -134,17 +134,22 @@ Independent testing confirmed the local pipeline at commit `94f58a11304cc11c92e1
 
 ## Databricks
 
-The v0.2 [Databricks bundle](databricks.yml) passed official CLI validation and was deployed as a serverless Python job. Two runs completed successfully on the same bounded 10,000-game October sample. Direct SQL queries after the second run confirmed the following results across seven managed Delta tables:
+The v0.3 [Databricks bundle](databricks.yml) passed official CLI validation and deployment. A serverless Python job ran twice successfully in a fresh schema on the same 100,000-game October sample used by the dashboard, split into ten 10,000-game PGN files. Direct SQL queries after the second run confirmed:
 
 | Cloud verification | Result |
 | --- | ---: |
-| Bronze rows / distinct game IDs | 10,000 / 10,000 |
-| Silver rows / quarantine rows | 9,996 / 4 |
-| Sum of games in each of the three Gold tables | 9,996 |
-| Run history rows | 2 |
-| Second-run inserts / duplicates | 0 / 10,000 |
+| Bronze rows / distinct game IDs | 100,000 / 100,000 |
+| Silver rows / quarantine rows | 99,875 / 125 |
+| Managed Delta tables | 11 |
+| Sum of games in each of the seven Gold marts | 99,875 |
+| Total Gold groups across seven marts | 20,399 |
+| Source hashes and attempted counts matching the manifest | All 10 files in both runs |
+| Run history rows | 20 (10 per run) |
+| Second-run inserts / duplicate attempts | 0 / 100,000 |
 
-The replay demonstrates idempotency: it keeps the same unique records and adds no duplicate games. These cloud results belong to the 10,000-game v0.2 sample; the enriched 100,000-game v0.3 dashboard was processed locally, and all Gold marts were compared with local Spark. The v0.3 cloud execution is not yet verified. Use a fresh schema and split the exact source into ten bounded 10,000-game files; the job reads the chunks with a glob and verifies each file's record bound. The dashboard is a static snapshot, and the job is a bounded batch rather than continuous ingestion. Local Spark and Delta tests also verified parity on a separate 100-game sample. See [cloud run instructions](DEV_HANDOFF.md#databricks-run-instructions) and the [verified chunk manifest](docs/assets/sample-chunks-manifest.json) for the planned v0.3 deployment.
+The replay confirms idempotency: the same input added no new records. The job reads the ten chunks through one glob and checks each file’s record bound. The dashboard still uses the locally exported aggregate snapshot, not a live Databricks connection. Both cloud runs were bounded batches, not continuous ingestion or a full-archive run. See the [cloud run instructions](DEV_HANDOFF.md#databricks-run-instructions), [chunk manifest](docs/assets/sample-chunks-manifest.json) and [measured results](docs/run-evidence.md#databricks-cloud-verification).
+
+The earlier v0.2 cloud runs remain separate historical evidence: two successful runs on 10,000 games produced 10,000 unique Bronze records, 9,996 Silver records, 4 quarantined records and seven Delta tables. Each of three Gold marts summed to 9,996, with two history rows and zero inserts / 10,000 duplicate attempts on replay.
 
 ## Source, license and limits
 
