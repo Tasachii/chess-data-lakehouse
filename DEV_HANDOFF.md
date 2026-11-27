@@ -1,6 +1,6 @@
 # Operations and validation notes
 
-These notes explain how to run, inspect and reproduce the lakehouse. The local pipeline passed independent testing at commit `94f58a11304cc11c92e102f3894aabcbdcc80ce9`. The dashboard adds an aggregate exporter, tests and static files without changing pipeline behavior. Databricks CLI validation, deployment, two serverless job runs and the subsequent SQL checks also passed. The [live dashboard](https://tasachii.github.io/chess-data-lakehouse/) and [hosted CI](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046) both passed verification.
+These notes explain how to run, inspect and reproduce the lakehouse. The local pipeline passed independent testing at commit `94f58a11304cc11c92e102f3894aabcbdcc80ce9`. The dashboard adds an aggregate exporter, tests and static files without changing pipeline behavior. Databricks CLI validation, deployment, two serverless job runs and the subsequent SQL checks also passed. The previous 10,000-game [live dashboard](https://tasachii.github.io/chess-data-lakehouse/) and [hosted CI](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046) both passed verification. The current 100,000-game update was processed and tested locally.
 
 ## Local replay and lineage
 
@@ -73,9 +73,12 @@ These counts show the replay did not add duplicates. This was two bounded runs, 
    CREATE VOLUME IF NOT EXISTS main.chess_portfolio.input;
    ```
 
-2. Generate the bounded 10,000-game dashboard sample from the README. The default bundle is configured for 100 games, so override the input path and record bound. Upload only the decompressed PGN and use its receipt metadata:
+2. Generate the separate bounded 10,000-game sample used in the verified cloud run. The default bundle is configured for 100 games, so override the input path and record bound. The 100,000-game dashboard sample has only been tested locally; do not treat the cloud results as verification at that size. Upload only the decompressed PGN and use its receipt metadata:
 
    ```bash
+   .venv/bin/chess-lakehouse download \
+     --url https://database.lichess.org/standard/lichess_db_standard_rated_2026-10.pgn.zst \
+     --output data/dashboard_sample_10000.pgn --max-games 10000
    databricks fs cp data/dashboard_sample_10000.pgn dbfs:/Volumes/main/chess_portfolio/input/dashboard_sample_10000.pgn
    export BUNDLE_VAR_source_path=/Volumes/main/chess_portfolio/input/dashboard_sample_10000.pgn
    export BUNDLE_VAR_requested_max_games=10000

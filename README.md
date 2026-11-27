@@ -4,7 +4,7 @@ A data engineering project that turns public Lichess PGN exports into Bronze, Si
 
 I enjoy chess, and I wanted to see if I could build a repeatable data pipeline using real game data. This project grew out of that curiosity.
 
-**Dashboard:** [Live dashboard](https://tasachii.github.io/chess-data-lakehouse/) · [Dashboard source](docs/index.html) · [Aggregate data](docs/assets/snapshot.json) · [Passing CI run](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046)
+**Dashboard:** [Live dashboard](https://tasachii.github.io/chess-data-lakehouse/) (previous 10,000-game release) · [Dashboard source](docs/index.html) · [100,000-game aggregate data](docs/assets/snapshot.json) · [Passing CI run for the previous release](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046)
 
 ![Dashboard preview: October 2026 archive sample, outcomes and opening explorer](docs/assets/dashboard-preview.png)
 
@@ -34,27 +34,27 @@ The synthetic fixture contains three records (one duplicate and one malformed ga
 
 ## Real data and dashboard
 
-The current dashboard uses the first **10,000 games** from the October 2026 Lichess rated standard archive. The validated games have start times between 00:00:00 and 00:08:08 UTC on October 1, 2026. This is a static archive snapshot, not a live feed or random sample.
+The current local dashboard update uses the first **100,000 games** from the October 2026 Lichess rated standard archive. The validated games have start times between 00:00:00 and 01:22:41 UTC on October 1, 2026. This is a static archive snapshot, not a live feed or random sample.
 
 | Metric | Measured value |
 | --- | ---: |
-| Unique Bronze records | 10,000 |
-| Valid Silver games | 9,996 |
-| Quarantined | 4 |
-| Opening groups / rating buckets / speeds | 1,107 / 14 / 4 |
-| White wins / black wins / draws | 5,026 / 4,571 / 399 |
+| Unique Bronze records | 100,000 |
+| Valid Silver games | 99,875 |
+| Quarantined | 125 |
+| Opening groups / rating buckets / speeds | 2,018 / 15 / 4 |
+| White wins / black wins / draws | 49,550 / 46,550 / 3,775 |
 
-The four quarantined games have invalid time-control fields. A second pipeline run inserted zero records. The dashboard exporter independently compares every Gold group with Silver counts before exporting; it includes only aggregate labels, game counts, outcome counts and source metadata.
+All 125 quarantined records have invalid time-control fields; 25 of them also have an invalid result. A second local pipeline run inserted zero records. The dashboard exporter independently compares every Gold group with Silver counts before exporting; it includes only aggregate labels, game counts, outcome counts and source metadata. For example, the literal Italian Game search matches 3,883 validated games (1,939 White wins), and Ruy Lopez matches 1,722 (838 White wins). These totals include matching variations.
 
 ### Reproduce the snapshot
 
 ```bash
 SOURCE_URL=https://database.lichess.org/standard/lichess_db_standard_rated_2026-10.pgn.zst
 .venv/bin/chess-lakehouse download \
-  --url "$SOURCE_URL" --output data/dashboard_sample_10000.pgn --max-games 10000
+  --url "$SOURCE_URL" --output data/dashboard_sample_100000.pgn --max-games 100000
 .venv/bin/chess-lakehouse run \
-  --input data/dashboard_sample_10000.pgn --output output/dashboard-10000 --source-url "$SOURCE_URL"
-.venv/bin/python scripts/export_dashboard.py --lakehouse output/dashboard-10000
+  --input data/dashboard_sample_100000.pgn --output output/dashboard-100000 --source-url "$SOURCE_URL"
+.venv/bin/python scripts/export_dashboard.py --lakehouse output/dashboard-100000
 ```
 
 Use a fresh output directory for a different sample. The downloader saves a receipt next to the PGN with its bound, source checksum and retrieval time. The exporter verifies that a single source batch produced the lakehouse and that the group counts reconcile. Re-downloading may produce a new retrieval timestamp; the PGN checksum and group metrics identify the sample itself.
@@ -65,9 +65,9 @@ Use a fresh output directory for a different sample. The downloader saves a rece
 .venv/bin/python -m http.server 8765 --directory docs
 ```
 
-Open [http://localhost:8765/](http://localhost:8765/). Search openings, choose a minimum game count, sort by number of games or outcomes, and switch the rating chart between counts and rates. Each Gold chart is a separate grouping; filtering the opening chart does not change the other dimensions.
+Open [http://localhost:8765/](http://localhost:8765/). Search or select opening shortcuts such as Italian Game and Ruy Lopez. Choose All games, White wins, Black wins or Draws to filter matching results. The minimum applies to total games in an opening; win rates use all games in each opening. The opening labels come from Lichess and describe the game, not exclusive openings assigned to one side. Each Gold chart is a separate grouping, so the opening filters do not change the other dimensions.
 
-The site uses plain HTML, CSS and JavaScript. It requires no build step, server API or account. It is published on GitHub Pages from `main:/docs`. The live site returned HTTP 200 and passed independent checks against the committed dashboard assets.
+The site uses plain HTML, CSS and JavaScript. It requires no build step, server API or account. The earlier 10,000-game release was published on GitHub Pages from `main:/docs` and passed independent live checks. This 100,000-game update has been tested locally and is ready for publication.
 
 ## Architecture
 
@@ -109,7 +109,7 @@ More on the data contracts, replay behavior and cloud configuration: [Operations
 .venv/bin/ruff format --check src tests scripts
 ```
 
-The [Chess Lakehouse CI workflow](.github/workflows/ci.yml) runs on pushes, pull requests and manual dispatch using GitHub-hosted Ubuntu runners. It checks the base Python tests, including the aggregate export, Ruff lint and formatting, and JavaScript syntax. A separate job runs Spark/Delta fixture tests with Python 3.12 and Java 17; it needs no credentials, real archive download or Databricks workspace. Both hosted jobs passed in [this CI run](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046). Real-data Spark parity is tested locally, and browser interactions have passed independent live-site checks.
+The [Chess Lakehouse CI workflow](.github/workflows/ci.yml) runs on pushes, pull requests and manual dispatch using GitHub-hosted Ubuntu runners. It checks the base Python tests, including the aggregate export, Ruff lint and formatting, and JavaScript syntax. A separate job runs Spark/Delta fixture tests with Python 3.12 and Java 17; it needs no credentials, real archive download or Databricks workspace. Both hosted jobs passed for the previous release in [this CI run](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046). Real-data Spark parity is tested locally, and browser interactions have passed independent live-site checks.
 
 The default local suite tests ingestion, validation, deduplication, corrupted/truncated inputs, lineage and aggregate export. Spark tests are optional. To run the full suite, install a compatible JDK and the pinned Spark/Delta extra (PySpark 3.5.3, Delta 3.3.2):
 
@@ -137,7 +137,7 @@ The [Databricks bundle](databricks.yml) passed official CLI validation and was d
 | Run history rows | 2 |
 | Second-run inserts / duplicates | 0 / 10,000 |
 
-The replay demonstrates idempotency: it keeps the same unique records and adds no duplicate games. The dashboard is a static snapshot; the Databricks job is a bounded batch, not live continuous ingestion. Local Spark and Delta tests also verified parity on a separate 100-game sample. See [cloud run instructions](DEV_HANDOFF.md#databricks-run-instructions) for an authorized workspace.
+The replay demonstrates idempotency: it keeps the same unique records and adds no duplicate games. These cloud results belong to the 10,000-game sample; the larger 100,000-game dashboard was processed locally, not on Databricks. The dashboard is a static snapshot, and the job is a bounded batch rather than continuous ingestion. Local Spark and Delta tests also verified parity on a separate 100-game sample. See [cloud run instructions](DEV_HANDOFF.md#databricks-run-instructions) for an authorized workspace.
 
 ## Source, license and limits
 

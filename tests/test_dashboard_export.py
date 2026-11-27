@@ -27,6 +27,25 @@ def test_checked_in_snapshot_contains_only_grouped_metrics():
         assert {key: sum(row[key] for row in groups) for key in outcomes} == outcomes
 
 
+def test_dashboard_snapshot_contains_verified_100000_game_opening_families():
+    snapshot = json.loads((ROOT / "docs/assets/snapshot.json").read_text())
+    assert snapshot["source"]["requested_games"] == 100_000
+    assert snapshot["counts"] == {"bronze": 100_000, "silver": 99_875, "quarantine": 125}
+    assert snapshot["source"]["sha256"] == (
+        "96e4ef9dd84f2e646f1604da2e47b4f686a2725186a3d026534ca9e742a3b031"
+    )
+    expected = {"Italian Game": (3_883, 1_939, 1_806, 138), "Ruy Lopez": (1_722, 838, 794, 90)}
+    for family, counts in expected.items():
+        rows = [row for row in snapshot["groups"]["opening"] if family in row["label"]]
+        assert (
+            tuple(
+                sum(row[key] for row in rows)
+                for key in ("games", "white_wins", "black_wins", "draws")
+            )
+            == counts
+        )
+
+
 def test_export_rejects_synthetic_fixture(tmp_path):
     lakehouse = tmp_path / "lakehouse"
     destination = tmp_path / "snapshot.json"

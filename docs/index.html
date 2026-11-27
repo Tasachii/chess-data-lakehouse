@@ -127,7 +127,7 @@
                 >Search opening<input
                   id="opening-search"
                   type="search"
-                  placeholder="e.g. Italian Game or Ruy Lopez"
+                  placeholder="e.g. Italian Game"
                   autocomplete="off"
               /></label>
               <label for="opening-result"
@@ -331,10 +331,10 @@
           <div>
             <span class="badge subtle">LOCAL + CLOUD VERIFIED</span>
             <p>
-              Local tests and two Databricks serverless runs passed. SQL
+              The 100,000-game dashboard sample was processed locally. Two
+              Databricks serverless runs used a separate 10,000-game sample; SQL
               confirmed 10,000 Bronze records, 9,996 valid games, 4 quarantined
-              and zero new records on replay. The dashboard remains a static
-              snapshot.
+              and zero new records on replay. No live ingestion.
             </p>
             <a
               class="text-link"

@@ -138,6 +138,27 @@ async function main() {
         ),
       );
     }
+    await page
+      .locator("#opening-quick-picks")
+      .getByRole("button", { name: "Italian Game", exact: true })
+      .click();
+    await page.locator("#opening-result").selectOption("white_wins");
+    await page.locator("#opening-sort").selectOption("white_wins");
+    const whiteRateRows = snapshot.groups.opening
+      .filter((row) => row.label.includes("Italian Game") && row.white_wins > 0)
+      .sort(
+        (a, b) =>
+          b.white_wins / b.games - a.white_wins / a.games ||
+          b.games - a.games ||
+          a.label.localeCompare(b.label),
+      )
+      .slice(0, 10);
+    assert.deepEqual(
+      await page.locator("#opening-list .row-value strong").allTextContents(),
+      whiteRateRows.map(
+        (row) => `${(100 * (row.white_wins / row.games)).toFixed(1)}%`,
+      ),
+    );
     await page.locator("#opening-search").fill("no-such-opening-zzzz");
     await page.locator("#reset-filters").click();
     assert.equal(await page.locator("#opening-result").inputValue(), "all");
