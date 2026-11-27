@@ -64,7 +64,7 @@ function overview(data) {
   $("sample-count").textContent = fmt(counts.bronze);
   $("valid-count").textContent = fmt(counts.silver);
   $("valid-caption").textContent =
-    `${fmt(counts.quarantine)} quarantined · ${((100 * counts.silver) / counts.bronze).toFixed(2)}% accepted`;
+    `${fmt(counts.quarantine)} rejected · ${((100 * counts.silver) / counts.bronze).toFixed(2)}% accepted`;
   $("opening-count").textContent = fmt(groups.opening.length);
   $("white-rate").textContent = percent(
     data.outcomes.white_wins / counts.silver,
@@ -344,7 +344,7 @@ function initOpeningExplorer(data) {
     white.setAttribute("aria-pressed", String(perspective === "white"));
     black.setAttribute("aria-pressed", String(perspective === "black"));
     $("perspective-note").textContent =
-      `${perspective === "white" ? "White" : "Black"} win rates use all games in the selected group and slice.`;
+      `${perspective === "white" ? "White" : "Black"} win rates use all games in the selected group.`;
     $("opening-list").dataset.perspective = perspective;
     const groupLabel = {
       family: "families",
@@ -438,12 +438,12 @@ function initContext(data) {
   );
   const known = data.coverage.length_known;
   $("length-summary").textContent = known
-    ? `${(data.coverage.total_plies / known).toFixed(1)} average plies · ${fmt(known)} known games`
+    ? `${(data.coverage.total_plies / known).toFixed(1)} average half-moves · ${fmt(known)} known games`
     : "No reliable mainline lengths";
   for (const [label, key] of [
     ["ECO codes", "eco_known"],
-    ["Termination", "termination_known"],
-    ["Mainline length", "length_known"],
+    ["Game endings", "termination_known"],
+    ["Game length", "length_known"],
   ]) {
     const row = node("div", "coverage-row");
     row.append(

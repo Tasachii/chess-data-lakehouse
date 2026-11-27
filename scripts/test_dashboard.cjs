@@ -227,6 +227,10 @@ async function main() {
       new RegExp(fmt(snapshot.coverage.length_known)),
     );
     await assertRows(page, expectedRows(snapshot));
+    for (const anchor of ["#openings", "#sample", "#pipeline"]) {
+      assert.equal(await page.locator(anchor).count(), 1);
+      assert.equal(await page.locator(`nav a[href="${anchor}"]`).count(), 1);
+    }
 
     for (const [family, result] of [
       ["Italian Game", "white_wins"],
@@ -324,6 +328,59 @@ async function main() {
       });
     for (const width of [320, 360, 390, 560, 768, 1440]) {
       await page.setViewportSize({ width, height: 844 });
+      await page.evaluate(() => window.scrollTo(0, 0));
+      if ([320, 390, 1440].includes(width)) {
+        assert.equal(
+          await page.locator("h1").innerText(),
+          "Explore chess openings",
+        );
+        const controls = [
+          page.locator("#opening-search"),
+          page.getByRole("button", { name: "Italian Game", exact: true }),
+          page.getByRole("button", { name: "Ruy Lopez", exact: true }),
+          page.getByRole("button", { name: "Sicilian Defense", exact: true }),
+        ];
+        for (const control of controls) {
+          const box = await control.boundingBox();
+          assert.ok(
+            box && box.x >= 0 && box.x + box.width <= width &&
+              box.y >= 0 && box.y + box.height <= 844,
+            `Primary opening control is below the fold or clipped at ${width}px`,
+          );
+        }
+        const firstRow = await page
+          .locator("#opening-body .opening-row")
+          .first()
+          .boundingBox();
+        assert.ok(
+          firstRow && firstRow.y >= 0 && firstRow.y + firstRow.height <= 844,
+          `Opening results are below the fold at ${width}px`,
+        );
+        for (const name of ["Italian Game", "Ruy Lopez", "Sicilian Defense"]) {
+          await page.getByRole("button", { name, exact: true }).click();
+          assert.equal(await page.locator("#opening-search").inputValue(), name);
+          await assertRows(page, expectedRows(snapshot, {
+            query: name,
+            group: "opening",
+          }));
+          await reset(page);
+        }
+        if (width === 390) {
+          // A later chip remains reachable in the horizontally scrolling shortcuts.
+          await page.getByRole("button", { name: "Pirc Defense", exact: true }).click();
+          await page.locator("#opening-rating").selectOption("1600-1799");
+          await page.locator("#opening-speed").selectOption("blitz");
+          await page.locator("#min-games").selectOption("5");
+          await assertRows(page, expectedRows(snapshot, {
+            query: "Pirc Defense",
+            group: "opening",
+            rating: "1600-1799",
+            speed: "blitz",
+            minimum: 5,
+          }));
+          await reset(page);
+        }
+      }
       assert.ok(
         await page.evaluate(
           () => document.documentElement.scrollWidth <= window.innerWidth,
