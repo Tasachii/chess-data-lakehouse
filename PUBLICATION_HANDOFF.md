@@ -1,6 +1,6 @@
 # Publication notes — one-million-game snapshot
 
-The one-million-game dashboard and its local Spark pipeline are ready for independent testing. The changes are on `scale-1m`; the 100,000-game dashboard on `main` remains unchanged. The new website and hosted CI have not been verified remotely. Databricks was verified on the earlier 100,000-game prefix only.
+The one-million-game dashboard is published from `main:/docs`. The [Pages build](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46038266738) at commit `7f45e0e` and [hosted CI](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46038266966) passed; the live snapshot matched the committed bytes. The subsequent Databricks incremental run also passed direct SQL verification against the local one-million-game results.
 
 ## Measured local results
 
@@ -52,7 +52,7 @@ The measured PySpark installation used the host PySpark 3.5.3 and Java 21 route 
 | Full local Spark/Delta tests with real 100-game fixture | 51 passed in 78.94 s |
 | `ruff check .` / `ruff format --check src tests scripts` | Passed |
 | `node --check` for dashboard and browser test | Passed |
-| Markdown links and anchors | All 39 local targets passed |
+| Markdown links and anchors | All 41 local targets passed after cloud-status update |
 | Playwright against one-million-game snapshot | Passed filters, exact counts and rates, reset, empty states, six viewport widths, no browser errors |
 | Screenshots | [Desktop](docs/assets/dashboard-preview.png) and [filtered opening study](docs/assets/opening-study.png) captured from the actual one-million-game site; 320 px mobile also inspected |
 
@@ -74,8 +74,21 @@ DASHBOARD_URL=http://127.0.0.1:18767/chess-data-lakehouse/ \
 node scripts/test_dashboard.cjs
 ```
 
-## Databricks status
+## Databricks verification
 
-The historical 100,000-game v0.3 cloud results remain verified: two successful serverless runs, 100,000 unique Bronze rows, 99,875 Silver, 125 quarantine, 11 Delta tables, seven Gold marts each summing to 99,875, all ten file receipts matching twice, 20 history rows and zero inserts / 100,000 duplicate attempts on replay.
+One incremental serverless job completed successfully in 324.55 s using the existing v0.3 job, schema and volume. Validation and deployment passed. All 100 files were present at the exact manifest sizes before the run; the first ten files were retained from the earlier cloud sample and 90 files were added.
 
-A proposed incremental expansion would reuse that schema and volume, transfer only the remaining 90 verified chunks, and run one glob of all 100 files. Expected checks are 900,000 new inserts, 100,000 duplicate attempts and 120 cumulative history rows, followed by full Gold reconciliation with the local results. The [operations notes](DEV_HANDOFF.md#planned-incremental-expansion-to-1000000-games-not-executed) describe the plan. These are expectations, not cloud measurements. No new cloud run or upload was performed for this handoff. The dashboard is a static snapshot, not live ingestion or a full-archive analysis.
+| Direct SQL check | Result |
+| --- | ---: |
+| Bronze / distinct Bronze | 1,000,000 / 1,000,000 |
+| Silver / quarantine | 998,976 / 1,024 |
+| Latest attempted / inserted / duplicates | 1,000,000 / 900,000 / 100,000 |
+| Newly accepted / quarantined | 899,101 / 899 |
+| Latest file receipt hashes and counts matching manifest | 100 / 100 |
+| Ingestion history rows | 120 (20 historical + 100 latest) |
+| Managed Delta tables | 11 |
+| Gold groups matching local CSVs | 45,332 / 45,332 |
+
+All seven Gold marts each sum to 998,976 games, with outcomes, exact half-even rates and length totals matching local results. The earlier 100,000-game same-input replay remains verified: two successful serverless runs, 100,000 unique Bronze rows, 99,875 Silver, 125 quarantine, 20 history rows and zero inserts / 100,000 duplicate attempts on replay. The latest one-million-game run verified incremental overlap handling; no full replay at one million games was performed. An independent check also matched the SQL receipts and every Gold row against the manifest and independently validated local results.
+
+See the [operations notes](DEV_HANDOFF.md#verified-incremental-expansion-to-1000000-games) and [measured SQL results](docs/run-evidence.md#databricks-cloud-verification). The dashboard remains a static snapshot, not live ingestion or full-archive analysis. No paid upgrade was used.

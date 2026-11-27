@@ -1,6 +1,6 @@
 # Operations and validation notes
 
-These notes explain how to run, inspect and reproduce the lakehouse. The local pipeline passed independent testing at commit `94f58a11304cc11c92e102f3894aabcbdcc80ce9`. The v0.3 dashboard adds optional Silver fields and four Gold marts while retaining the original validation and deduplication behavior. The v0.3 Databricks bundle passed CLI validation and deployment, two serverless job runs on the 100,000-game sample, and the subsequent SQL checks. The previous 10,000-game [live dashboard](https://tasachii.github.io/chess-data-lakehouse/) and [hosted CI](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046) both passed verification. The expanded one-million-game dashboard was exported and verified locally with Spark. Cloud verification remains at 100,000 games.
+These notes explain how to run, inspect and reproduce the lakehouse. The local pipeline passed independent testing at commit `94f58a11304cc11c92e102f3894aabcbdcc80ce9`. The v0.3 dashboard adds optional Silver fields and four Gold marts while retaining the original validation and deduplication behavior. The v0.3 Databricks bundle passed CLI validation and deployment, two serverless job runs on the 100,000-game sample, and the subsequent SQL checks. The previous 10,000-game [live dashboard](https://tasachii.github.io/chess-data-lakehouse/) and [hosted CI](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046) both passed verification. The one-million-game dashboard was exported and verified locally with Spark, then the existing Databricks schema was extended to the same one-million-game sample. Direct SQL checks matched every Gold group with the local results.
 
 ## Local replay and lineage
 
@@ -131,10 +131,24 @@ FROM main.chess_portfolio_v3.ingestion_runs GROUP BY run_id;
 
 Check `SUM(games)` in `gold_opening_metrics`, `gold_rating_metrics`, `gold_time_control_metrics`, `gold_opening_context`, `gold_rating_gap_metrics`, `gold_termination_metrics`, and `gold_length_metrics`. Cumulative totals are repeated on history rows; do not sum them. The verified v0.3 runs used the bounded sample, not the full archive or continuous ingestion. The job assumes immutable input and serial invocations and does not provide cross-table atomicity.
 
-### Planned incremental expansion to 1,000,000 games (not executed)
+### Verified incremental expansion to 1,000,000 games
 
-The verified v0.3 schema and volume can be reused because the first ten entries of the [one-million-game manifest](docs/assets/sample-chunks-1m-manifest.json) exactly match the historical cloud sample and the job schema is unchanged. Confirm the existing ten file hashes in the workspace before any transfer. The remaining 90 files (`part-011.pgn` through `part-100.pgn`) would extend the same input volume; do not replace the original ten or upload additional files outside the manifest. Check available storage and compute quota first.
+The existing v0.3 job, schema and volume were reused. Before the incremental run, SQL confirmed the original 100,000 unique Bronze rows, 99,875 Silver rows, 125 quarantined and 20 history rows. The first ten entries of the [one-million-game manifest](docs/assets/sample-chunks-1m-manifest.json) match the historical input exactly. The remaining 90 files (`part-011.pgn` through `part-100.pgn`) were added and all 100 uploaded file sizes matched the manifest.
 
-Use one job invocation over the full `part-*.pgn` glob with `requested_max_games=10000` per file. The single-file expected SHA argument stays blank. Compare all 100 per-file SHA-256 and attempted counts against the expanded manifest, preserving the existing 20 history rows. Based on the local reconciliation, the expected incremental result is 900,000 inserts, 100,000 duplicate attempts, 1,000,000 distinct Bronze rows, 998,976 Silver rows and 1,024 quarantine rows, with 120 history rows after one additional successful invocation. All seven Gold marts should sum to 998,976 games across 45,332 groups. These are expected checks, not measured cloud results. A further replay, if approved, should add zero distinct records and 1,000,000 duplicate attempts. Stop on quota failure; no new workspace, billing upgrade or cloud changes are needed for the local check.
+The bundle passed validation and deployment with the all-file `part-*.pgn` glob, `requested_max_games=10000` per file, the parent receipt retrieval timestamp and a blank single-file expected SHA. The job ID was unchanged. One incremental serverless invocation completed successfully in 324.55 s.
+
+| Direct SQL check | Observed |
+| --- | ---: |
+| Bronze / distinct Bronze | 1,000,000 / 1,000,000 |
+| Silver / distinct Silver | 998,976 / 998,976 |
+| Quarantine / distinct quarantine | 1,024 / 1,024 |
+| Latest attempts / inserts / duplicates | 1,000,000 / 900,000 / 100,000 |
+| Newly accepted / quarantined | 899,101 / 899 |
+| Latest file SHA-256 and attempted counts matching manifest | 100 of 100 |
+| Total history rows | 120 (20 historical + 100 latest) |
+| Managed Delta tables | 11 |
+| Gold games summed per mart / total groups | 998,976 / 45,332 |
+
+The original 20 history rows remain present; their source hashes and counts match the historical manifest. All 100 new receipts matched source hashes, 10,000 attempted records per file, batch identities and the parent receipt timestamp. Every Gold row in all seven marts matched the local CSVs, including exact half-even rates, outcomes and known-length totals. The first ten files inserted zero new records; the other 90 each inserted 10,000. The one-million-game run was incremental; a full replay at this scale was not executed. The earlier 100,000-game replay remains the verified same-input replay. No continuous ingestion, full-archive processing or paid upgrade was involved.
 
 References: [job task types](https://docs.databricks.com/aws/en/dev-tools/bundles/job-task-types), [bundle settings](https://docs.databricks.com/aws/en/dev-tools/bundles/settings), [serverless limitations](https://docs.databricks.com/aws/en/compute/serverless/limitations), [Delta Lake quickstart](https://docs.delta.io/quick-start/).

@@ -30,7 +30,7 @@ Each mart sums to 998,976 validated games: 497,294 White wins, 463,906 Black win
 
 The base Python suite passed 40 tests with one optional Spark module skipped. The full local Spark/Delta suite passed 51 tests in 78.94 s, including the separate 100-game real validation sample and the multi-file scale fixture. Ruff lint and formatting, JavaScript syntax, and the browser test all passed. The browser checked the actual one-million-game snapshot at 320, 360, 390, 560, 768 and 1,440 px, including both color perspectives, opening names and ECO, rating and speed slices, minimum counts, exact outcomes, reset and empty states.
 
-These are local Spark transformation and export measurements, not managed Delta table writes or a Databricks run at one million games. Cloud verification remains the earlier 100,000-game sample described below.
+These measurements cover the local Spark transformation and export, not managed Delta writes. The separate one-million-game Databricks incremental run and direct SQL verification are recorded below.
 
 ## Historical v0.3 opening analytics (100,000 games)
 
@@ -149,11 +149,32 @@ The local base suite, including two aggregate-export tests, passed 21 tests with
 
 ## GitHub Pages and CI verification
 
-The previous 10,000-game GitHub Pages release built commit `b6387d4`. The [live dashboard](https://tasachii.github.io/chess-data-lakehouse/) returned HTTP 200 and passed independent live checks, including byte-for-byte comparison of deployed assets with the committed files. Both the Python/dashboard and Spark/Delta fixture jobs completed successfully in [Chess Lakehouse CI run 46021313046](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046). The hosted jobs did not require cloud credentials or real archive downloads. The one-million-game dashboard has been verified locally; its GitHub Pages deployment and hosted CI are still awaiting verification.
+The previous 10,000-game GitHub Pages release built commit `b6387d4`. The [live dashboard](https://tasachii.github.io/chess-data-lakehouse/) returned HTTP 200 and passed independent live checks, including byte-for-byte comparison of deployed assets with the committed files. Both the Python/dashboard and Spark/Delta fixture jobs completed successfully in [Chess Lakehouse CI run 46021313046](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046). The hosted jobs did not require cloud credentials or real archive downloads. The one-million-game dashboard was published at commit `7f45e0e`. The [Pages build](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46038266738) and both jobs in [Chess Lakehouse CI run 46038266966](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46038266966) succeeded. The served aggregate snapshot matched the local committed bytes.
 
 ## Databricks cloud verification
 
-### Verified v0.3 (100,000 games)
+### Current v0.3 incremental run (1,000,000 games)
+
+The existing v0.3 serverless job and schema were expanded without replacing the original ten 10,000-game files. Before the run, direct SQL confirmed the 100,000-game counts and 20 historical ingestion records. After adding the remaining 90 files, all 100 uploaded sizes matched the source manifest. Databricks CLI bundle validation and deployment succeeded, with the same job ID and the all-file glob. One incremental job completed successfully in 324.55 s.
+
+| Direct SQL check | Observed |
+| --- | ---: |
+| Bronze rows / distinct IDs | 1,000,000 / 1,000,000 |
+| Silver rows / distinct IDs | 998,976 / 998,976 |
+| Quarantine rows / distinct IDs | 1,024 / 1,024 |
+| Managed Delta tables | 11 |
+| Latest attempted / inserted / duplicate attempts | 1,000,000 / 900,000 / 100,000 |
+| Latest accepted / quarantined | 899,101 / 899 |
+| Latest file SHA-256 and attempted counts matching manifest | 100 of 100 |
+| Ingestion history rows | 120 (20 prior + 100 latest) |
+| Sum of `games` in each of the seven Gold marts | 998,976 |
+| Gold rows matching local CSVs | 45,332 of 45,332 |
+
+All 100 latest source receipts matched the [one-million-game chunk manifest](assets/sample-chunks-1m-manifest.json), including 10,000 attempted records per file, batch identities and the parent receipt timestamp. The first ten files produced 100,000 duplicate attempts with no inserts; the remaining 90 produced 900,000 inserts. Prior receipts were preserved. SQL rows in all seven Gold tables matched the local CSVs field-for-field, including 497,294 White wins, 463,906 Black wins, 37,776 draws per mart and exact rounded rates and length totals. This confirms incremental ingestion against an overlapping input, not a full one-million-game replay. No further job run was performed.
+
+The public dashboard is the same locally exported snapshot, now matched against the cloud results; it does not query Databricks live.
+
+### Historical v0.3 replay (100,000 games)
 
 Official Databricks CLI bundle validation and deployment passed. Two actual serverless job runs completed successfully in a fresh v0.3 schema. Each run read the same ten 10,000-game files through a single glob. Direct SQL queries after the second run confirmed:
 
@@ -170,7 +191,7 @@ Official Databricks CLI bundle validation and deployment passed. Two actual serv
 | Replay `inserted` (sum) | 0 |
 | Replay `duplicates` (sum) | 100,000 |
 
-The replay added no new game records. These SQL checks confirm the bounded cloud run and its replay. The expanded one-million-game dashboard was exported from local Spark results, not this cloud schema.
+The replay added no new game records. These are the historical 100,000-game results before the incremental expansion described above.
 
 ### Historical v0.2 (10,000 games)
 

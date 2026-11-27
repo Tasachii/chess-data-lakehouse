@@ -464,13 +464,12 @@
             <code id="source-hash"></code>
           </div>
           <div>
-            <span class="badge subtle">LOCAL SPARK VERIFIED</span>
+            <span class="badge subtle">LOCAL + CLOUD VERIFIED</span>
             <p>
-              Local Spark checked all 100 source files, and a separate Python
-              pass reconciled all seven Gold marts for this 1,000,000-game sample.
-              Databricks cloud verification covers the earlier 100,000-game
-              prefix: two successful runs and zero new records on replay.
-              No live ingestion.
+              Local Spark and Python verified this 1,000,000-game snapshot.
+              Databricks then processed all 100 files, adding 900,000 games and
+              skipping 100,000 duplicate attempts. SQL matched all 45,332 Gold
+              groups with the local results. No live ingestion.
             </p>
             <a
               class="text-link"

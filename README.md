@@ -4,7 +4,7 @@ A data engineering project that turns public Lichess PGN exports into Bronze, Si
 
 I enjoy chess, and I wanted to see if I could build a repeatable data pipeline using real game data. This project grew out of that curiosity.
 
-**Dashboard:** [Live dashboard](https://tasachii.github.io/chess-data-lakehouse/) (earlier release) · [Dashboard source](docs/index.html) · [1,000,000-game aggregate data](docs/assets/snapshot.json) · [Passing CI run for the previous release](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046)
+**Dashboard:** [Live dashboard](https://tasachii.github.io/chess-data-lakehouse/) · [Dashboard source](docs/index.html) · [1,000,000-game aggregate data](docs/assets/snapshot.json) · [Passing one-million-game release CI](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46038266966)
 
 ![Dashboard preview: one million games from the October 2026 archive](docs/assets/dashboard-preview.png)
 
@@ -80,7 +80,7 @@ Use new output directories. The generated candidate is `output/scale-1m/checkpoi
 
 Open [http://localhost:8765/](http://localhost:8765/). Search opening names, family names or ECO codes (for example `C50`). White opening ideas and Black defenses are shortcuts to real Lichess labels. Select an average-Elo bucket, speed and minimum games to compare a meaningful slice. The table explicitly shows White wins, Black wins and draws with counts and rates. Select a color perspective to emphasize its win rate, or a result filter to count only matching outcomes. Rates always divide by all games in the selected opening group and slice. Family means the label before the first colon; it is not an official taxonomy or an exclusive assignment to one color. The separate rating-gap, termination and length charts show the full sample.
 
-The site uses plain HTML, CSS and JavaScript. It requires no build step, server API or account. The earlier 10,000-game release was published on GitHub Pages from `main:/docs` and passed independent live checks. This one-million-game dashboard was tested locally; its GitHub Pages deployment and hosted CI have not yet been verified.
+The site uses plain HTML, CSS and JavaScript. It requires no build step, server API or account. The one-million-game dashboard is published on GitHub Pages from `main:/docs`. The [Pages build](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46038266738) succeeded and the served aggregate snapshot matched the committed bytes.
 
 ## Architecture
 
@@ -127,7 +127,7 @@ More on the data contracts, replay behavior and cloud configuration: [Operations
 .venv/bin/ruff format --check src tests scripts
 ```
 
-The [Chess Lakehouse CI workflow](.github/workflows/ci.yml) runs on pushes, pull requests and manual dispatch using GitHub-hosted Ubuntu runners. It checks the base Python tests, including the aggregate export, Ruff lint and formatting, and JavaScript syntax. A separate job runs Spark/Delta fixture tests with Python 3.12 and Java 17; it needs no credentials, real archive download or Databricks workspace. Both hosted jobs passed for the previous release in [this CI run](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046). Real-data Spark parity is tested locally, and browser interactions have passed independent live-site checks.
+The [Chess Lakehouse CI workflow](.github/workflows/ci.yml) runs on pushes, pull requests and manual dispatch using GitHub-hosted Ubuntu runners. It checks the base Python tests, including the aggregate export, Ruff lint and formatting, and JavaScript syntax. A separate job runs Spark/Delta fixture tests with Python 3.12 and Java 17; it needs no credentials, real archive download or Databricks workspace. Both hosted jobs passed for the one-million-game dashboard release in [this CI run](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46038266966). Real-data Spark parity is tested locally, and browser interactions have passed independent live-site checks.
 
 The default local suite tests ingestion, validation, deduplication, corrupted/truncated inputs, lineage and aggregate export. Spark tests are optional. To run the full suite, install a compatible JDK and the pinned Spark/Delta extra (PySpark 3.5.3, Delta 3.3.2):
 
@@ -145,20 +145,23 @@ Independent testing confirmed the local pipeline at commit `94f58a11304cc11c92e1
 
 ## Databricks
 
-The v0.3 [Databricks bundle](databricks.yml) passed official CLI validation and deployment. A serverless Python job ran twice successfully in a fresh schema on the first 100,000 games of the October archive, split into ten 10,000-game PGN files. Their exact hashes match the first ten chunks of the expanded local sample. Direct SQL queries after the second run confirmed:
+The v0.3 [Databricks bundle](databricks.yml) passed official CLI validation and deployment. After two successful 100,000-game runs, the same serverless job and schema were extended to one million games by adding the remaining 90 files and reading all 100 files through one glob. The incremental job completed successfully in 324.55 seconds. Direct SQL queries confirmed:
 
 | Cloud verification | Result |
 | --- | ---: |
-| Bronze rows / distinct game IDs | 100,000 / 100,000 |
-| Silver rows / quarantine rows | 99,875 / 125 |
+| Bronze rows / distinct game IDs | 1,000,000 / 1,000,000 |
+| Silver rows / quarantine rows | 998,976 / 1,024 |
 | Managed Delta tables | 11 |
-| Sum of games in each of the seven Gold marts | 99,875 |
-| Total Gold groups across seven marts | 20,399 |
-| Source hashes and attempted counts matching the manifest | All 10 files in both runs |
-| Run history rows | 20 (10 per run) |
-| Second-run inserts / duplicate attempts | 0 / 100,000 |
+| Sum of games in each of the seven Gold marts | 998,976 |
+| Gold groups matching local results | 45,332 / 45,332 |
+| Latest file hashes and attempted counts matching manifest | 100 / 100 |
+| Latest attempted / inserted / duplicate records | 1,000,000 / 900,000 / 100,000 |
+| New Silver / quarantine records | 899,101 / 899 |
+| Run history rows | 120 (20 earlier + 100 incremental) |
 
-The replay confirms idempotency at 100,000 games: the same input added no new records. The job reads the ten chunks through one glob and checks each file’s record bound. The one-million-game snapshot was verified locally with Spark; managed Delta writes and replay at this scale have not been verified. The dashboard is not connected to Databricks, and the cloud runs were bounded batches, not continuous ingestion or a full-archive run. See the [cloud run instructions](DEV_HANDOFF.md#databricks-run-instructions), [chunk manifest](docs/assets/sample-chunks-manifest.json) and [measured results](docs/run-evidence.md#databricks-cloud-verification).
+All Gold rows matched the local Spark/Python results, including outcome counts, known game lengths and exact rounded rates. The earlier 100,000-game replay inserted zero records and skipped 100,000 duplicate attempts; the one-million-game incremental run likewise skipped the existing prefix. A full replay at one million games has not been run. See the [cloud run instructions](DEV_HANDOFF.md#databricks-run-instructions), [one-million-game chunk manifest](docs/assets/sample-chunks-1m-manifest.json) and [measured SQL results](docs/run-evidence.md#databricks-cloud-verification).
+
+The dashboard remains a locally exported static snapshot, independently matched against the cloud results. The job processes bounded batches, not continuous ingestion or the full archive.
 
 The earlier v0.2 cloud runs remain separate historical evidence: two successful runs on 10,000 games produced 10,000 unique Bronze records, 9,996 Silver records, 4 quarantined records and seven Delta tables. Each of three Gold marts summed to 9,996, with two history rows and zero inserts / 10,000 duplicate attempts on replay.
 
