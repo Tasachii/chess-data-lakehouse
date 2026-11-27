@@ -7,6 +7,8 @@ from collections.abc import Iterable
 from datetime import datetime
 from typing import Any
 
+from chess_lakehouse.analytics import optional_fields, rounded_rate
+
 TAG_PATTERN = re.compile(r'^\[([^ ]+) "(.*)"\]$')
 LICHESS_ID_PATTERN = re.compile(r"^https?://lichess\.org/(?:game/)?([A-Za-z0-9]{8})(?:/.*)?$")
 VALID_RESULTS = {"1-0", "0-1", "1/2-1/2"}
@@ -117,6 +119,7 @@ def normalize_game(raw_pgn: str) -> tuple[dict[str, Any] | None, list[str]]:
         "increment_seconds": time_control[1],
         "speed": _speed(*time_control),
         "rating_bucket": f"{bucket_start}-{bucket_start + 199}",
+        **optional_fields(raw_pgn, tags, white_elo, black_elo),
     }, []
 
 
@@ -141,6 +144,6 @@ def aggregate_gold(games: Iterable[dict[str, Any] | None]) -> dict[str, list[dic
             row["draws"] += int(game["result"] == "1/2-1/2")
         rows = [grouped[key] for key in sorted(grouped)]
         for row in rows:
-            row["white_win_rate"] = round(row["white_wins"] / row["games"], 4)
+            row["white_win_rate"] = rounded_rate(row["white_wins"], row["games"])
         output[table] = rows
     return output

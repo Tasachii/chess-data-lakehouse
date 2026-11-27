@@ -15,6 +15,19 @@ from pyspark.sql import functions as F
 from pyspark.sql.types import LongType, StringType, StructField, StructType
 
 from chess_lakehouse import __version__
+from chess_lakehouse.analytics import (
+    ANALYTICS_DIMENSIONS,
+    ANALYTICS_FIELDS,
+    COMMENT_PATTERN,
+    ECO_PATTERN,
+    GAP_LIMITS,
+    LENGTH_LIMITS,
+    MOVE_NUMBER_PATTERN,
+    SAN_PATTERN,
+    TAG_LINE_PATTERN,
+    TERMINATIONS,
+    UNSUPPORTED_MOVE_PATTERN,
+)
 from chess_lakehouse.lineage import batch_id, source_metadata
 
 
@@ -163,6 +176,54 @@ def bronze_records(spark: SparkSession, source_path: str) -> DataFrame:
     return _distinct_records(_raw_records(_source_files(spark, source_path)))
 
 
+def _bucket_column(
+    value: F.Column, limits: tuple[tuple[int, str], ...], remainder: str
+) -> F.Column:
+    column = F.lit(remainder)
+    for upper, label in reversed(limits):
+        column = F.when(value <= upper, F.lit(label)).otherwise(column)
+    return column
+
+
+def _mainline_plies() -> F.Column:
+    body = F.concat_ws(
+        " ", F.filter(F.split("raw_pgn", "\n"), lambda line: ~line.rlike(TAG_LINE_PATTERN))
+    )
+    stripped = F.regexp_replace(body, COMMENT_PATTERN, " ")
+    clean = F.trim(
+        F.regexp_replace(F.regexp_replace(stripped, MOVE_NUMBER_PATTERN, " "), r"\s+", " ")
+    )
+    words = F.split(clean, " ")
+    size = F.size(words)
+    valid = (
+        ~stripped.rlike(UNSUPPORTED_MOVE_PATTERN)
+        & (size >= 2)
+        & (F.element_at(words, -1) == F.col("result"))
+        & F.forall(F.slice(words, 1, size - 1), lambda word: word.rlike(SAN_PATTERN))
+    )
+    return F.when(valid, size - 1).otherwise(F.lit(None).cast("int"))
+
+
+def _with_analytics(frame: DataFrame) -> DataFrame:
+    eco = _tag("ECO")
+    termination = _tag("Termination")
+    return (
+        frame.withColumn("eco", F.when(eco.rlike(ECO_PATTERN), eco).otherwise("Unknown"))
+        .withColumn(
+            "termination", F.when(termination.isin(*TERMINATIONS), termination).otherwise("Unknown")
+        )
+        .withColumn("rating_gap", F.col("white_elo").cast("long") - F.col("black_elo").cast("long"))
+        .withColumn("rating_gap_bucket", _bucket_column(F.col("rating_gap"), GAP_LIMITS, "≥ +400"))
+        .withColumn("plies", _mainline_plies())
+        .withColumn(
+            "length_bucket",
+            F.when(F.col("plies").isNull(), "Unknown").otherwise(
+                _bucket_column(F.col("plies"), LENGTH_LIMITS, "121+")
+            ),
+        )
+    )
+
+
 def validated_records(bronze: DataFrame) -> DataFrame:
     result = _tag("Result")
     bronze = (
@@ -200,7 +261,7 @@ def validated_records(bronze: DataFrame) -> DataFrame:
         ),
         lambda item: item.isNotNull(),
     )
-    return (
+    base = (
         bronze.withColumn("is_valid", valid)
         .withColumn("validation_errors", errors)
         .withColumn("played_at", played_at)
@@ -227,6 +288,8 @@ def validated_records(bronze: DataFrame) -> DataFrame:
             F.concat(bucket_start.cast("string"), F.lit("-"), (bucket_start + 199).cast("string")),
         )
     )
+
+    return _with_analytics(base)
 
 
 def _merge_insert_only(spark: SparkSession, frame: DataFrame, table: str) -> None:
@@ -257,6 +320,27 @@ def gold_metrics(silver: DataFrame, dimension: str) -> DataFrame:
     return metrics.withColumn("white_win_rate", F.bround(F.col("white_wins") / F.col("games"), 4))
 
 
+def analytics_gold_metrics(silver: DataFrame, table: str) -> DataFrame:
+    dimensions = ANALYTICS_DIMENSIONS[table]
+    aggregates = [
+        F.count("*").alias("games"),
+        F.sum(F.when(F.col("result") == "1-0", 1).otherwise(0)).alias("white_wins"),
+        F.sum(F.when(F.col("result") == "1/2-1/2", 1).otherwise(0)).alias("draws"),
+    ]
+    if table == "length_metrics":
+        aggregates.extend(
+            [
+                F.count("plies").alias("known_length_games"),
+                F.sum(F.coalesce(F.col("plies"), F.lit(0))).alias("total_plies"),
+            ]
+        )
+    return (
+        silver.groupBy(*dimensions)
+        .agg(*aggregates)
+        .withColumn("white_win_rate", F.bround(F.col("white_wins") / F.col("games"), 4))
+    )
+
+
 def main() -> None:
     args = _arguments()
     catalog = _identifier(args.catalog)
@@ -285,6 +369,24 @@ def build_lakehouse(
     retrieved_at_utc: str | None = None,
     expected_source_sha256: str | None = None,
 ) -> dict[str, int]:
+    bronze_table = f"{prefix}.bronze_games"
+    silver_table = f"{prefix}.silver_games"
+    existing = spark.table(bronze_table) if spark.catalog.tableExists(bronze_table) else None
+    if existing is not None:
+        if not {"batch_id", "pipeline_version"}.issubset(existing.columns):
+            raise ValueError("Legacy Bronze IDs/lineage: rebuild into a fresh schema")
+        if (
+            existing.where(
+                F.col("pipeline_version").isNull() | (F.col("pipeline_version") != __version__)
+            )
+            .limit(1)
+            .count()
+        ):
+            raise ValueError("Previous analytics schema: rebuild from source into a fresh schema")
+    if spark.catalog.tableExists(silver_table) and not set(ANALYTICS_FIELDS).issubset(
+        spark.table(silver_table).columns
+    ):
+        raise ValueError("Previous analytics schema: rebuild from source into a fresh schema")
     files = _source_files(spark, source_path, source_url, requested_max_games, retrieved_at_utc)
     file_metadata = _file_receipts(files, source_url, requested_max_games, retrieved_at_utc)
     if expected_source_sha256 is not None and (
@@ -295,10 +397,6 @@ def build_lakehouse(
         raise ValueError("Spark expects bounded decompressed .pgn files (not .zst or receipts)")
     raw = _raw_records(files)
     incoming = _distinct_records(raw)
-    bronze_table = f"{prefix}.bronze_games"
-    existing = spark.table(bronze_table) if spark.catalog.tableExists(bronze_table) else None
-    if existing is not None and "batch_id" not in existing.columns:
-        raise ValueError("Legacy Bronze IDs/lineage: rebuild into a fresh schema")
     new = (
         incoming
         if existing is None
@@ -345,6 +443,7 @@ def build_lakehouse(
         "increment_seconds",
         "speed",
         "rating_bucket",
+        *ANALYTICS_FIELDS,
     )
     quarantine = validated.where("NOT is_valid").select(
         "game_id", "validation_errors", "raw_pgn", *PROVENANCE_COLUMNS, "ingested_at"
@@ -362,6 +461,11 @@ def build_lakehouse(
         metrics.write.format("delta").mode("overwrite").option(
             "overwriteSchema", "true"
         ).saveAsTable(f"{prefix}.{table}")
+
+    for table in ANALYTICS_DIMENSIONS:
+        analytics_gold_metrics(silver_all, table).write.format("delta").mode("overwrite").option(
+            "overwriteSchema", "true"
+        ).saveAsTable(f"{prefix}.gold_{table}")
 
     counts = {
         "incoming_distinct": incoming.count(),

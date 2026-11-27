@@ -10,6 +10,7 @@ from typing import Any
 from uuid import uuid4
 
 from chess_lakehouse import __version__
+from chess_lakehouse.analytics import ANALYTICS_DIMENSIONS, aggregate_analytics
 from chess_lakehouse.compression import decompressed_chunks
 from chess_lakehouse.lineage import input_receipt
 from chess_lakehouse.transform import (
@@ -38,12 +39,17 @@ def _write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
     path.write_text(content)
 
 
-def _write_csv(path: Path, rows: list[dict[str, Any]], dimension: str) -> None:
+def _write_csv(
+    path: Path,
+    rows: list[dict[str, Any]],
+    dimensions: tuple[str, ...],
+    extras: tuple[str, ...] = (),
+) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="") as handle:
         writer = csv.DictWriter(
             handle,
-            fieldnames=[dimension, "games", "white_wins", "draws", "white_win_rate"],
+            fieldnames=[*dimensions, "games", "white_wins", "draws", "white_win_rate", *extras],
         )
         writer.writeheader()
         writer.writerows(rows)
@@ -52,6 +58,14 @@ def _write_csv(path: Path, rows: list[dict[str, Any]], dimension: str) -> None:
 def run_pipeline(input_path: str | Path, output_dir: str | Path, source_url: str) -> dict[str, int]:
     source = Path(input_path)
     output = Path(output_dir)
+    latest_path = output / "manifests/latest.json"
+    if (
+        latest_path.exists()
+        and json.loads(latest_path.read_text()).get("pipeline_version") != __version__
+    ):
+        raise ValueError(
+            "Previous analytics schema: rebuild from source into a fresh output directory"
+        )
     source_bytes = source.read_bytes()
     blocks = list(parse_pgn_games(_read_source(source, source_bytes)))
     provenance = input_receipt(source, source_url, hashlib.sha256(source_bytes).hexdigest())
@@ -98,9 +112,15 @@ def run_pipeline(input_path: str | Path, output_dir: str | Path, source_url: str
     _write_jsonl(output / "quarantine" / "games.jsonl", quarantine)
 
     gold = aggregate_gold(silver)
-    _write_csv(output / "gold" / "opening_metrics.csv", gold["opening_metrics"], "opening")
-    _write_csv(output / "gold" / "rating_metrics.csv", gold["rating_metrics"], "rating_bucket")
-    _write_csv(output / "gold" / "time_control_metrics.csv", gold["time_control_metrics"], "speed")
+    _write_csv(output / "gold" / "opening_metrics.csv", gold["opening_metrics"], ("opening",))
+    _write_csv(output / "gold" / "rating_metrics.csv", gold["rating_metrics"], ("rating_bucket",))
+    _write_csv(
+        output / "gold" / "time_control_metrics.csv", gold["time_control_metrics"], ("speed",)
+    )
+
+    for table, rows in aggregate_analytics(silver).items():
+        extras = ("known_length_games", "total_plies") if table == "length_metrics" else ()
+        _write_csv(output / "gold" / f"{table}.csv", rows, ANALYTICS_DIMENSIONS[table], extras)
 
     counts = {
         "input_games": len(blocks),

@@ -9,6 +9,7 @@ pytest.importorskip("pyspark")
 from pyspark.sql import SparkSession  # noqa: E402
 from pyspark.sql import functions as F  # noqa: E402
 
+from chess_lakehouse.analytics import ANALYTICS_DIMENSIONS, aggregate_analytics  # noqa: E402
 from chess_lakehouse.lineage import batch_id, receipt_path  # noqa: E402
 from chess_lakehouse.transform import (  # noqa: E402
     aggregate_gold,
@@ -17,6 +18,7 @@ from chess_lakehouse.transform import (  # noqa: E402
     stable_game_id,
 )
 from databricks_job import (  # noqa: E402
+    analytics_gold_metrics,
     bronze_records,
     build_lakehouse,
     gold_metrics,
@@ -65,6 +67,9 @@ def test_spark_transform_matches_local_ids_validation_and_dimensions(spark):
     assert rows["alpha001"]["opening"] == "Sicilian Defense"
     assert rows["alpha001"]["rating_bucket"] == "1600-1799"
     assert rows["alpha001"]["speed"] == "blitz"
+    assert rows["alpha001"]["eco"] == "Unknown"
+    assert rows["alpha001"]["plies"] == 4
+    assert rows["alpha001"]["rating_gap"] == -200
     assert rows["bad00001"]["is_valid"] is False
     assert rows["bad00001"]["validation_errors"] == [
         "invalid result",
@@ -131,6 +136,14 @@ def test_real_sample_matches_local_silver_and_all_gold(spark):
         ]
         assert actual_gold == expected
         print(f"{table}: {len(actual_gold)} rows; {sum(row['games'] for row in actual_gold)} games")
+    for table, expected in aggregate_analytics(local.values()).items():
+        actual_gold = [
+            row.asDict()
+            for row in analytics_gold_metrics(silver, table)
+            .orderBy(*ANALYTICS_DIMENSIONS[table])
+            .collect()
+        ]
+        assert actual_gold == expected
 
 
 @pytest.mark.skipif(
@@ -214,6 +227,13 @@ def test_real_delta_managed_tables_replay_matches_local(spark):
         }[table]
         actual = spark.table(f"chess_real_test.gold_{table}").orderBy(dimension).collect()
         assert [row.asDict() for row in actual] == rows
+    for table, rows in aggregate_analytics(local).items():
+        actual = (
+            spark.table(f"chess_real_test.gold_{table}")
+            .orderBy(*ANALYTICS_DIMENSIONS[table])
+            .collect()
+        )
+        assert [row.asDict() for row in actual] == rows
 
 
 def test_spark_logical_id_and_header_only_boundary(spark, tmp_path):
@@ -265,3 +285,86 @@ def test_delta_logical_replay_and_lineage(spark, tmp_path):
     assert bronze.source_kind == "synthetic_fixture" and bronze.source_license == "MIT"
     assert bronze.pipeline_version and bronze.batch_id in {row.batch_id for row in history}
     assert all(row.bronze_total == row.silver_total == 1 for row in history)
+
+
+@pytest.mark.skipif(os.environ.get("CHESS_TEST_DELTA") != "1", reason="requires local Delta")
+def test_delta_multi_file_glob_with_receipts_and_legacy_guard(spark, tmp_path):
+    prefix = "spark_catalog.chess_chunks_test"
+    spark.sql("CREATE SCHEMA IF NOT EXISTS chess_chunks_test")
+    records = list(parse_pgn_games(FIXTURE.read_text()))
+    first = tmp_path / "part-01.pgn"
+    second = tmp_path / "part-02.pgn"
+    first.write_text(records[0] + "\n\n" + records[2] + "\n")
+    second.write_text(records[1] + "\n\n" + records[0].replace("alpha001", "new00001") + "\n")
+    hashes = {hashlib.sha256(p.read_bytes()).hexdigest() for p in (first, second)}
+    for _ in range(2):
+        counts = build_lakehouse(
+            spark,
+            str(tmp_path / "*.pgn"),
+            prefix,
+            source_url="fixture://chunks",
+            requested_max_games=2,
+        )
+        assert counts == {
+            "incoming_distinct": 3,
+            "bronze_total": 3,
+            "silver_total": 2,
+            "quarantine_total": 1,
+        }
+    history = spark.table(f"{prefix}.ingestion_runs").collect()
+    assert len(history) == 4 and {r.source_sha256 for r in history} == hashes
+    assert all(r.attempted == 2 and r.requested_max_games == 2 for r in history)
+    by_run = {}
+    for row in history:
+        by_run[row.run_id] = by_run.get(row.run_id, 0) + row.inserted
+    assert sorted(by_run.values()) == [0, 3]
+    for table in ANALYTICS_DIMENSIONS:
+        assert spark.table(f"{prefix}.gold_{table}").agg(F.sum("games")).first()[0] == 2
+    spark.sql("CREATE SCHEMA IF NOT EXISTS chess_legacy_test")
+    spark.createDataFrame([("old",)], "game_id string").write.format("delta").saveAsTable(
+        "chess_legacy_test.silver_games"
+    )
+    with pytest.raises(ValueError, match="fresh schema"):
+        build_lakehouse(spark, str(first), "spark_catalog.chess_legacy_test")
+    assert not spark.catalog.tableExists("chess_legacy_test.bronze_games")
+
+
+def test_spark_half_even_and_optional_fields(spark, tmp_path):
+    base = next(iter(parse_pgn_games(FIXTURE.read_text())))
+    annotated = base.replace(
+        '[Opening "Sicilian Defense"]',
+        '[Opening "Sicilian Defense"]\n[ECO "B20"]\n[Termination "Time forfeit"]',
+    ).replace("1. e4 c5 2. Nf3 d6 1-0", "1. e4 { [%clk 0:05:00] } 1... c5 2. Nf3 d6 1-0")
+    unknown = (
+        annotated.replace("alpha001", "beta0002")
+        .replace("B20", "?")
+        .replace("Time forfeit", "unsupported")
+        .replace("1. e4 { [%clk 0:05:00] } 1... c5 2. Nf3 d6 1-0", "1-0")
+    )
+    path = tmp_path / "optional.pgn"
+    path.write_text(annotated + "\n\n" + unknown + "\n")
+    expected = {
+        game["game_id"]: game
+        for raw in parse_pgn_games(path.read_text())
+        if (game := normalize_game(raw)[0]) is not None
+    }
+    actual = (
+        validated_records(bronze_records(spark, str(path)))
+        .where("is_valid")
+        .withColumn("played_at", F.date_format("played_at", "yyyy-MM-dd'T'HH:mm:ss'Z'"))
+    )
+    fields = list(next(iter(expected.values())))
+    assert {row.game_id: row.asDict() for row in actual.select(*fields).collect()} == expected
+    assert expected["beta0002"]["plies"] is None and expected["beta0002"]["eco"] == "Unknown"
+    frame = spark.range(160).select(
+        F.lit("Italian Game").alias("opening"),
+        F.lit("C50").alias("eco"),
+        F.lit("1600-1799").alias("rating_bucket"),
+        F.lit("blitz").alias("speed"),
+        F.when(F.col("id") < 77, "1-0").otherwise("0-1").alias("result"),
+    )
+    for row in (
+        gold_metrics(frame, "opening").first(),
+        analytics_gold_metrics(frame, "opening_context").first(),
+    ):
+        assert row.games == 160 and row.white_wins == 77 and row.white_win_rate == 0.4812
