@@ -43,6 +43,10 @@ Independent testing confirmed the local pipeline at commit `94f58a11304cc11c92e1
 
 The local base suite, including two aggregate-export tests, passed 21 tests with the optional Spark module skipped. The full local Spark/Delta suite passed 29 tests in 45.18 s (45.53 s wall clock) on the final layout revision, using the original 100-game validation sample. Browser checks exercised the 10,000-game dashboard at 320, 360, 390, 560, 768 and 1,440 pixel widths. Opening search, filters, sorting and rating selection passed with no JavaScript errors. A 320 px outcome-caption overlap was reproduced and fixed: the measured horizontal gap between white and black captions improved from −1.23 px to 29.41 px. All six widths now pass the caption containment and overlap checks. Pipeline behavior and Databricks configuration are unchanged.
 
+## GitHub Pages and CI verification
+
+GitHub Pages built commit `b6387d4`. The [live dashboard](https://tasachii.github.io/chess-data-lakehouse/) returned HTTP 200 and passed independent live checks, including byte-for-byte comparison of deployed assets with the committed files. Both the Python/dashboard and Spark/Delta fixture jobs completed successfully in [Chess Lakehouse CI run 46021313046](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046). The hosted jobs did not require cloud credentials or real archive downloads.
+
 ## Databricks cloud verification
 
 Official Databricks CLI bundle validation passed. The deployed serverless job ran twice successfully on the same bounded 10,000-game October 2026 sample and created seven managed Delta tables. SQL queries after the second execution verified:

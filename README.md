@@ -4,7 +4,7 @@ A data engineering project that turns public Lichess PGN exports into Bronze, Si
 
 I enjoy chess, and I wanted to see if I could build a repeatable data pipeline using real game data. This project grew out of that curiosity.
 
-**Dashboard:** [GitHub Pages](https://tasachii.github.io/chess-data-lakehouse/) (publication target) · [Dashboard source](docs/index.html) · [Aggregate data](docs/assets/snapshot.json)
+**Dashboard:** [Live dashboard](https://tasachii.github.io/chess-data-lakehouse/) · [Dashboard source](docs/index.html) · [Aggregate data](docs/assets/snapshot.json) · [Passing CI run](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046)
 
 ![Dashboard preview: October 2026 archive sample, outcomes and opening explorer](docs/assets/dashboard-preview.png)
 
@@ -67,7 +67,7 @@ Use a fresh output directory for a different sample. The downloader saves a rece
 
 Open [http://localhost:8765/](http://localhost:8765/). Search openings, choose a minimum game count, sort by number of games or outcomes, and switch the rating chart between counts and rates. Each Gold chart is a separate grouping; filtering the opening chart does not change the other dimensions.
 
-The site uses plain HTML, CSS and JavaScript. It requires no build step, server API or account. GitHub Pages can serve `main:/docs` directly.
+The site uses plain HTML, CSS and JavaScript. It requires no build step, server API or account. It is published on GitHub Pages from `main:/docs`. The live site returned HTTP 200 and passed independent checks against the committed dashboard assets.
 
 ## Architecture
 
@@ -109,7 +109,7 @@ More on the data contracts, replay behavior and cloud configuration: [Operations
 .venv/bin/ruff format --check src tests scripts
 ```
 
-The [Chess Lakehouse CI workflow](.github/workflows/ci.yml) runs on pushes, pull requests and manual dispatch using GitHub-hosted Ubuntu runners. It checks the base Python tests, including the aggregate export, Ruff lint and formatting, and JavaScript syntax. A separate job runs Spark/Delta fixture tests with Python 3.12 and Java 17; it needs no credentials, real archive download or Databricks workspace. The hosted workflow has not been run yet. Browser interaction tests and real-data Spark parity remain local checks.
+The [Chess Lakehouse CI workflow](.github/workflows/ci.yml) runs on pushes, pull requests and manual dispatch using GitHub-hosted Ubuntu runners. It checks the base Python tests, including the aggregate export, Ruff lint and formatting, and JavaScript syntax. A separate job runs Spark/Delta fixture tests with Python 3.12 and Java 17; it needs no credentials, real archive download or Databricks workspace. Both hosted jobs passed in [this CI run](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046). Real-data Spark parity is tested locally, and browser interactions have passed independent live-site checks.
 
 The default local suite tests ingestion, validation, deduplication, corrupted/truncated inputs, lineage and aggregate export. Spark tests are optional. To run the full suite, install a compatible JDK and the pinned Spark/Delta extra (PySpark 3.5.3, Delta 3.3.2):
 

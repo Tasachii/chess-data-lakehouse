@@ -1,6 +1,6 @@
 # Publication notes
 
-The static dashboard is ready for GitHub Pages from `main:/docs`. The outcome captions now wrap within their columns on narrow screens. No dashboard data, pipeline logic or Databricks configuration changed in this revision. Published material contains aggregate statistics only, with no real player names, game IDs, raw PGN or private workspace details.
+The [static dashboard](https://tasachii.github.io/chess-data-lakehouse/) is published on GitHub Pages from `main:/docs`. The outcome captions wrap within their columns on narrow screens. The site publishes aggregate statistics only, with no real player names, game IDs, raw PGN or private workspace details.
 
 ## Responsive layout verification
 
@@ -51,8 +51,8 @@ Official Databricks CLI bundle validation passed. The serverless job ran success
 
 ## Continuous integration
 
-The [Chess Lakehouse CI workflow](.github/workflows/ci.yml) uses standard GitHub-hosted Ubuntu runners with read-only repository access. Pushes, pull requests and manual dispatch run the base Python and JavaScript checks plus a separate local Spark/Delta fixture job. The hosted jobs have not run yet; the real-data parity and browser interaction tests still run locally using the documented commands. No cloud credentials are required by CI. The workflow passed `actionlint`. A fresh local Python install ran 21 base tests (one optional Spark module skipped), Ruff checks and both JavaScript syntax checks. The fixture-only Spark/Delta run passed six tests (two real-data tests skipped) using the documented local host/JAR setup; the hosted dependency-install route still needs its first CI run.
+The [Chess Lakehouse CI workflow](.github/workflows/ci.yml) uses standard GitHub-hosted Ubuntu runners with read-only repository access. Pushes, pull requests and manual dispatch run the base Python and JavaScript checks plus a separate local Spark/Delta fixture job. Both jobs completed successfully in [the hosted CI run](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046). No cloud credentials or real archive downloads are required by CI. The workflow also passed `actionlint`. A fresh local Python install ran 21 base tests (one optional Spark module skipped), Ruff checks and both JavaScript syntax checks. The local Spark/Delta fixture run passed six tests (two real-data tests skipped). Real-data parity is tested locally; browser interactions were also verified on the live site.
 
 ## GitHub Pages deployment
 
-Select the `main` branch and `/docs` folder in GitHub Pages settings. The intended URL is [https://tasachii.github.io/chess-data-lakehouse/](https://tasachii.github.io/chess-data-lakehouse/). The final live URL must be checked after publication. This revision was committed locally without pushing or changing cloud configuration.
+GitHub Pages built commit `b6387d4` from `main:/docs`. The [live dashboard](https://tasachii.github.io/chess-data-lakehouse/) returned HTTP 200, and independent live checks confirmed that the deployed assets matched the committed files byte-for-byte. The site passed its full live checks. It remains a static archive sample, not a live ingestion service.

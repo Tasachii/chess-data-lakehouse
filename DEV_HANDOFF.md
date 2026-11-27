@@ -1,6 +1,6 @@
 # Operations and validation notes
 
-These notes explain how to run, inspect and reproduce the lakehouse. The local pipeline passed independent testing at commit `94f58a11304cc11c92e102f3894aabcbdcc80ce9`. The dashboard adds an aggregate exporter, tests and static files without changing pipeline behavior. Databricks CLI validation, deployment, two serverless job runs and the subsequent SQL checks also passed.
+These notes explain how to run, inspect and reproduce the lakehouse. The local pipeline passed independent testing at commit `94f58a11304cc11c92e102f3894aabcbdcc80ce9`. The dashboard adds an aggregate exporter, tests and static files without changing pipeline behavior. Databricks CLI validation, deployment, two serverless job runs and the subsequent SQL checks also passed. The [live dashboard](https://tasachii.github.io/chess-data-lakehouse/) and [hosted CI](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046) both passed verification.
 
 ## Local replay and lineage
 
@@ -47,7 +47,7 @@ CHESS_REAL_SAMPLE="$PWD/data/real_sample_100.pgn" \
 .venv/bin/python -m pytest -s -ra tests --basetemp output/spark-tests
 ```
 
-Generate `data/real_sample_100.pgn` using the 100-game download command in the README before running. The local tests create temporary managed Delta tables and compare the real Silver fields and all Gold metrics. The full optional fresh installation and the automatic Maven resolver were not independently verified; the explicit host/JAR route was.
+Generate `data/real_sample_100.pgn` using the 100-game download command in the README before running. The local tests create temporary managed Delta tables and compare the real Silver fields and all Gold metrics. The fresh optional Spark/Delta installation and explicit matching JAR route also passed in [hosted CI](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046). The automatic Maven resolver was not separately tested.
 
 ## Databricks run instructions
 
