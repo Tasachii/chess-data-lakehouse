@@ -49,6 +49,10 @@ Official Databricks CLI bundle validation passed. The serverless job ran success
 - Python lint and formatting, Python compilation, JavaScript syntax and local Markdown links: passed.
 - Snapshot SHA-256 remains `b299b5a7b654f0be438787cdb76f04ae7be9f78a825e1080a4b02ed76a6a8165`.
 
+## Continuous integration
+
+The [Chess Lakehouse CI workflow](.github/workflows/ci.yml) uses standard GitHub-hosted Ubuntu runners with read-only repository access. Pushes, pull requests and manual dispatch run the base Python and JavaScript checks plus a separate local Spark/Delta fixture job. The hosted jobs have not run yet; the real-data parity and browser interaction tests still run locally using the documented commands. No cloud credentials are required by CI. The workflow passed `actionlint`. A fresh local Python install ran 21 base tests (one optional Spark module skipped), Ruff checks and both JavaScript syntax checks. The fixture-only Spark/Delta run passed six tests (two real-data tests skipped) using the documented local host/JAR setup; the hosted dependency-install route still needs its first CI run.
+
 ## GitHub Pages deployment
 
 Select the `main` branch and `/docs` folder in GitHub Pages settings. The intended URL is [https://tasachii.github.io/chess-data-lakehouse/](https://tasachii.github.io/chess-data-lakehouse/). The final live URL must be checked after publication. This revision was committed locally without pushing or changing cloud configuration.
