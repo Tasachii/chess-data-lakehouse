@@ -2,6 +2,8 @@
 
 A data engineering project that turns public Lichess PGN exports into Bronze, Silver, quarantine and Gold datasets. It uses Python for a local pipeline and PySpark/Delta Lake for a managed-table implementation. The accompanying dashboard explores verified aggregate metrics without publishing player names, game IDs or raw PGN.
 
+I enjoy chess, and I wanted to see if I could build a repeatable data pipeline using real game data. This project grew out of that curiosity.
+
 **Dashboard:** [GitHub Pages](https://tasachii.github.io/chess-data-lakehouse/) (publication target) · [Dashboard source](docs/index.html) · [Aggregate data](docs/assets/snapshot.json)
 
 ![Dashboard preview: October 2026 archive sample, outcomes and opening explorer](docs/assets/dashboard-preview.png)
