@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Explore a bounded Lichess archive sample, its openings, ratings and time controls, and the data pipeline behind it."
+    />
+    <meta name="color-scheme" content="light" />
+    <title>Chess Data Lakehouse · Game analytics</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="stylesheet" href="assets/dashboard.css" />
+    <script src="assets/dashboard.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to analytics</a>
+    <header class="topbar">
+      <div class="wrap topbar-inner">
+        <a class="brand" href="./" aria-label="Chess Data Lakehouse home"
+          ><span class="board-mark" aria-hidden="true"
+            ><i></i><i></i><i></i><i></i></span
+          ><span
+            >Chess<span class="brand-light"> / </span>Data Lakehouse</span
+          ></a
+        >
+        <nav aria-label="Main navigation">
+          <a href="#openings">Analytics</a><a href="#pipeline">Pipeline</a
+          ><a
+            class="source-link"
+            href="https://github.com/tasachii/chess-data-lakehouse"
+            >Repository <span aria-hidden="true">↗</span></a
+          >
+        </nav>
+      </div>
+    </header>
+    <main id="main" class="wrap">
+      <section class="intro" aria-labelledby="title">
+        <div>
+          <p class="eyebrow">
+            <span class="status-dot"></span> Archive analysis
+            <span class="slash">/</span>
+            <span id="archive-month">Loading snapshot</span>
+          </p>
+          <h1 id="title">
+            The games behind<br />the numbers<span class="period">.</span>
+          </h1>
+          <p class="intro-copy">
+            A bounded window into rated chess on Lichess, from raw game records
+            to verified, anonymous aggregates.
+          </p>
+        </div>
+        <aside class="snapshot-note" aria-label="Snapshot details">
+          <span class="badge">STATIC SNAPSHOT</span>
+          <p id="sample-window">Loading the archive window…</p>
+          <span id="retrieved" class="muted"></span>
+          <p class="small">
+            First records of the archive, not a random sample. No live feed.
+          </p>
+        </aside>
+      </section>
+      <p id="load-status" class="load-status" role="status">
+        Loading aggregate snapshot…
+      </p>
+      <noscript
+        ><p class="load-status">
+          Enable JavaScript to explore the published aggregates.
+        </p></noscript
+      >
+      <div id="dashboard" hidden>
+        <section class="kpis" aria-label="Snapshot totals">
+          <article class="kpi">
+            <span class="kpi-label">Sampled games</span
+            ><strong id="sample-count">—</strong
+            ><span>Bronze · ingested records</span>
+          </article>
+          <article class="kpi">
+            <span class="kpi-label">Validated games</span
+            ><strong id="valid-count">—</strong
+            ><span id="valid-caption">Silver · usable records</span>
+          </article>
+          <article class="kpi">
+            <span class="kpi-label">Opening groups</span
+            ><strong id="opening-count">—</strong
+            ><span>Distinct opening labels</span>
+          </article>
+          <article class="kpi">
+            <span class="kpi-label">White win rate</span
+            ><strong id="white-rate">—</strong
+            ><span>Across validated games</span>
+          </article>
+        </section>
+        <section class="outcome-card panel" aria-labelledby="outcome-title">
+          <div class="outcome-head">
+            <div>
+              <p class="eyebrow">Match results</p>
+              <h2 id="outcome-title">How the games ended</h2>
+            </div>
+            <span class="chart-note" id="outcome-total"></span>
+          </div>
+          <div
+            class="outcome-track"
+            id="outcome-track"
+            role="img"
+            aria-label="Game outcomes"
+          ></div>
+          <div class="outcome-stats" id="outcome-stats"></div>
+        </section>
+        <div class="section-title" id="openings">
+          <div>
+            <p class="eyebrow">Explore the Gold layer</p>
+            <h2>Patterns in the sample</h2>
+          </div>
+          <p>Each chart is a separate grouping of the same validated games.</p>
+        </div>
+        <div class="analytics-grid">
+          <section class="panel openings-panel" aria-labelledby="opening-title">
+            <div class="panel-heading">
+              <div>
+                <h3 id="opening-title">Opening explorer</h3>
+                <p>Find openings and compare their outcomes.</p>
+              </div>
+              <span class="pill" id="opening-groups">—</span>
+            </div>
+            <div class="filters">
+              <label class="search-field" for="opening-search"
+                >Search opening<input
+                  id="opening-search"
+                  type="search"
+                  placeholder="e.g. Sicilian"
+                  autocomplete="off"
+              /></label>
+              <label for="opening-sort"
+                >Sort by<select id="opening-sort">
+                  <option value="games">Most played</option>
+                  <option value="white_wins">White win rate</option>
+                  <option value="black_wins">Black win rate</option>
+                  <option value="draws">Draw rate</option>
+                </select></label
+              >
+              <label for="min-games"
+                >Minimum games<select id="min-games">
+                  <option value="1">Any</option>
+                  <option value="5">5+</option>
+                  <option value="20">20+</option>
+                  <option value="50">50+</option>
+                </select></label
+              >
+            </div>
+            <div class="chart-toolbar">
+              <span id="opening-summary" role="status" aria-live="polite"></span
+              ><label class="inline-label" for="opening-limit"
+                >Show
+                <select id="opening-limit">
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                </select></label
+              >
+            </div>
+            <div class="legend">
+              <span><i class="dot white"></i>White win</span
+              ><span><i class="dot black"></i>Black win</span
+              ><span><i class="dot draw"></i>Draw</span>
+            </div>
+            <div id="opening-list" class="opening-list"></div>
+            <div id="opening-empty" class="empty" hidden>
+              <strong>No matching openings</strong>
+              <p>Try a shorter search or a lower minimum.</p>
+              <button id="reset-filters" type="button">Reset filters</button>
+            </div>
+            <p class="panel-foot">
+              Bar widths compare game counts with the most-played matching
+              opening; colors show outcomes. Small groups are noisy.
+            </p>
+          </section>
+          <div class="side-stack">
+            <section class="panel speed-panel" aria-labelledby="speed-title">
+              <div class="panel-heading">
+                <div>
+                  <h3 id="speed-title">Time controls</h3>
+                  <p>Estimated game duration</p>
+                </div>
+              </div>
+              <div id="speed-list" class="speed-list"></div>
+              <p class="panel-foot">
+                Speed = initial seconds + 40 × increment. Bullet includes
+                ultrabullet.
+              </p>
+            </section>
+            <section
+              class="panel integrity-panel"
+              aria-labelledby="integrity-title"
+            >
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">Data quality</p>
+                  <h3 id="integrity-title">From records to results</h3>
+                </div>
+                <span class="check" aria-hidden="true">✓</span>
+              </div>
+              <div class="quality-steps">
+                <div><span>Ingested</span><b id="quality-bronze">—</b></div>
+                <div><span>Validated</span><b id="quality-silver">—</b></div>
+                <div class="quarantine">
+                  <span>Quarantined</span><b id="quality-quarantine">—</b>
+                </div>
+              </div>
+              <p class="small">
+                Only validated Silver records contribute to Gold metrics.
+                Quarantined games are excluded.
+              </p>
+            </section>
+          </div>
+        </div>
+        <section class="panel rating-panel" aria-labelledby="rating-title">
+          <div class="panel-heading rating-heading">
+            <div>
+              <h3 id="rating-title">Average rating distribution</h3>
+              <p>Mean White and Black Elo, grouped into 200-point buckets.</p>
+            </div>
+            <label for="rating-metric"
+              >Measure<select id="rating-metric">
+                <option value="games">Games played</option>
+                <option value="white_wins">White win rate</option>
+                <option value="black_wins">Black win rate</option>
+                <option value="draws">Draw rate</option>
+              </select></label
+            >
+          </div>
+          <div
+            class="rating-chart"
+            id="rating-chart"
+            aria-label="Interactive rating bucket chart"
+          ></div>
+          <div
+            class="rating-detail"
+            id="rating-detail"
+            role="status"
+            aria-live="polite"
+          ></div>
+          <p class="panel-foot">
+            Select a bar for exact counts. Rate bars use a 0–100% scale; rates
+            are descriptive, not estimates of player skill.
+          </p>
+        </section>
+        <section
+          class="pipeline"
+          id="pipeline"
+          aria-labelledby="pipeline-title"
+        >
+          <div class="section-title">
+            <div>
+              <p class="eyebrow">The engineering behind the chart</p>
+              <h2 id="pipeline-title">A reproducible lakehouse</h2>
+            </div>
+            <a
+              class="text-link"
+              href="https://github.com/tasachii/chess-data-lakehouse#quick-start"
+              >Run the pipeline ↗</a
+            >
+          </div>
+          <div class="pipeline-grid">
+            <article>
+              <span class="step-number">01 · Extract</span>
+              <h3>Bounded PGN</h3>
+              <p>
+                Stream a Zstandard archive up to a fixed record limit. Record
+                the source, checksum and retrieval time.
+              </p>
+            </article>
+            <article>
+              <span class="step-number bronze-tag">02 · Bronze</span>
+              <h3>Keep the source</h3>
+              <p>
+                Deduplicate by stable game ID and retain raw records locally
+                with batch lineage.
+              </p>
+            </article>
+            <article>
+              <span class="step-number silver-tag">03 · Silver</span>
+              <h3>Validate &amp; type</h3>
+              <p>
+                Check analytics fields, timestamps, ratings and time controls;
+                quarantine invalid records.
+              </p>
+            </article>
+            <article>
+              <span class="step-number gold-tag">04 · Gold</span>
+              <h3>Group &amp; export</h3>
+              <p>
+                Aggregate openings, rating buckets and speed. Publish only group
+                labels and counts.
+              </p>
+            </article>
+          </div>
+        </section>
+        <section class="provenance" aria-labelledby="provenance-title">
+          <div>
+            <h3 id="provenance-title">Source &amp; reproducibility</h3>
+            <p>
+              Public rated standard games from
+              <a href="https://database.lichess.org/">Lichess Open Database</a>,
+              released under
+              <a
+                id="license-link"
+                href="https://creativecommons.org/publicdomain/zero/1.0/"
+                >CC0 1.0</a
+              >. Project code is MIT licensed.
+            </p>
+            <p>SHA-256 of the bounded decompressed PGN:</p>
+            <code id="source-hash"></code>
+          </div>
+          <div>
+            <span class="badge subtle">VERIFIED LOCALLY</span>
+            <p>
+              Local Python and PySpark/Delta paths were tested. Databricks
+              workspace execution has not been verified.
+            </p>
+            <a
+              class="text-link"
+              id="archive-link"
+              href="https://database.lichess.org/"
+              >Original source ↗</a
+            ><br /><a class="text-link" href="assets/snapshot.json"
+              >Download aggregate snapshot (JSON) ↗</a
+            >
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer class="wrap footer">
+      <span>Chess Data Lakehouse · Public portfolio project</span
+      ><span>No accounts · No raw game records in this site</span>
+    </footer>
+  </body>
+</html>

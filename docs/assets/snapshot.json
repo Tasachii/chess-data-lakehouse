@@ -1,0 +1,7908 @@
+{
+  "schema_version": 1,
+  "source": {
+    "url": "https://database.lichess.org/standard/lichess_db_standard_rated_2026-10.pgn.zst",
+    "month": "2026-10",
+    "license": "CC0-1.0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "sha256": "24a50c38d31691401b5ef3b5fa246c4941e56d4223c54d397d0ef6c9b13c3030",
+    "retrieved_at_utc": "2026-11-27T14:06:34.649665+00:00",
+    "first_game_utc": "2026-10-01T00:00:00Z",
+    "last_game_utc": "2026-10-01T00:08:08Z",
+    "requested_games": 10000,
+    "pipeline_version": "0.2.0"
+  },
+  "counts": {
+    "bronze": 10000,
+    "quarantine": 4,
+    "silver": 9996
+  },
+  "outcomes": {
+    "white_wins": 5026,
+    "black_wins": 4571,
+    "draws": 399
+  },
+  "groups": {
+    "opening": [
+      {
+        "label": "?",
+        "games": 26,
+        "white_wins": 1,
+        "black_wins": 25,
+        "draws": 0
+      },
+      {
+        "label": "Alekhine Defense",
+        "games": 21,
+        "white_wins": 10,
+        "black_wins": 9,
+        "draws": 2
+      },
+      {
+        "label": "Alekhine Defense: Brooklyn Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Alekhine Defense: Exchange Variation",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Alekhine Defense: Exchange Variation, Voronezh Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Alekhine Defense: Four Pawns Attack",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Alekhine Defense: Four Pawns Attack, Main Line",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Alekhine Defense: Four Pawns Attack, Trifunovic Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Alekhine Defense: Krejcik Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Alekhine Defense: Krejcik Variation, Krejcik Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Alekhine Defense: Maróczy Variation",
+        "games": 11,
+        "white_wins": 5,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "Alekhine Defense: Modern Variation, Schmid Variation",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Alekhine Defense: Mokele Mbembe",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Alekhine Defense: Normal Variation",
+        "games": 5,
+        "white_wins": 1,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Alekhine Defense: Scandinavian Variation",
+        "games": 13,
+        "white_wins": 6,
+        "black_wins": 5,
+        "draws": 2
+      },
+      {
+        "label": "Alekhine Defense: Scandinavian Variation, Geschev Gambit",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Alekhine Defense: Sämisch Attack",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Alekhine Defense: Two Pawns Attack",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "Alekhine Defense: Two Pawns Attack, Lasker Variation",
+        "games": 7,
+        "white_wins": 2,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Alekhine Defense: Two Pawns Attack, Tate Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Amar Opening",
+        "games": 6,
+        "white_wins": 1,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Amazon Attack",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Anderssen's Opening",
+        "games": 14,
+        "white_wins": 6,
+        "black_wins": 8,
+        "draws": 0
+      },
+      {
+        "label": "Barnes Defense",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Barnes Opening",
+        "games": 18,
+        "white_wins": 9,
+        "black_wins": 8,
+        "draws": 1
+      },
+      {
+        "label": "Barnes Opening: Hammerschlag",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Barnes Opening: Walkerling",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Benko Gambit",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Benko Gambit Accepted: Fully Accepted Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Benoni Defense",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Benoni Defense: Benoni Gambit Accepted",
+        "games": 20,
+        "white_wins": 8,
+        "black_wins": 10,
+        "draws": 2
+      },
+      {
+        "label": "Benoni Defense: Benoni-Indian Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Benoni Defense: Classical Variation, Averbakh-Grivas Attack",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Benoni Defense: Classical Variation, Main Line",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Benoni Defense: Czech Benoni Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Benoni Defense: French Benoni",
+        "games": 12,
+        "white_wins": 7,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Benoni Defense: Hromádka System",
+        "games": 4,
+        "white_wins": 3,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Benoni Defense: King's Pawn Line",
+        "games": 7,
+        "white_wins": 3,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Benoni Defense: Modern Variation",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Benoni Defense: Old Benoni",
+        "games": 93,
+        "white_wins": 51,
+        "black_wins": 40,
+        "draws": 2
+      },
+      {
+        "label": "Benoni Defense: Old Benoni, Schmid Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Benoni Defense: Semi-Benoni",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Benoni Defense: Weenink Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Bird Opening",
+        "games": 55,
+        "white_wins": 24,
+        "black_wins": 30,
+        "draws": 1
+      },
+      {
+        "label": "Bird Opening: Dutch Variation",
+        "games": 28,
+        "white_wins": 16,
+        "black_wins": 11,
+        "draws": 1
+      },
+      {
+        "label": "Bird Opening: Dutch Variation, Batavo Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Bird Opening: Dutch Variation, Dudweiler Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Bird Opening: From's Gambit",
+        "games": 7,
+        "white_wins": 2,
+        "black_wins": 4,
+        "draws": 1
+      },
+      {
+        "label": "Bird Opening: From's Gambit, Lasker Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Bird Opening: Myers Defense",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Bird Opening: Schlechter Gambit",
+        "games": 3,
+        "white_wins": 3,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Bird Opening: Sturm Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Bird Opening: Williams Gambit",
+        "games": 5,
+        "white_wins": 5,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Bishop's Opening",
+        "games": 92,
+        "white_wins": 48,
+        "black_wins": 40,
+        "draws": 4
+      },
+      {
+        "label": "Bishop's Opening: Berlin Defense",
+        "games": 21,
+        "white_wins": 9,
+        "black_wins": 12,
+        "draws": 0
+      },
+      {
+        "label": "Bishop's Opening: Boden-Kieseritzky Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Bishop's Opening: Boi Variation",
+        "games": 19,
+        "white_wins": 10,
+        "black_wins": 8,
+        "draws": 1
+      },
+      {
+        "label": "Bishop's Opening: Calabrese Countergambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Bishop's Opening: Khan Gambit",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Bishop's Opening: Kitchener Folly",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Bishop's Opening: Lewis Gambit",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Bishop's Opening: Paulsen Defense",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Bishop's Opening: Philidor Counterattack",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Bishop's Opening: Philidor Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Bishop's Opening: Ponziani Gambit",
+        "games": 5,
+        "white_wins": 2,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Bishop's Opening: Urusov Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Bishop's Opening: Vienna Hybrid",
+        "games": 8,
+        "white_wins": 5,
+        "black_wins": 2,
+        "draws": 1
+      },
+      {
+        "label": "Bishop's Opening: Vienna Hybrid, Hromádka Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Bishop's Opening: Vienna Hybrid, Spielmann Attack",
+        "games": 6,
+        "white_wins": 1,
+        "black_wins": 4,
+        "draws": 1
+      },
+      {
+        "label": "Blackmar-Diemer Gambit",
+        "games": 11,
+        "white_wins": 3,
+        "black_wins": 8,
+        "draws": 0
+      },
+      {
+        "label": "Blackmar-Diemer Gambit Accepted: Bogoljubow Defense",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "Blackmar-Diemer Gambit Accepted: Euwe Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Blackmar-Diemer Gambit Accepted: Gunderam Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Blackmar-Diemer Gambit Accepted: Pietrowsky Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Blackmar-Diemer Gambit Accepted: Ryder Gambit",
+        "games": 5,
+        "white_wins": 2,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Blackmar-Diemer Gambit Accepted: Teichmann Defense, Ciesielski Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Blackmar-Diemer Gambit Accepted: Teichmann Defense, Classical Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Blackmar-Diemer Gambit Declined: O'Kelly Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Blackmar-Diemer Gambit Declined: Vienna Defense",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Blackmar-Diemer Gambit Declined: Weinsbach Defense",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Blackmar-Diemer Gambit: Blackmar Gambit",
+        "games": 12,
+        "white_wins": 6,
+        "black_wins": 5,
+        "draws": 1
+      },
+      {
+        "label": "Blackmar-Diemer Gambit: Diemer-Rosenberg Attack",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Blackmar-Diemer Gambit: Fritz Attack",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Blackmar-Diemer Gambit: Netherlands Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Blackmar-Diemer Gambit: Zeller Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Blackmar-Diemer Gambit: von Popiel Gambit",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Bogo-Indian Defense: Exchange Variation",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Bogo-Indian Defense: Grünfeld Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Bogo-Indian Defense: Retreat Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Bogo-Indian Defense: Wade-Smyslov Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Borg Defense",
+        "games": 8,
+        "white_wins": 5,
+        "black_wins": 2,
+        "draws": 1
+      },
+      {
+        "label": "Borg Defense: Borg Gambit",
+        "games": 5,
+        "white_wins": 1,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense",
+        "games": 204,
+        "white_wins": 106,
+        "black_wins": 88,
+        "draws": 10
+      },
+      {
+        "label": "Caro-Kann Defense: Accelerated Panov Attack",
+        "games": 6,
+        "white_wins": 2,
+        "black_wins": 3,
+        "draws": 1
+      },
+      {
+        "label": "Caro-Kann Defense: Accelerated Panov Attack, Modern Variation",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Accelerated Panov Attack, Open Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Advance Variation",
+        "games": 42,
+        "white_wins": 17,
+        "black_wins": 22,
+        "draws": 3
+      },
+      {
+        "label": "Caro-Kann Defense: Advance Variation, Botvinnik-Carls Defense",
+        "games": 31,
+        "white_wins": 15,
+        "black_wins": 15,
+        "draws": 1
+      },
+      {
+        "label": "Caro-Kann Defense: Advance Variation, Bronstein Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Advance Variation, Short Variation",
+        "games": 16,
+        "white_wins": 5,
+        "black_wins": 10,
+        "draws": 1
+      },
+      {
+        "label": "Caro-Kann Defense: Advance Variation, Tal Variation",
+        "games": 6,
+        "white_wins": 3,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Advance Variation, Van der Wiel Attack",
+        "games": 4,
+        "white_wins": 1,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Alekhine Gambit",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Alien Gambit",
+        "games": 4,
+        "white_wins": 3,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Apocalypse Attack",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Breyer Variation",
+        "games": 14,
+        "white_wins": 9,
+        "black_wins": 3,
+        "draws": 2
+      },
+      {
+        "label": "Caro-Kann Defense: Bronstein-Larsen Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Campomanes Attack",
+        "games": 10,
+        "white_wins": 3,
+        "black_wins": 6,
+        "draws": 1
+      },
+      {
+        "label": "Caro-Kann Defense: Classical Variation",
+        "games": 15,
+        "white_wins": 7,
+        "black_wins": 6,
+        "draws": 2
+      },
+      {
+        "label": "Caro-Kann Defense: Classical Variation, Lobron System",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Classical Variation, Main Line",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Classical Variation, Maróczy Attack",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Classical Variation, Seirawan Variation",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Classical Variation, Spassky Variation",
+        "games": 3,
+        "white_wins": 0,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: De Bruycker Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Endgame Offer",
+        "games": 5,
+        "white_wins": 2,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Endgame Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Euwe Attack",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Exchange Variation",
+        "games": 74,
+        "white_wins": 27,
+        "black_wins": 41,
+        "draws": 6
+      },
+      {
+        "label": "Caro-Kann Defense: Exchange Variation, Rubinstein Variation",
+        "games": 4,
+        "white_wins": 1,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Finnish Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Forgacs Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Gurgenidze System",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Hillbilly Attack",
+        "games": 44,
+        "white_wins": 18,
+        "black_wins": 26,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Hillbilly Attack, Schaeffer Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Karpov Variation",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Karpov Variation, Modern Variation, Kasparov Attack",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Main Line",
+        "games": 9,
+        "white_wins": 7,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Maróczy Variation",
+        "games": 10,
+        "white_wins": 5,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Masi Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Mieses Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Modern Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Panov Attack",
+        "games": 22,
+        "white_wins": 12,
+        "black_wins": 9,
+        "draws": 1
+      },
+      {
+        "label": "Caro-Kann Defense: Panov Attack, Fianchetto Defense",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Panov Attack, Modern Defense, Carlsbad Line",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Panov Attack, Modern Defense, Mieses Line",
+        "games": 5,
+        "white_wins": 2,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Rasa-Studier Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Tartakower Variation",
+        "games": 10,
+        "white_wins": 3,
+        "black_wins": 5,
+        "draws": 2
+      },
+      {
+        "label": "Caro-Kann Defense: Two Knights Attack",
+        "games": 32,
+        "white_wins": 13,
+        "black_wins": 18,
+        "draws": 1
+      },
+      {
+        "label": "Caro-Kann Defense: Two Knights Attack, Mindeno Variation",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Two Knights Attack, Mindeno Variation, Exchange Line",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Two Knights Attack, Mindeno Variation, Retreat Line",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: Ulysses Gambit",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Caro-Kann Defense: von Hennig Gambit",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Carr Defense",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Catalan Opening",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Catalan Opening: Closed",
+        "games": 5,
+        "white_wins": 0,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Catalan Opening: Closed, Botvinnik Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Catalan Opening: Open Defense, Classical Line",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Center Game",
+        "games": 27,
+        "white_wins": 12,
+        "black_wins": 15,
+        "draws": 0
+      },
+      {
+        "label": "Center Game Accepted",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Center Game: Berger Variation",
+        "games": 4,
+        "white_wins": 3,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Center Game: Halasz-McDonnell Gambit",
+        "games": 5,
+        "white_wins": 2,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Center Game: Kieseritzky Variation",
+        "games": 6,
+        "white_wins": 2,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Center Game: Lanc-Arnold Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Center Game: Normal Variation",
+        "games": 13,
+        "white_wins": 4,
+        "black_wins": 9,
+        "draws": 0
+      },
+      {
+        "label": "Center Game: Paulsen Attack Variation",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Center Game: Ross Gambit",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Center Game: von der Lasa Gambit",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Clemenz Opening",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Clemenz Opening: Spike Lee Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Czech Defense",
+        "games": 5,
+        "white_wins": 1,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Danish Gambit",
+        "games": 10,
+        "white_wins": 5,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Danish Gambit Accepted",
+        "games": 15,
+        "white_wins": 11,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Danish Gambit Accepted: Chigorin Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Danish Gambit Accepted: Classical Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Danish Gambit Accepted: Copenhagen Defense",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Danish Gambit Accepted: Schlechter Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Danish Gambit Declined: Sörensen Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Duras Gambit",
+        "games": 9,
+        "white_wins": 4,
+        "black_wins": 4,
+        "draws": 1
+      },
+      {
+        "label": "Dutch Defense",
+        "games": 25,
+        "white_wins": 18,
+        "black_wins": 6,
+        "draws": 1
+      },
+      {
+        "label": "Dutch Defense: Blackmar's Second Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Dutch Defense: Classical Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Dutch Defense: Fianchetto Attack",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Dutch Defense: Hopton Attack",
+        "games": 7,
+        "white_wins": 4,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Dutch Defense: Korchnoi Attack",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Dutch Defense: Leningrad Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Dutch Defense: Normal Variation",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Dutch Defense: Queen's Knight Variation",
+        "games": 7,
+        "white_wins": 6,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Dutch Defense: Raphael Variation",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Dutch Defense: Rubinstein Variation",
+        "games": 5,
+        "white_wins": 0,
+        "black_wins": 4,
+        "draws": 1
+      },
+      {
+        "label": "Dutch Defense: Staunton Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Dutch Defense: Staunton Gambit Accepted",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Dutch Defense: Staunton Gambit, Chigorin Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Dutch Defense: Stonewall Variation, Modern Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "East Indian Defense",
+        "games": 13,
+        "white_wins": 7,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "Elephant Gambit",
+        "games": 23,
+        "white_wins": 15,
+        "black_wins": 7,
+        "draws": 1
+      },
+      {
+        "label": "Elephant Gambit: Paulsen Countergambit",
+        "games": 15,
+        "white_wins": 8,
+        "black_wins": 7,
+        "draws": 0
+      },
+      {
+        "label": "English Defense",
+        "games": 51,
+        "white_wins": 21,
+        "black_wins": 27,
+        "draws": 3
+      },
+      {
+        "label": "English Defense: Hartlaub Gambit Declined",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "English Opening",
+        "games": 19,
+        "white_wins": 10,
+        "black_wins": 9,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Agincourt Defense",
+        "games": 28,
+        "white_wins": 18,
+        "black_wins": 10,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Agincourt Defense, Catalan Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Agincourt Defense, Wimpy System",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Anglo-Dutch Defense",
+        "games": 4,
+        "white_wins": 1,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Anglo-Grünfeld Defense",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Anglo-Indian Defense",
+        "games": 5,
+        "white_wins": 4,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Anglo-Indian Defense, Anglo-Grünfeld Variation",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Anglo-Indian Defense, Hedgehog System",
+        "games": 7,
+        "white_wins": 3,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Anglo-Indian Defense, King's Indian Formation",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "English Opening: Anglo-Indian Defense, King's Knight Variation",
+        "games": 4,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 1
+      },
+      {
+        "label": "English Opening: Anglo-Indian Defense, Old Indian Formation",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "English Opening: Anglo-Indian Defense, Queen's Indian Formation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Anglo-Indian Defense, Queen's Knight Variation",
+        "games": 13,
+        "white_wins": 8,
+        "black_wins": 4,
+        "draws": 1
+      },
+      {
+        "label": "English Opening: Anglo-Indian Defense, Scandinavian Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Anglo-Lithuanian Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Anglo-Scandinavian Defense",
+        "games": 23,
+        "white_wins": 14,
+        "black_wins": 9,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Anglo-Scandinavian Defense, Löhn Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Anglo-Scandinavian Defense, Malvinas Variation",
+        "games": 8,
+        "white_wins": 4,
+        "black_wins": 3,
+        "draws": 1
+      },
+      {
+        "label": "English Opening: Anglo-Scandinavian Defense, Schulz Gambit",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Carls-Bremen System",
+        "games": 4,
+        "white_wins": 1,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Caro-Kann Defensive System",
+        "games": 9,
+        "white_wins": 5,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Four Knights System, Nimzowitsch Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Great Snake Variation",
+        "games": 19,
+        "white_wins": 10,
+        "black_wins": 9,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Jaenisch Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: King's English Variation",
+        "games": 25,
+        "white_wins": 11,
+        "black_wins": 12,
+        "draws": 2
+      },
+      {
+        "label": "English Opening: King's English Variation, Four Knights Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: King's English Variation, Four Knights Variation, Fianchetto Line",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: King's English Variation, Four Knights Variation, Fianchetto Line, with .. d6, a6",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: King's English Variation, Four Knights Variation, Flexible Line",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: King's English Variation, Four Knights Variation, Quiet Line",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: King's English Variation, Kramnik-Shirov Counterattack",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "English Opening: King's English Variation, Nimzowitsch Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: King's English Variation, Reversed Closed Sicilian",
+        "games": 10,
+        "white_wins": 5,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: King's English Variation, Reversed Sicilian",
+        "games": 18,
+        "white_wins": 10,
+        "black_wins": 7,
+        "draws": 1
+      },
+      {
+        "label": "English Opening: King's English Variation, Two Knights Variation",
+        "games": 9,
+        "white_wins": 3,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: King's English Variation, Two Knights Variation, Keres Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: King's English Variation, Two Knights Variation, Smyslov System",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Mikenas-Carls Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Myers Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Neo-Catalan",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "English Opening: Neo-Catalan Declined",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Symmetrical Variation",
+        "games": 14,
+        "white_wins": 7,
+        "black_wins": 7,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Symmetrical Variation, Anti-Benoni Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Symmetrical Variation, Anti-Benoni Variation, Spielmann Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Symmetrical Variation, Botvinnik System",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "English Opening: Symmetrical Variation, Botvinnik System Reversed, with Nf3",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Symmetrical Variation, Duchamp Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Symmetrical Variation, Fianchetto Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Symmetrical Variation, Four Knights Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Symmetrical Variation, Mecking Variation",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Symmetrical Variation, Normal Variation",
+        "games": 8,
+        "white_wins": 4,
+        "black_wins": 3,
+        "draws": 1
+      },
+      {
+        "label": "English Opening: Symmetrical Variation, Rubinstein Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: Symmetrical Variation, Two Knights Variation",
+        "games": 4,
+        "white_wins": 3,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "English Opening: Symmetrical Variation, Ultra-Symmetrical Variation",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "English Opening: The Whale",
+        "games": 11,
+        "white_wins": 6,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Englund Gambit",
+        "games": 67,
+        "white_wins": 34,
+        "black_wins": 31,
+        "draws": 2
+      },
+      {
+        "label": "Englund Gambit Declined",
+        "games": 12,
+        "white_wins": 8,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Englund Gambit Declined: Reversed Alekhine",
+        "games": 9,
+        "white_wins": 3,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "Englund Gambit Declined: Reversed Brooklyn",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Englund Gambit Declined: Reversed French",
+        "games": 21,
+        "white_wins": 11,
+        "black_wins": 10,
+        "draws": 0
+      },
+      {
+        "label": "Englund Gambit Declined: Reversed Krebs",
+        "games": 6,
+        "white_wins": 2,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Englund Gambit: Felbecker Gambit",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Englund Gambit: Hartlaub-Charlick Gambit",
+        "games": 15,
+        "white_wins": 9,
+        "black_wins": 5,
+        "draws": 1
+      },
+      {
+        "label": "Englund Gambit: Main Line",
+        "games": 17,
+        "white_wins": 8,
+        "black_wins": 8,
+        "draws": 1
+      },
+      {
+        "label": "Englund Gambit: Soller Gambit",
+        "games": 7,
+        "white_wins": 2,
+        "black_wins": 4,
+        "draws": 1
+      },
+      {
+        "label": "Englund Gambit: Soller Gambit Deferred",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Englund Gambit: Zilbermints Gambit",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Four Knights Game",
+        "games": 13,
+        "white_wins": 5,
+        "black_wins": 8,
+        "draws": 0
+      },
+      {
+        "label": "Four Knights Game: Gunsberg Variation",
+        "games": 5,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 3
+      },
+      {
+        "label": "Four Knights Game: Halloween Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Four Knights Game: Italian Variation",
+        "games": 52,
+        "white_wins": 27,
+        "black_wins": 25,
+        "draws": 0
+      },
+      {
+        "label": "Four Knights Game: Italian Variation, Noa Gambit",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Four Knights Game: Scotch Variation",
+        "games": 8,
+        "white_wins": 5,
+        "black_wins": 2,
+        "draws": 1
+      },
+      {
+        "label": "Four Knights Game: Scotch Variation Accepted",
+        "games": 18,
+        "white_wins": 10,
+        "black_wins": 6,
+        "draws": 2
+      },
+      {
+        "label": "Four Knights Game: Spanish Variation",
+        "games": 8,
+        "white_wins": 4,
+        "black_wins": 3,
+        "draws": 1
+      },
+      {
+        "label": "Four Knights Game: Spanish Variation, Classical Variation",
+        "games": 8,
+        "white_wins": 7,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Four Knights Game: Spanish Variation, Double Spanish",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Four Knights Game: Spanish Variation, Ranken Variation",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Four Knights Game: Spanish Variation, Rubinstein Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Four Knights Game: Spanish Variation, Rubinstein Variation Accepted",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "Four Knights Game: Spanish Variation, Symmetrical Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "French Defense",
+        "games": 31,
+        "white_wins": 12,
+        "black_wins": 19,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Advance Variation",
+        "games": 40,
+        "white_wins": 20,
+        "black_wins": 18,
+        "draws": 2
+      },
+      {
+        "label": "French Defense: Advance Variation, Euwe Variation",
+        "games": 5,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 2
+      },
+      {
+        "label": "French Defense: Advance Variation, Extended Bishop Swap",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Advance Variation, Kupreichik Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Advance Variation, Main Line",
+        "games": 5,
+        "white_wins": 3,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Advance Variation, Milner-Barry Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Advance Variation, Milner-Barry Gambit, Main Line",
+        "games": 4,
+        "white_wins": 3,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Advance Variation, Nimzowitsch System",
+        "games": 11,
+        "white_wins": 3,
+        "black_wins": 8,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Advance Variation, Paulsen Attack",
+        "games": 19,
+        "white_wins": 9,
+        "black_wins": 10,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Advance Variation, Steinitz Variation",
+        "games": 5,
+        "white_wins": 2,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Advance Variation, Wade Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Bird Invitation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Carlson Gambit",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Chigorin Variation",
+        "games": 8,
+        "white_wins": 1,
+        "black_wins": 7,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Classical Variation",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Classical Variation, Burn Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Classical Variation, Delayed Exchange Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Classical Variation, Richter Attack",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Classical Variation, Shirov-Anand Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Classical Variation, Steinitz Variation",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Diemer-Duhm Gambit Accepted",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Exchange Variation",
+        "games": 110,
+        "white_wins": 42,
+        "black_wins": 57,
+        "draws": 11
+      },
+      {
+        "label": "French Defense: Exchange Variation, Bogoljubow Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Exchange Variation, Monte Carlo Variation",
+        "games": 5,
+        "white_wins": 2,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Exchange Variation, Svenonius Variation",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Franco-Sicilian Defense",
+        "games": 8,
+        "white_wins": 1,
+        "black_wins": 6,
+        "draws": 1
+      },
+      {
+        "label": "French Defense: Horwitz Attack",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Horwitz Attack, Papa-Ticulat Gambit",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: King's Indian Attack",
+        "games": 17,
+        "white_wins": 4,
+        "black_wins": 11,
+        "draws": 2
+      },
+      {
+        "label": "French Defense: Knight Variation",
+        "games": 88,
+        "white_wins": 42,
+        "black_wins": 43,
+        "draws": 3
+      },
+      {
+        "label": "French Defense: Knight Variation, Franco-Hiva Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: La Bourdonnais Variation",
+        "games": 28,
+        "white_wins": 15,
+        "black_wins": 12,
+        "draws": 1
+      },
+      {
+        "label": "French Defense: Marshall Gambit",
+        "games": 6,
+        "white_wins": 3,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: McCutcheon Variation, Chigorin Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Mediterranean Defense",
+        "games": 6,
+        "white_wins": 2,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Normal Variation",
+        "games": 41,
+        "white_wins": 20,
+        "black_wins": 18,
+        "draws": 3
+      },
+      {
+        "label": "French Defense: Orthoschnapp Gambit",
+        "games": 3,
+        "white_wins": 3,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Paulsen Variation",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Pelikan Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "French Defense: Perseus Gambit",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Queen's Knight",
+        "games": 28,
+        "white_wins": 13,
+        "black_wins": 12,
+        "draws": 3
+      },
+      {
+        "label": "French Defense: Rubinstein Variation",
+        "games": 12,
+        "white_wins": 7,
+        "black_wins": 4,
+        "draws": 1
+      },
+      {
+        "label": "French Defense: Rubinstein Variation, Blackburne Defense",
+        "games": 5,
+        "white_wins": 4,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Rubinstein Variation, Fort Knox Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Rubinstein Variation, Kasparov Attack",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Réti-Spielmann Attack",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Schlechter Variation",
+        "games": 3,
+        "white_wins": 0,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: St. George Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: St. George Defense, Three Pawn Attack",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Steiner Variation",
+        "games": 5,
+        "white_wins": 4,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Steinitz Attack",
+        "games": 10,
+        "white_wins": 4,
+        "black_wins": 5,
+        "draws": 1
+      },
+      {
+        "label": "French Defense: Steinitz Variation",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "French Defense: Steinitz Variation, Boleslavsky Variation",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "French Defense: Tarrasch Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Tarrasch Variation, Botvinnik Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Tarrasch Variation, Chistyakov Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Tarrasch Variation, Closed Variation, Main Line",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Tarrasch Variation, Morozevich Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Tarrasch Variation, Open System, Euwe-Keres Line",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Tarrasch Variation, Open System, Main Line",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Two Knights Variation",
+        "games": 15,
+        "white_wins": 7,
+        "black_wins": 8,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Winawer Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Winawer Variation, Advance Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Winawer Variation, Fingerslip Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "French Defense: Winawer Variation, Retreat Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "French Defense: Wing Gambit",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Global Opening",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Goldsmith Defense",
+        "games": 6,
+        "white_wins": 5,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Grob Opening",
+        "games": 12,
+        "white_wins": 7,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Grob Opening: Grob Gambit",
+        "games": 7,
+        "white_wins": 4,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Grob Opening: Grob Gambit, Fritz Gambit",
+        "games": 4,
+        "white_wins": 4,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Grob Opening: London Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Grünfeld Defense",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Grünfeld Defense: Exchange Variation, Modern Exchange Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Grünfeld Defense: Exchange Variation, Seville Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Grünfeld Defense: Russian Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Grünfeld Defense: Stockholm Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Grünfeld Defense: Three Knights Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Grünfeld Defense: Three Knights Variation, Burille Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Grünfeld Defense: Three Knights Variation, Hungarian Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Grünfeld Defense: Three Knights Variation, Paris Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Grünfeld Defense: Three Knights Variation, Petrosian System",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Gunderam Defense",
+        "games": 5,
+        "white_wins": 4,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Hippopotamus Defense",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Horwitz Defense",
+        "games": 142,
+        "white_wins": 76,
+        "black_wins": 63,
+        "draws": 3
+      },
+      {
+        "label": "Hungarian Opening",
+        "games": 95,
+        "white_wins": 46,
+        "black_wins": 40,
+        "draws": 9
+      },
+      {
+        "label": "Hungarian Opening: Catalan Formation",
+        "games": 13,
+        "white_wins": 5,
+        "black_wins": 8,
+        "draws": 0
+      },
+      {
+        "label": "Hungarian Opening: Dutch Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Hungarian Opening: Indian Defense",
+        "games": 11,
+        "white_wins": 4,
+        "black_wins": 7,
+        "draws": 0
+      },
+      {
+        "label": "Hungarian Opening: Reversed Modern Defense",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Hungarian Opening: Sicilian Invitation",
+        "games": 10,
+        "white_wins": 4,
+        "black_wins": 5,
+        "draws": 1
+      },
+      {
+        "label": "Hungarian Opening: Slav Formation",
+        "games": 20,
+        "white_wins": 11,
+        "black_wins": 9,
+        "draws": 0
+      },
+      {
+        "label": "Hungarian Opening: Symmetrical Variation",
+        "games": 10,
+        "white_wins": 6,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Indian Defense",
+        "games": 43,
+        "white_wins": 24,
+        "black_wins": 17,
+        "draws": 2
+      },
+      {
+        "label": "Indian Defense: Accelerated London System",
+        "games": 54,
+        "white_wins": 28,
+        "black_wins": 26,
+        "draws": 0
+      },
+      {
+        "label": "Indian Defense: Anti-Nimzo-Indian",
+        "games": 7,
+        "white_wins": 5,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Indian Defense: Budapest Defense",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "Indian Defense: Budapest Defense, Adler Variation",
+        "games": 5,
+        "white_wins": 1,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Indian Defense: Budapest Defense, Fajarowicz Variation",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Indian Defense: Colle System, King's Indian Variation",
+        "games": 9,
+        "white_wins": 4,
+        "black_wins": 4,
+        "draws": 1
+      },
+      {
+        "label": "Indian Defense: Czech-Indian",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Indian Defense: Knights Variation",
+        "games": 9,
+        "white_wins": 6,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Indian Defense: London System",
+        "games": 3,
+        "white_wins": 3,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Indian Defense: Normal Variation",
+        "games": 11,
+        "white_wins": 5,
+        "black_wins": 5,
+        "draws": 1
+      },
+      {
+        "label": "Indian Defense: Omega Gambit",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Indian Defense: Pawn Push Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Indian Defense: Przepiorka Variation",
+        "games": 7,
+        "white_wins": 4,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Indian Defense: Reversed Chigorin Defense",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Indian Defense: Spielmann-Indian",
+        "games": 4,
+        "white_wins": 3,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Indian Defense: Tartakower Attack",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Indian Defense: Wade-Tartakower Defense",
+        "games": 14,
+        "white_wins": 9,
+        "black_wins": 4,
+        "draws": 1
+      },
+      {
+        "label": "Indian Defense: West Indian Defense",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game",
+        "games": 31,
+        "white_wins": 21,
+        "black_wins": 7,
+        "draws": 3
+      },
+      {
+        "label": "Italian Game: Anti-Fried Liver Defense",
+        "games": 39,
+        "white_wins": 24,
+        "black_wins": 14,
+        "draws": 1
+      },
+      {
+        "label": "Italian Game: Bird's Attack",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Blackburne-Kostić Gambit",
+        "games": 10,
+        "white_wins": 7,
+        "black_wins": 1,
+        "draws": 2
+      },
+      {
+        "label": "Italian Game: Classical Variation",
+        "games": 13,
+        "white_wins": 7,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Classical Variation, Albin Gambit",
+        "games": 6,
+        "white_wins": 1,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Classical Variation, Center Attack",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Classical Variation, Center Holding Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Classical Variation, Giuoco Pianissimo",
+        "games": 18,
+        "white_wins": 10,
+        "black_wins": 8,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Classical Variation, Giuoco Pianissimo, Albin Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Classical Variation, Giuoco Pianissimo, with h6",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Classical Variation, Greco Gambit, Anderssen Variation",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Classical Variation, Greco Gambit, Main Line",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Classical Variation, Greco Gambit, Modern Line",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Classical Variation, Greco Gambit, Moeller-Therkatz Attack",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Italian Game: Classical Variation, Greco Gambit, Traditional Line",
+        "games": 5,
+        "white_wins": 2,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Classical Variation, La Bourdonnais Variation",
+        "games": 5,
+        "white_wins": 3,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Classical Variation, with d5",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Deutz Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Evans Gambit, Anderssen Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Evans Gambit, McDonnell Defense, Main Line",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Evans Gambit, Mieses Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Giuoco Pianissimo",
+        "games": 20,
+        "white_wins": 10,
+        "black_wins": 9,
+        "draws": 1
+      },
+      {
+        "label": "Italian Game: Giuoco Pianissimo, Canal Variation",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Giuoco Pianissimo, Italian Four Knights Variation",
+        "games": 25,
+        "white_wins": 19,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Giuoco Pianissimo, Normal",
+        "games": 22,
+        "white_wins": 9,
+        "black_wins": 13,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Giuoco Piano",
+        "games": 34,
+        "white_wins": 14,
+        "black_wins": 20,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Giuoco Piano, Greco's Attack",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Hungarian Defense",
+        "games": 11,
+        "white_wins": 4,
+        "black_wins": 7,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Jerome Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Paris Defense",
+        "games": 28,
+        "white_wins": 15,
+        "black_wins": 13,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Rousseau Gambit",
+        "games": 13,
+        "white_wins": 8,
+        "black_wins": 4,
+        "draws": 1
+      },
+      {
+        "label": "Italian Game: Scotch Gambit",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Scotch Gambit, Anderssen Attack",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Scotch Gambit, Janowski Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Scotch Gambit, Max Lange Attack",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Scotch Gambit, Max Lange Attack, Long Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Scotch Gambit, Walbrodt-Baird Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Scotch Gambit, de Riviere Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Scotch Invitation Declined",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "Italian Game: Two Knights Defense",
+        "games": 22,
+        "white_wins": 7,
+        "black_wins": 14,
+        "draws": 1
+      },
+      {
+        "label": "Italian Game: Two Knights Defense, Fried Liver Attack",
+        "games": 3,
+        "white_wins": 3,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Two Knights Defense, Fritz Variation",
+        "games": 6,
+        "white_wins": 4,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Two Knights Defense, Knight Attack",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Two Knights Defense, Knight Attack, Normal Variation",
+        "games": 4,
+        "white_wins": 3,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Two Knights Defense, Modern Bishop's Opening",
+        "games": 23,
+        "white_wins": 14,
+        "black_wins": 7,
+        "draws": 2
+      },
+      {
+        "label": "Italian Game: Two Knights Defense, Open Variation",
+        "games": 5,
+        "white_wins": 2,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Two Knights Defense, Perreux Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Two Knights Defense, Polerio Defense",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Two Knights Defense, Polerio Defense, Bishop Check Line",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Two Knights Defense, Polerio Defense, Bogoljubow Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Two Knights Defense, Ponziani-Steinitz Gambit",
+        "games": 4,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 2
+      },
+      {
+        "label": "Italian Game: Two Knights Defense, Traxler Counterattack, Bishop Sacrifice Line",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Two Knights Defense, Traxler Counterattack, Knight Sacrifice Line",
+        "games": 5,
+        "white_wins": 5,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Italian Game: Two Knights Defense, Ulvestad Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Kangaroo Defense",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Kangaroo Defense: Keres Defense, Transpositional Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit",
+        "games": 19,
+        "white_wins": 9,
+        "black_wins": 10,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Accepted",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Accepted: Abbazia Defense",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Accepted: Bishop's Gambit",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Accepted: Bishop's Gambit, Bogoljubow Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Accepted: Blachly Gambit",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Accepted: Bonsch-Osmolovsky Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Accepted: Cunningham Defense",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Accepted: Cunningham Defense, Bertin Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Accepted: Fischer Defense",
+        "games": 6,
+        "white_wins": 0,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Accepted: Gianutio Countergambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Accepted: Kieseritzky Gambit, Cotter Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Accepted: Kieseritzky Gambit, Long Whip",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Accepted: King's Knight's Gambit",
+        "games": 7,
+        "white_wins": 3,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Accepted: MacLeod Defense",
+        "games": 17,
+        "white_wins": 11,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Accepted: Modern Defense",
+        "games": 5,
+        "white_wins": 4,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Accepted: Rosentreter Gambit, Testa Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Accepted: Salvio Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Accepted: Salvio Gambit, Anderssen Counterattack",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Accepted: Schallopp Defense",
+        "games": 5,
+        "white_wins": 4,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Accepted: Sörensen Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Accepted: Villemson Gambit",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Declined: Classical Variation",
+        "games": 11,
+        "white_wins": 6,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Declined: Falkbeer Countergambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Declined: Falkbeer Countergambit Accepted",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Declined: Falkbeer Countergambit, Blackburne Attack",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Declined: Falkbeer Countergambit, Milner-Barry Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Declined: Falkbeer Countergambit, Modern Transfer",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Declined: Keene Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Declined: Keene's Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Declined: Norwalde Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Declined: Petrov's Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Gambit Declined: Queen's Knight Defense",
+        "games": 23,
+        "white_wins": 17,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Attack",
+        "games": 22,
+        "white_wins": 10,
+        "black_wins": 10,
+        "draws": 2
+      },
+      {
+        "label": "King's Indian Attack, with Bf5",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "King's Indian Attack, with e6",
+        "games": 10,
+        "white_wins": 3,
+        "black_wins": 7,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Attack: Double Fianchetto",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Attack: French Variation",
+        "games": 6,
+        "white_wins": 3,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Attack: Keres Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Attack: Sicilian Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Attack: Symmetrical Defense",
+        "games": 4,
+        "white_wins": 1,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Attack: Wahls Defense",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Attack: Yugoslav Variation",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense",
+        "games": 5,
+        "white_wins": 2,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Accelerated Averbakh Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Averbakh Variation, Nc6 Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Exchange Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Fianchetto Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Fianchetto Variation, Classical Fianchetto",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Fianchetto Variation, Delayed Fianchetto",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Fianchetto Variation, Immediate Fianchetto",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Fianchetto Variation, Larsen Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Fianchetto Variation, Panno Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Fianchetto Variation, Simagin Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Fianchetto Variation, Yugoslav Variation, Advance Line",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Fianchetto Variation, Yugoslav Variation, Exchange Line",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Four Pawns Attack",
+        "games": 4,
+        "white_wins": 1,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Larsen Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Makogonov Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Normal Variation",
+        "games": 6,
+        "white_wins": 4,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Normal Variation, King's Knight Variation",
+        "games": 5,
+        "white_wins": 2,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Normal Variation, Rare Defenses",
+        "games": 5,
+        "white_wins": 2,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Normal Variation, Standard Development",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Orthodox Variation",
+        "games": 8,
+        "white_wins": 2,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Orthodox Variation, Gligoric-Taimanov System",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Petrosian Variation, Stein Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Semi-Averbakh System",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Semi-Classical Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Semi-Classical Variation, Hollywood Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Smyslov Variation",
+        "games": 4,
+        "white_wins": 3,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Sämisch Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Sämisch Variation, Double Fianchetto",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Sämisch Variation, Normal Defense",
+        "games": 5,
+        "white_wins": 4,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Sämisch Variation, Orthodox Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "King's Indian Defense: Zinnowitz Variation",
+        "games": 4,
+        "white_wins": 1,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "King's Knight Opening",
+        "games": 13,
+        "white_wins": 7,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "King's Knight Opening: Konstantinopolsky",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Knight Opening: Normal Variation",
+        "games": 27,
+        "white_wins": 14,
+        "black_wins": 12,
+        "draws": 1
+      },
+      {
+        "label": "King's Pawn Game",
+        "games": 23,
+        "white_wins": 17,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "King's Pawn Game: Alapin Opening",
+        "games": 5,
+        "white_wins": 1,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "King's Pawn Game: Beyer Gambit",
+        "games": 5,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 1
+      },
+      {
+        "label": "King's Pawn Game: Busch-Gass Gambit",
+        "games": 37,
+        "white_wins": 24,
+        "black_wins": 13,
+        "draws": 0
+      },
+      {
+        "label": "King's Pawn Game: Busch-Gass Gambit, Chiodini Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "King's Pawn Game: Clam Variation, King's Gambit Reversed",
+        "games": 3,
+        "white_wins": 3,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "King's Pawn Game: Damiano Defense",
+        "games": 15,
+        "white_wins": 8,
+        "black_wins": 7,
+        "draws": 0
+      },
+      {
+        "label": "King's Pawn Game: Gunderam Gambit",
+        "games": 3,
+        "white_wins": 3,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "King's Pawn Game: King's Head Opening",
+        "games": 7,
+        "white_wins": 2,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "King's Pawn Game: Leonardis Variation",
+        "games": 65,
+        "white_wins": 35,
+        "black_wins": 30,
+        "draws": 0
+      },
+      {
+        "label": "King's Pawn Game: MacLeod Attack",
+        "games": 17,
+        "white_wins": 7,
+        "black_wins": 10,
+        "draws": 0
+      },
+      {
+        "label": "King's Pawn Game: Maróczy Defense",
+        "games": 8,
+        "white_wins": 3,
+        "black_wins": 4,
+        "draws": 1
+      },
+      {
+        "label": "King's Pawn Game: McConnell Defense",
+        "games": 22,
+        "white_wins": 12,
+        "black_wins": 9,
+        "draws": 1
+      },
+      {
+        "label": "King's Pawn Game: Napoleon Attack",
+        "games": 23,
+        "white_wins": 10,
+        "black_wins": 12,
+        "draws": 1
+      },
+      {
+        "label": "King's Pawn Game: Tayler Opening",
+        "games": 5,
+        "white_wins": 1,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "King's Pawn Game: Tortoise Opening",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "King's Pawn Game: Wayward Queen Attack",
+        "games": 30,
+        "white_wins": 17,
+        "black_wins": 10,
+        "draws": 3
+      },
+      {
+        "label": "King's Pawn Game: Wayward Queen Attack, Kiddie Countergambit",
+        "games": 11,
+        "white_wins": 2,
+        "black_wins": 9,
+        "draws": 0
+      },
+      {
+        "label": "King's Pawn Opening",
+        "games": 4,
+        "white_wins": 1,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Kádas Opening",
+        "games": 4,
+        "white_wins": 0,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Kádas Opening: Beginner's Trap",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Lasker Simul Special",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Latvian Gambit",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Latvian Gambit Accepted",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Latvian Gambit Accepted: Main Line",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Latvian Gambit: Clam Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Lemming Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Lion Defense: Lion's Jaw",
+        "games": 5,
+        "white_wins": 3,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "London System",
+        "games": 19,
+        "white_wins": 8,
+        "black_wins": 10,
+        "draws": 1
+      },
+      {
+        "label": "London System, with Bd3",
+        "games": 6,
+        "white_wins": 5,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "London System, with Be2",
+        "games": 4,
+        "white_wins": 3,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Mexican Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Mieses Opening",
+        "games": 71,
+        "white_wins": 43,
+        "black_wins": 27,
+        "draws": 1
+      },
+      {
+        "label": "Mieses Opening: Reversed Rat",
+        "games": 5,
+        "white_wins": 1,
+        "black_wins": 3,
+        "draws": 1
+      },
+      {
+        "label": "Mikenas Defense",
+        "games": 17,
+        "white_wins": 11,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "Mikenas Defense: Lithuanian Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Modern Defense",
+        "games": 177,
+        "white_wins": 87,
+        "black_wins": 86,
+        "draws": 4
+      },
+      {
+        "label": "Modern Defense: Averbakh System",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Modern Defense: Bishop Attack",
+        "games": 4,
+        "white_wins": 3,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Modern Defense: Fianchetto Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Modern Defense: Geller's System",
+        "games": 6,
+        "white_wins": 3,
+        "black_wins": 2,
+        "draws": 1
+      },
+      {
+        "label": "Modern Defense: Kotov Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Modern Defense: Modern Pterodactyl",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Modern Defense: Mongredien Defense, with Nc3",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Modern Defense: Mongredien Defense, with Nf3",
+        "games": 6,
+        "white_wins": 3,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Modern Defense: Norwegian Defense",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "Modern Defense: Pseudo-Austrian Attack",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Modern Defense: Standard Defense",
+        "games": 6,
+        "white_wins": 3,
+        "black_wins": 2,
+        "draws": 1
+      },
+      {
+        "label": "Modern Defense: Standard Line",
+        "games": 6,
+        "white_wins": 2,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Modern Defense: Three Pawns Attack",
+        "games": 5,
+        "white_wins": 3,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "Modern Defense: Two Knights Variation",
+        "games": 12,
+        "white_wins": 9,
+        "black_wins": 2,
+        "draws": 1
+      },
+      {
+        "label": "Modern Defense: Two Knights Variation, Suttles Variation",
+        "games": 3,
+        "white_wins": 3,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Montevideo Defense",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Neo-Grünfeld Defense: Classical Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Neo-Grünfeld Defense: Classical Variation, Original Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Nimzo-Indian Defense",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Nimzo-Indian Defense: Classical Variation",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Nimzo-Indian Defense: Classical Variation, Noa Variation",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Nimzo-Indian Defense: Classical Variation, Zurich Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Nimzo-Indian Defense: Leningrad Variation",
+        "games": 3,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 1
+      },
+      {
+        "label": "Nimzo-Indian Defense: Normal Variation, Classical Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Nimzo-Indian Defense: Normal Variation, Ragozin Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Nimzo-Indian Defense: Rubinstein System",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "Nimzo-Indian Defense: Spielmann Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Nimzo-Indian Defense: St. Petersburg Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Nimzo-Indian Defense: Sämisch Variation",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Nimzo-Indian Defense: Three Knights Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Nimzo-Indian Defense: Three Knights Variation, Korchnoi Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Nimzo-Larsen Attack",
+        "games": 38,
+        "white_wins": 20,
+        "black_wins": 15,
+        "draws": 3
+      },
+      {
+        "label": "Nimzo-Larsen Attack: Classical Variation",
+        "games": 51,
+        "white_wins": 28,
+        "black_wins": 22,
+        "draws": 1
+      },
+      {
+        "label": "Nimzo-Larsen Attack: Dutch Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Nimzo-Larsen Attack: English Variation",
+        "games": 14,
+        "white_wins": 8,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "Nimzo-Larsen Attack: Indian Variation",
+        "games": 20,
+        "white_wins": 11,
+        "black_wins": 9,
+        "draws": 0
+      },
+      {
+        "label": "Nimzo-Larsen Attack: Modern Variation",
+        "games": 41,
+        "white_wins": 17,
+        "black_wins": 23,
+        "draws": 1
+      },
+      {
+        "label": "Nimzo-Larsen Attack: Polish Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Nimzo-Larsen Attack: Spike Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Nimzo-Larsen Attack: Symmetrical Variation",
+        "games": 4,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 1
+      },
+      {
+        "label": "Nimzowitsch Defense",
+        "games": 18,
+        "white_wins": 7,
+        "black_wins": 10,
+        "draws": 1
+      },
+      {
+        "label": "Nimzowitsch Defense: Colorado Countergambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Nimzowitsch Defense: Colorado Countergambit Accepted",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Nimzowitsch Defense: Declined Variation",
+        "games": 15,
+        "white_wins": 10,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Nimzowitsch Defense: El Columpio Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Nimzowitsch Defense: Franco-Nimzowitsch Variation",
+        "games": 5,
+        "white_wins": 2,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Nimzowitsch Defense: French Connection",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Nimzowitsch Defense: Kennedy Variation",
+        "games": 5,
+        "white_wins": 4,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Nimzowitsch Defense: Kennedy Variation, Bielefelder Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Nimzowitsch Defense: Kennedy Variation, Keres Attack",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Nimzowitsch Defense: Kennedy Variation, Linksspringer Variation",
+        "games": 16,
+        "white_wins": 8,
+        "black_wins": 7,
+        "draws": 1
+      },
+      {
+        "label": "Nimzowitsch Defense: Kennedy Variation, Paulsen Attack",
+        "games": 6,
+        "white_wins": 2,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Nimzowitsch Defense: Kennedy Variation, Riemann Defense",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Nimzowitsch Defense: Kennedy Variation, de Smet Gambit",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 0,
+        "draws": 2
+      },
+      {
+        "label": "Nimzowitsch Defense: Mikenas Variation",
+        "games": 7,
+        "white_wins": 4,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Nimzowitsch Defense: Pseudo-Spanish Variation",
+        "games": 3,
+        "white_wins": 0,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Nimzowitsch Defense: Scandinavian Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Nimzowitsch Defense: Scandinavian Variation, Advance Variation",
+        "games": 13,
+        "white_wins": 10,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Nimzowitsch Defense: Scandinavian Variation, Bogoljubow Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Nimzowitsch Defense: Scandinavian Variation, Bogoljubow Variation, Nimzowitsch Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Nimzowitsch Defense: Scandinavian Variation, Bogoljubow Variation, Vehre Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Nimzowitsch Defense: Scandinavian Variation, Exchange Variation",
+        "games": 4,
+        "white_wins": 0,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Nimzowitsch Defense: Scandinavian Variation, Exchange Variation, Marshall Gambit",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Nimzowitsch Defense: Williams Variation",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Old Indian Defense",
+        "games": 17,
+        "white_wins": 7,
+        "black_wins": 9,
+        "draws": 1
+      },
+      {
+        "label": "Old Indian Defense: Czech Variation, with Nc3",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Old Indian Defense: Czech Variation, with Nf3",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Old Indian Defense: Janowski Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Old Indian Defense: Normal Variation",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "Old Indian Defense: Tartakower-Indian",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Owen Defense",
+        "games": 124,
+        "white_wins": 58,
+        "black_wins": 60,
+        "draws": 6
+      },
+      {
+        "label": "Owen Defense: Guatemala Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Owen Defense: Smith Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Paleface Attack",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Petrov's Defense",
+        "games": 27,
+        "white_wins": 12,
+        "black_wins": 15,
+        "draws": 0
+      },
+      {
+        "label": "Petrov's Defense: Classical Attack",
+        "games": 3,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 1
+      },
+      {
+        "label": "Petrov's Defense: Classical Attack, Mason Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Petrov's Defense: Classical Attack, Staunton Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Petrov's Defense: Cozio Attack",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Petrov's Defense: Damiano Variation",
+        "games": 4,
+        "white_wins": 3,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Petrov's Defense: Damiano Variation, Kholmov Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Petrov's Defense: French Attack",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Petrov's Defense: Italian Variation",
+        "games": 25,
+        "white_wins": 12,
+        "black_wins": 12,
+        "draws": 1
+      },
+      {
+        "label": "Petrov's Defense: Modern Attack",
+        "games": 10,
+        "white_wins": 5,
+        "black_wins": 4,
+        "draws": 1
+      },
+      {
+        "label": "Petrov's Defense: Modern Attack, Symmetrical Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Petrov's Defense: Nimzowitsch Attack",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Petrov's Defense: Stafford Gambit",
+        "games": 13,
+        "white_wins": 7,
+        "black_wins": 5,
+        "draws": 1
+      },
+      {
+        "label": "Petrov's Defense: Three Knights Game",
+        "games": 32,
+        "white_wins": 17,
+        "black_wins": 13,
+        "draws": 2
+      },
+      {
+        "label": "Philidor Defense",
+        "games": 136,
+        "white_wins": 72,
+        "black_wins": 56,
+        "draws": 8
+      },
+      {
+        "label": "Philidor Defense: Albin-Blackburne Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Philidor Defense: Bird Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Philidor Defense: Exchange Variation",
+        "games": 30,
+        "white_wins": 21,
+        "black_wins": 9,
+        "draws": 0
+      },
+      {
+        "label": "Philidor Defense: Hanham Variation",
+        "games": 3,
+        "white_wins": 3,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Philidor Defense: Hanham Variation, Schlechter Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Philidor Defense: Hanham Variation, Steiner Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Philidor Defense: Hanham, Kmoch Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Philidor Defense: Lion Variation",
+        "games": 3,
+        "white_wins": 0,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Philidor Defense: Lopez Countergambit",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Philidor Defense: Morphy Gambit",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Philidor Defense: Nimzowitsch Variation",
+        "games": 4,
+        "white_wins": 3,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Philidor Defense: Philidor Countergambit",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Philidor Defense: Philidor Countergambit, Zukertort Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Philidor Defense: Steinitz Variation",
+        "games": 4,
+        "white_wins": 3,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Pirc Defense",
+        "games": 158,
+        "white_wins": 76,
+        "black_wins": 77,
+        "draws": 5
+      },
+      {
+        "label": "Pirc Defense: Austrian Attack",
+        "games": 4,
+        "white_wins": 3,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Pirc Defense: Austrian Attack, Dragon Formation",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Pirc Defense: Austrian Attack, Kurajica Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Pirc Defense: Austrian Attack, Ljubojevic Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Pirc Defense: Austrian Attack, Weiss Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Pirc Defense: Byrne Variation",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Pirc Defense: Chinese Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Pirc Defense: Classical Variation",
+        "games": 28,
+        "white_wins": 16,
+        "black_wins": 12,
+        "draws": 0
+      },
+      {
+        "label": "Pirc Defense: Classical Variation, Quiet System",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Pirc Defense: Classical Variation, Schlechter Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Pirc Defense: Roscher Gambit",
+        "games": 5,
+        "white_wins": 2,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Polish Defense",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Polish Defense: Spassky Gambit Accepted",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Polish Opening",
+        "games": 28,
+        "white_wins": 14,
+        "black_wins": 12,
+        "draws": 2
+      },
+      {
+        "label": "Polish Opening, with d5",
+        "games": 6,
+        "white_wins": 6,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Polish Opening: Bugayev Advance Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Polish Opening: Bugayev Attack",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Polish Opening: Czech Defense",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Polish Opening: King's Indian Variation",
+        "games": 5,
+        "white_wins": 3,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Polish Opening: King's Indian Variation, Schiffler Attack",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Polish Opening: Outflank Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Polish Opening: Schiffler-Sokolsky Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Ponziani Opening",
+        "games": 16,
+        "white_wins": 8,
+        "black_wins": 5,
+        "draws": 3
+      },
+      {
+        "label": "Ponziani Opening: Jaenisch Counterattack",
+        "games": 12,
+        "white_wins": 7,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Ponziani Opening: Neumann Gambit",
+        "games": 7,
+        "white_wins": 3,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Ponziani Opening: Ponziani Countergambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Ponziani Opening: Romanishin Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Portuguese Opening",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Pseudo Queen's Indian Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Pterodactyl Defense: Eastern, Anhanguera",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Pterodactyl Defense: Fianchetto, Queen Benoni Pterodactyl",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Pterodactyl Defense: Queen Pterodactyl, Quiet Line",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Pterodactyl Defense: Western, Pterodactyl",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit",
+        "games": 6,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 2
+      },
+      {
+        "label": "Queen's Gambit Accepted",
+        "games": 19,
+        "white_wins": 16,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Accepted: Accelerated Mannheim Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Accepted: Alekhine Defense, Haberditz Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Accepted: Central Variation, Alekhine System",
+        "games": 4,
+        "white_wins": 3,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Accepted: Central Variation, Greco Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Accepted: Central Variation, McDonnell Defense",
+        "games": 7,
+        "white_wins": 5,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Accepted: Central Variation, Modern Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Accepted: Classical Defense, Rubinstein Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Accepted: Normal Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Accepted: Normal Variation, Traditional System",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Accepted: Old Variation",
+        "games": 16,
+        "white_wins": 6,
+        "black_wins": 10,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Accepted: Saduleto Variation",
+        "games": 9,
+        "white_wins": 4,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Accepted: Showalter Variation",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Accepted: Slav Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Queen's Gambit Declined",
+        "games": 30,
+        "white_wins": 17,
+        "black_wins": 13,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Albin Countergambit",
+        "games": 6,
+        "white_wins": 3,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Albin Countergambit, Normal Line",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Austrian Attack, Salvio Countergambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Austrian Defense",
+        "games": 7,
+        "white_wins": 5,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "Queen's Gambit Declined: Baltic Defense",
+        "games": 10,
+        "white_wins": 4,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Baltic Defense, Pseudo-Chigorin",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Baltic Defense, Pseudo-Slav",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "Queen's Gambit Declined: Barmen Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Cambridge Springs Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Charousek Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Chigorin Defense",
+        "games": 14,
+        "white_wins": 3,
+        "black_wins": 11,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Chigorin Defense, Janowski Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Chigorin Defense, Main Line",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Chigorin Defense, Modern Gambit",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Chigorin Defense, Tartakower Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Exchange Variation",
+        "games": 7,
+        "white_wins": 4,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Exchange Variation, Positional Variation",
+        "games": 7,
+        "white_wins": 5,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Exchange Variation, Reshevsky Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Harrwitz Attack",
+        "games": 10,
+        "white_wins": 6,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Harrwitz Attack, Fianchetto Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Marshall Defense",
+        "games": 54,
+        "white_wins": 25,
+        "black_wins": 27,
+        "draws": 2
+      },
+      {
+        "label": "Queen's Gambit Declined: Modern Variation",
+        "games": 7,
+        "white_wins": 1,
+        "black_wins": 5,
+        "draws": 1
+      },
+      {
+        "label": "Queen's Gambit Declined: Modern Variation, Normal Line",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Neo-Orthodox Variation, Main Line",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Normal Defense",
+        "games": 7,
+        "white_wins": 2,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Pseudo-Tarrasch Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Queen's Knight Variation",
+        "games": 15,
+        "white_wins": 8,
+        "black_wins": 7,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Ragozin Defense",
+        "games": 6,
+        "white_wins": 2,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Semi-Tarrasch Defense",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Semi-Tarrasch Defense, Exchange Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Semi-Tarrasch Defense, Pillsbury Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Tarrasch Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Tarrasch Defense, Pseudo-Tarrasch",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Three Knights Variation",
+        "games": 12,
+        "white_wins": 7,
+        "black_wins": 4,
+        "draws": 1
+      },
+      {
+        "label": "Queen's Gambit Declined: Three Knights, Vienna Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Traditional Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Vienna Variation, Quiet Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Gambit Declined: Westphalian Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Indian Accelerated",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Indian Defense: Classical Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Indian Defense: Kasparov-Petrosian Variation, Marco Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Pawn Game",
+        "games": 317,
+        "white_wins": 162,
+        "black_wins": 140,
+        "draws": 15
+      },
+      {
+        "label": "Queen's Pawn Game: Accelerated London System",
+        "games": 195,
+        "white_wins": 104,
+        "black_wins": 83,
+        "draws": 8
+      },
+      {
+        "label": "Queen's Pawn Game: Accelerated London System, Steinitz Countergambit",
+        "games": 7,
+        "white_wins": 4,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Pawn Game: Anglo-Slav Opening",
+        "games": 6,
+        "white_wins": 0,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Pawn Game: Anti-Torre",
+        "games": 10,
+        "white_wins": 7,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Pawn Game: Barry Attack",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Pawn Game: Chigorin Variation",
+        "games": 73,
+        "white_wins": 35,
+        "black_wins": 34,
+        "draws": 4
+      },
+      {
+        "label": "Queen's Pawn Game: Chigorin Variation, Alburt Defense",
+        "games": 4,
+        "white_wins": 1,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Pawn Game: Chigorin Variation, Anti-Veresov",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Pawn Game: Chigorin Variation, Irish Gambit",
+        "games": 4,
+        "white_wins": 3,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Pawn Game: Chigorin Variation, Shaviliuk Gambit",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Pawn Game: Colle System",
+        "games": 42,
+        "white_wins": 31,
+        "black_wins": 11,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Pawn Game: Colle System, Anti-Colle",
+        "games": 5,
+        "white_wins": 3,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Pawn Game: Colle System, Grünfeld Formation",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Pawn Game: Colle System, Traditional Colle",
+        "games": 3,
+        "white_wins": 3,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Pawn Game: Hübsch Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Pawn Game: Krause Variation",
+        "games": 12,
+        "white_wins": 10,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Pawn Game: Levitsky Attack",
+        "games": 29,
+        "white_wins": 15,
+        "black_wins": 14,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Pawn Game: London System",
+        "games": 51,
+        "white_wins": 28,
+        "black_wins": 21,
+        "draws": 2
+      },
+      {
+        "label": "Queen's Pawn Game: London System, with e6",
+        "games": 31,
+        "white_wins": 15,
+        "black_wins": 15,
+        "draws": 1
+      },
+      {
+        "label": "Queen's Pawn Game: Mason Attack",
+        "games": 13,
+        "white_wins": 10,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Pawn Game: Modern Defense",
+        "games": 97,
+        "white_wins": 53,
+        "black_wins": 41,
+        "draws": 3
+      },
+      {
+        "label": "Queen's Pawn Game: Stonewall Attack",
+        "games": 9,
+        "white_wins": 3,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Pawn Game: Symmetrical Variation",
+        "games": 15,
+        "white_wins": 9,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Pawn Game: Symmetrical Variation, Pseudo-Catalan",
+        "games": 12,
+        "white_wins": 8,
+        "black_wins": 3,
+        "draws": 1
+      },
+      {
+        "label": "Queen's Pawn Game: Torre Attack",
+        "games": 5,
+        "white_wins": 3,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "Queen's Pawn Game: Torre Attack, Gossip Variation",
+        "games": 4,
+        "white_wins": 1,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Pawn Game: Torre Attack, Grünfeld Variation",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Pawn Game: Veresov Attack, Classical Defense",
+        "games": 4,
+        "white_wins": 3,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Queen's Pawn Game: Veresov, Richter Attack",
+        "games": 3,
+        "white_wins": 3,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Queen's Pawn Game: Zukertort Variation",
+        "games": 76,
+        "white_wins": 37,
+        "black_wins": 33,
+        "draws": 6
+      },
+      {
+        "label": "Rapport-Jobava System",
+        "games": 49,
+        "white_wins": 30,
+        "black_wins": 18,
+        "draws": 1
+      },
+      {
+        "label": "Rapport-Jobava System, with e6",
+        "games": 14,
+        "white_wins": 8,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "Rat Defense: Accelerated Gurgenidze",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Rat Defense: Antal Defense",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Rat Defense: Balogh Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Rat Defense: English Rat",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Rat Defense: Harmonist",
+        "games": 5,
+        "white_wins": 3,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Rat Defense: Small Center Defense",
+        "games": 21,
+        "white_wins": 12,
+        "black_wins": 9,
+        "draws": 0
+      },
+      {
+        "label": "Richter-Veresov Attack",
+        "games": 4,
+        "white_wins": 0,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Robatsch Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Rubinstein Opening",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Ruy Lopez",
+        "games": 11,
+        "white_wins": 7,
+        "black_wins": 3,
+        "draws": 1
+      },
+      {
+        "label": "Ruy Lopez: Alapin Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Berlin Defense",
+        "games": 21,
+        "white_wins": 11,
+        "black_wins": 9,
+        "draws": 1
+      },
+      {
+        "label": "Ruy Lopez: Berlin Defense, Anti-Berlin Variation",
+        "games": 9,
+        "white_wins": 7,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Berlin Defense, Berlin Wall",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Ruy Lopez: Berlin Defense, Beverwijk Variation",
+        "games": 8,
+        "white_wins": 3,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Berlin Defense, Improved Steinitz Defense",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Ruy Lopez: Berlin Defense, Rio Gambit Accepted",
+        "games": 5,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 1
+      },
+      {
+        "label": "Ruy Lopez: Berlin Defense, Rio de Janeiro Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Berlin Defense, l'Hermet Variation, Berlin Wall Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Ruy Lopez: Bird Variation",
+        "games": 10,
+        "white_wins": 7,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Classical Variation",
+        "games": 10,
+        "white_wins": 5,
+        "black_wins": 4,
+        "draws": 1
+      },
+      {
+        "label": "Ruy Lopez: Classical Variation, Central Variation",
+        "games": 3,
+        "white_wins": 0,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Classical Variation, Modern Main Line",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Ruy Lopez: Classical Variation, Zukertort Gambit",
+        "games": 5,
+        "white_wins": 2,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Closed",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Closed, Kholmov Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Closed, Rosen Attack",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Closed, Yates Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Cozio Defense",
+        "games": 8,
+        "white_wins": 4,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Cozio Defense, Paulsen Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Exchange Variation",
+        "games": 3,
+        "white_wins": 3,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Exchange Variation, Alapin Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Exchange Variation, King's Bishop Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Exchange Variation, Lutikov Variation",
+        "games": 4,
+        "white_wins": 3,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Exchange Variation, Normal Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Fianchetto Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Lucena Variation",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Marshall Attack",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Morphy Defense",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Morphy Defense, Anderssen Variation",
+        "games": 6,
+        "white_wins": 2,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Morphy Defense, Arkhangelsk Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Morphy Defense, Caro Variation",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Morphy Defense, Classical Defense Deferred",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Morphy Defense, Mackenzie Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Morphy Defense, Modern Steinitz Defense, Siesta Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Morphy Defense, Neo-Arkhangelsk Variation",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Morphy Defense, Steinitz Deferred",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Morphy Defense, Tarrasch Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Morphy Defense, Wormald Attack",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Nürnberg Variation",
+        "games": 3,
+        "white_wins": 3,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Open",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Open, Italian Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Schliemann Defense",
+        "games": 4,
+        "white_wins": 1,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Schliemann Defense, Jaenisch Gambit Accepted",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Spanish Countergambit",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Ruy Lopez: Steinitz Defense",
+        "games": 36,
+        "white_wins": 18,
+        "black_wins": 17,
+        "draws": 1
+      },
+      {
+        "label": "Réti Opening: Advance Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Réti Opening: Anglo-Slav Variation, Gurevich System",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "Réti Opening: Anglo-Slav Variation, with g3",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Réti Opening: Réti Accepted",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Saragossa Opening",
+        "games": 34,
+        "white_wins": 16,
+        "black_wins": 15,
+        "draws": 3
+      },
+      {
+        "label": "Scandinavian Defense",
+        "games": 138,
+        "white_wins": 66,
+        "black_wins": 62,
+        "draws": 10
+      },
+      {
+        "label": "Scandinavian Defense: Anderssen Counterattack",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Scandinavian Defense: Blackburne Gambit",
+        "games": 6,
+        "white_wins": 3,
+        "black_wins": 2,
+        "draws": 1
+      },
+      {
+        "label": "Scandinavian Defense: Blackburne-Kloosterboer Gambit",
+        "games": 6,
+        "white_wins": 3,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Scandinavian Defense: Boehnke Gambit",
+        "games": 6,
+        "white_wins": 4,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Scandinavian Defense: Gubinsky-Melts Defense",
+        "games": 10,
+        "white_wins": 4,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "Scandinavian Defense: Icelandic-Palme Gambit",
+        "games": 11,
+        "white_wins": 5,
+        "black_wins": 4,
+        "draws": 2
+      },
+      {
+        "label": "Scandinavian Defense: Kloosterboer Gambit",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Scandinavian Defense: Lasker Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Scandinavian Defense: Main Line",
+        "games": 47,
+        "white_wins": 20,
+        "black_wins": 25,
+        "draws": 2
+      },
+      {
+        "label": "Scandinavian Defense: Main Line, Leonhardt Gambit",
+        "games": 4,
+        "white_wins": 4,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Scandinavian Defense: Main Line, Mieses Variation",
+        "games": 5,
+        "white_wins": 3,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Scandinavian Defense: Marshall Variation",
+        "games": 7,
+        "white_wins": 4,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Scandinavian Defense: Mieses-Kotroc Variation",
+        "games": 119,
+        "white_wins": 66,
+        "black_wins": 47,
+        "draws": 6
+      },
+      {
+        "label": "Scandinavian Defense: Modern Variation",
+        "games": 65,
+        "white_wins": 24,
+        "black_wins": 38,
+        "draws": 3
+      },
+      {
+        "label": "Scandinavian Defense: Modern Variation, Gipslis Variation",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Scandinavian Defense: Panov Transfer",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Scandinavian Defense: Portuguese Gambit",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Scandinavian Defense: Portuguese Gambit, Banker Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Scandinavian Defense: Portuguese Gambit, Wuss Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Scandinavian Defense: Valencian Variation",
+        "games": 94,
+        "white_wins": 49,
+        "black_wins": 41,
+        "draws": 4
+      },
+      {
+        "label": "Scandinavian Defense: Valencian Variation, Ilundain Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Scandinavian Defense: Valencian Variation, Main Line",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Scotch Game",
+        "games": 64,
+        "white_wins": 40,
+        "black_wins": 23,
+        "draws": 1
+      },
+      {
+        "label": "Scotch Game: Benima Defense",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Scotch Game: Classical Variation",
+        "games": 8,
+        "white_wins": 5,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Scotch Game: Classical Variation, Intermezzo Variation",
+        "games": 3,
+        "white_wins": 0,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Scotch Game: Göring Gambit",
+        "games": 7,
+        "white_wins": 3,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Scotch Game: Göring Gambit, Bardeleben Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Scotch Game: Göring Gambit, Double Pawn Sacrifice",
+        "games": 4,
+        "white_wins": 1,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Scotch Game: Göring Gambit, Main Line",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "Scotch Game: Haxo Gambit",
+        "games": 5,
+        "white_wins": 2,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Scotch Game: Lolli Variation",
+        "games": 45,
+        "white_wins": 27,
+        "black_wins": 17,
+        "draws": 1
+      },
+      {
+        "label": "Scotch Game: Malaniuk Variation",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Scotch Game: Relfsson Gambit",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Scotch Game: Schmidt Variation",
+        "games": 13,
+        "white_wins": 7,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "Scotch Game: Scotch Gambit",
+        "games": 15,
+        "white_wins": 10,
+        "black_wins": 4,
+        "draws": 1
+      },
+      {
+        "label": "Scotch Game: Scotch Gambit, Advance Variation",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Scotch Game: Scotch Gambit, Cochrane-Anderssen Variation",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Scotch Game: Scotch Gambit, Dubois Réti Defense",
+        "games": 5,
+        "white_wins": 2,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Scotch Game: Scotch Gambit, Kingside Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Scotch Game: Scotch Gambit, London Defense",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Semi-Slav Defense",
+        "games": 11,
+        "white_wins": 4,
+        "black_wins": 7,
+        "draws": 0
+      },
+      {
+        "label": "Semi-Slav Defense Accepted",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Semi-Slav Defense: Accelerated Move Order",
+        "games": 16,
+        "white_wins": 8,
+        "black_wins": 7,
+        "draws": 1
+      },
+      {
+        "label": "Semi-Slav Defense: Bogoljubow Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Semi-Slav Defense: Botvinnik Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Semi-Slav Defense: Main Line",
+        "games": 5,
+        "white_wins": 3,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Semi-Slav Defense: Marshall Gambit",
+        "games": 6,
+        "white_wins": 4,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Semi-Slav Defense: Normal Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Semi-Slav Defense: Noteboom Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Semi-Slav Defense: Stoltz Variation",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense",
+        "games": 53,
+        "white_wins": 26,
+        "black_wins": 26,
+        "draws": 1
+      },
+      {
+        "label": "Sicilian Defense: Accelerated Dragon",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Accelerated Dragon, Exchange Variation",
+        "games": 6,
+        "white_wins": 1,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Accelerated Dragon, Maróczy Bind",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Sicilian Defense: Accelerated Dragon, Modern Bc4 Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Accelerated Dragon, Modern Variation",
+        "games": 7,
+        "white_wins": 4,
+        "black_wins": 2,
+        "draws": 1
+      },
+      {
+        "label": "Sicilian Defense: Alapin Variation",
+        "games": 42,
+        "white_wins": 18,
+        "black_wins": 21,
+        "draws": 3
+      },
+      {
+        "label": "Sicilian Defense: Alapin Variation, Anti-Alapin Gambit",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Alapin Variation, Barmen Defense",
+        "games": 5,
+        "white_wins": 4,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Alapin Variation, Barmen Defense, Central Exchange",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Alapin Variation, Barmen Defense, Modern Line",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Alapin Variation, Smith-Morra Declined",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Bowdler Attack",
+        "games": 81,
+        "white_wins": 45,
+        "black_wins": 35,
+        "draws": 1
+      },
+      {
+        "label": "Sicilian Defense: Chekhover Variation",
+        "games": 6,
+        "white_wins": 3,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Classical Variation",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Classical Variation, Sozin Attack",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Closed",
+        "games": 56,
+        "white_wins": 30,
+        "black_wins": 23,
+        "draws": 3
+      },
+      {
+        "label": "Sicilian Defense: Closed, Chameleon Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Closed, Fianchetto Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Closed, Korchnoi Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Closed, Traditional",
+        "games": 41,
+        "white_wins": 24,
+        "black_wins": 16,
+        "draws": 1
+      },
+      {
+        "label": "Sicilian Defense: Czerniak Attack",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Delayed Alapin Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Sicilian Defense: Delayed Alapin Variation, with d6",
+        "games": 19,
+        "white_wins": 9,
+        "black_wins": 10,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Delayed Alapin Variation, with e6",
+        "games": 14,
+        "white_wins": 6,
+        "black_wins": 8,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Dragon Variation",
+        "games": 6,
+        "white_wins": 3,
+        "black_wins": 2,
+        "draws": 1
+      },
+      {
+        "label": "Sicilian Defense: Dragon Variation, Accelerated Dragon",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Dragon Variation, Modern Bc4 Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Dragon Variation, Yugoslav Attack",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Dragon Variation, Yugoslav Attack, Main Line",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Dragon Variation, Yugoslav Attack, Modern Line",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Dragon Variation, Yugoslav Attack, Old Line",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Drazic Variation",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Four Knights Variation",
+        "games": 8,
+        "white_wins": 2,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Four Knights Variation, Exchange Variation",
+        "games": 4,
+        "white_wins": 0,
+        "black_wins": 3,
+        "draws": 1
+      },
+      {
+        "label": "Sicilian Defense: Four Knights Variation, Sveshnikov Transfer",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Franco-Sicilian Variation",
+        "games": 6,
+        "white_wins": 1,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: French Variation",
+        "games": 28,
+        "white_wins": 16,
+        "black_wins": 12,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: French Variation, Normal",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: French Variation, Open",
+        "games": 8,
+        "white_wins": 5,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: French Variation, Westerinen Attack",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Grand Prix Attack",
+        "games": 10,
+        "white_wins": 4,
+        "black_wins": 5,
+        "draws": 1
+      },
+      {
+        "label": "Sicilian Defense: Halasz Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Hyperaccelerated Dragon",
+        "games": 17,
+        "white_wins": 5,
+        "black_wins": 10,
+        "draws": 2
+      },
+      {
+        "label": "Sicilian Defense: Hyperaccelerated Pterodactyl",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Jalalabad Variation",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Kalashnikov Variation",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "Sicilian Defense: Kan Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Kan Variation, Knight Variation",
+        "games": 7,
+        "white_wins": 2,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Kan Variation, Maróczy Bind, Réti Variation",
+        "games": 5,
+        "white_wins": 2,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Kan Variation, Wing Attack",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Katalimov Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Keres Variation",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "Sicilian Defense: Kramnik Variation",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "Sicilian Defense: Lasker-Dunne Attack",
+        "games": 5,
+        "white_wins": 3,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Lasker-Pelikan Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Lasker-Pelikan Variation, Exchange Variation",
+        "games": 3,
+        "white_wins": 0,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Lasker-Pelikan Variation, Retreat Variation",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Lasker-Pelikan Variation, Schlechter Variation",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Lasker-Pelikan Variation, Sveshnikov Variation, Chelyabinsk Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Löwenthal Variation",
+        "games": 15,
+        "white_wins": 8,
+        "black_wins": 7,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Marshall Counterattack",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: McDonnell Attack",
+        "games": 27,
+        "white_wins": 10,
+        "black_wins": 17,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: McDonnell Attack, Tal Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: McDonnell Attack, Toilet Variation",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Mengarini Variation",
+        "games": 8,
+        "white_wins": 3,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Modern Variations",
+        "games": 37,
+        "white_wins": 17,
+        "black_wins": 19,
+        "draws": 1
+      },
+      {
+        "label": "Sicilian Defense: Modern Variations, Ginsberg Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Modern Variations, Main Line",
+        "games": 5,
+        "white_wins": 1,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Modern Variations, Tartakower",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Mongoose Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Morphy Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Moscow Variation",
+        "games": 6,
+        "white_wins": 4,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Moscow Variation, Main Line",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Najdorf Variation",
+        "games": 11,
+        "white_wins": 5,
+        "black_wins": 5,
+        "draws": 1
+      },
+      {
+        "label": "Sicilian Defense: Najdorf Variation, English Attack",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Najdorf Variation, Lipnitsky Attack",
+        "games": 3,
+        "white_wins": 0,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Najdorf Variation, Main Line",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Najdorf Variation, Opocensky Variation",
+        "games": 3,
+        "white_wins": 0,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Najdorf Variation, Opocensky Variation, Traditional Line",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Najdorf Variation, Poisoned Pawn Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Najdorf Variation, Zagreb Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Nimzowitsch Variation, Advance Variation",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Nimzowitsch Variation, Closed Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Nyezhmetdinov-Rossolimo Attack",
+        "games": 24,
+        "white_wins": 12,
+        "black_wins": 11,
+        "draws": 1
+      },
+      {
+        "label": "Sicilian Defense: Nyezhmetdinov-Rossolimo Attack, Fianchetto Variation",
+        "games": 6,
+        "white_wins": 2,
+        "black_wins": 3,
+        "draws": 1
+      },
+      {
+        "label": "Sicilian Defense: O'Kelly Variation",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: O'Kelly Variation, Normal System",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "Sicilian Defense: O'Kelly Variation, Normal System, Cortlever Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: O'Kelly Variation, Normal System, Taimanov Line",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: O'Kelly Variation, Normal System, Zagorovsky Line",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: O'Kelly Variation, Réti System",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: O'Kelly Variation, Venice System, Steiner Line",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: O'Kelly Variation, Yerevan System",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Old Sicilian",
+        "games": 92,
+        "white_wins": 52,
+        "black_wins": 34,
+        "draws": 6
+      },
+      {
+        "label": "Sicilian Defense: Open",
+        "games": 30,
+        "white_wins": 12,
+        "black_wins": 18,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Paulsen-Basman Defense",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Pin Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Pin Variation, Jaffe Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Richter-Rauzer Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Sicilian Defense: Richter-Rauzer Variation, Neo-Modern Variation, Early Deviations",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Scheveningen Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Scheveningen Variation, Classical Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Scheveningen Variation, Delayed Keres Attack",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Scheveningen Variation, English Attack, with f3",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Scheveningen Variation, Vitolins Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Smith-Morra Gambit",
+        "games": 45,
+        "white_wins": 20,
+        "black_wins": 25,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Smith-Morra Gambit Accepted",
+        "games": 14,
+        "white_wins": 8,
+        "black_wins": 5,
+        "draws": 1
+      },
+      {
+        "label": "Sicilian Defense: Smith-Morra Gambit Accepted, Danish Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Smith-Morra Gambit Accepted, Fianchetto Defense",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Smith-Morra Gambit Accepted, Finegold Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Smith-Morra Gambit Accepted, Kan Formation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Smith-Morra Gambit Accepted, Paulsen Formation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Smith-Morra Gambit Accepted, Pin Defense",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Smith-Morra Gambit Declined, Center Formation",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Smith-Morra Gambit Declined, Push Variation",
+        "games": 4,
+        "white_wins": 1,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Smith-Morra Gambit Declined, Scandinavian Formation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Smith-Morra Gambit Deferred",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Sozin Attack, Leonhardt Variation",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Staunton-Cochrane Variation",
+        "games": 10,
+        "white_wins": 2,
+        "black_wins": 8,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Taimanov Variation",
+        "games": 20,
+        "white_wins": 10,
+        "black_wins": 10,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Taimanov Variation, Bastrikov Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Taimanov Variation, Szén Variation",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Velimirovic Attack",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 0,
+        "draws": 1
+      },
+      {
+        "label": "Sicilian Defense: Wing Gambit",
+        "games": 7,
+        "white_wins": 1,
+        "black_wins": 5,
+        "draws": 1
+      },
+      {
+        "label": "Sicilian Defense: Wing Gambit, Carlsbad Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Sicilian Defense: Wing Gambit, Marshall Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Slav Defense",
+        "games": 28,
+        "white_wins": 17,
+        "black_wins": 9,
+        "draws": 2
+      },
+      {
+        "label": "Slav Defense: Alapin Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Slav Defense: Bonet Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Slav Defense: Chebanenko Variation",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Slav Defense: Diemer Gambit",
+        "games": 5,
+        "white_wins": 0,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Slav Defense: Exchange Variation",
+        "games": 11,
+        "white_wins": 7,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Slav Defense: Exchange Variation, Trifunovic Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Slav Defense: Modern Line",
+        "games": 10,
+        "white_wins": 5,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Slav Defense: Quiet Variation, Pin Defense",
+        "games": 5,
+        "white_wins": 3,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "Slav Defense: Quiet Variation, Schallopp Defense",
+        "games": 7,
+        "white_wins": 1,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "Slav Defense: Schlechter Variation",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Slav Defense: Slav Gambit, Alekhine Attack",
+        "games": 3,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Slav Defense: Steiner Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Slav Defense: Three Knights Variation",
+        "games": 12,
+        "white_wins": 6,
+        "black_wins": 6,
+        "draws": 0
+      },
+      {
+        "label": "Slav Indian",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Sodium Attack",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "St. George Defense",
+        "games": 17,
+        "white_wins": 12,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Tarrasch Defense",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Tarrasch Defense: Classical Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Tarrasch Defense: Symmetrical Variation",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Tarrasch Defense: Two Knights Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Three Knights Opening",
+        "games": 57,
+        "white_wins": 23,
+        "black_wins": 30,
+        "draws": 4
+      },
+      {
+        "label": "Three Knights Opening: Winawer Defense",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "Torre Attack: Classical Defense",
+        "games": 5,
+        "white_wins": 1,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Torre Attack: Fianchetto Defense",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Trompowsky Attack",
+        "games": 8,
+        "white_wins": 4,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Trompowsky Attack: Borg Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Trompowsky Attack: Classical Defense",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Trompowsky Attack: Classical Defense, Big Center Variation",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Van Geet Opening",
+        "games": 30,
+        "white_wins": 14,
+        "black_wins": 15,
+        "draws": 1
+      },
+      {
+        "label": "Van Geet Opening: Berlin Gambit",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Van Geet Opening: Dougherty Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Van Geet Opening: Dunst-Perrenet Gambit",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Van Geet Opening: Napoleon Attack",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Van Geet Opening: Reversed Nimzowitsch",
+        "games": 6,
+        "white_wins": 1,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Van Geet Opening: Reversed Scandinavian",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Van't Kruijs Opening",
+        "games": 177,
+        "white_wins": 89,
+        "black_wins": 79,
+        "draws": 9
+      },
+      {
+        "label": "Vienna Gambit, with Max Lange Defense",
+        "games": 7,
+        "white_wins": 4,
+        "black_wins": 2,
+        "draws": 1
+      },
+      {
+        "label": "Vienna Gambit, with Max Lange Defense: Knight Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Vienna Game",
+        "games": 35,
+        "white_wins": 20,
+        "black_wins": 14,
+        "draws": 1
+      },
+      {
+        "label": "Vienna Game: Anderssen Defense",
+        "games": 13,
+        "white_wins": 6,
+        "black_wins": 7,
+        "draws": 0
+      },
+      {
+        "label": "Vienna Game: Falkbeer Variation",
+        "games": 9,
+        "white_wins": 5,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Vienna Game: Frankenstein-Dracula Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Vienna Game: Max Lange Defense",
+        "games": 32,
+        "white_wins": 13,
+        "black_wins": 19,
+        "draws": 0
+      },
+      {
+        "label": "Vienna Game: Mengarini Variation",
+        "games": 3,
+        "white_wins": 0,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Vienna Game: Mieses Variation",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Vienna Game: Omaha Gambit",
+        "games": 4,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 1
+      },
+      {
+        "label": "Vienna Game: Paulsen Variation",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Vienna Game: Stanley Variation",
+        "games": 8,
+        "white_wins": 5,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Vienna Game: Stanley Variation, Reversed Spanish",
+        "games": 5,
+        "white_wins": 2,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Vienna Game: Stanley Variation, Three Knights Variation",
+        "games": 6,
+        "white_wins": 4,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Vienna Game: Vienna Gambit",
+        "games": 19,
+        "white_wins": 14,
+        "black_wins": 4,
+        "draws": 1
+      },
+      {
+        "label": "Vienna Game: Vienna Gambit, Main Line",
+        "games": 3,
+        "white_wins": 2,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Ware Defense",
+        "games": 12,
+        "white_wins": 8,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Ware Opening",
+        "games": 8,
+        "white_wins": 4,
+        "black_wins": 3,
+        "draws": 1
+      },
+      {
+        "label": "Ware Opening: Symmetric Variation",
+        "games": 2,
+        "white_wins": 2,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Yusupov-Rubinstein System",
+        "games": 13,
+        "white_wins": 6,
+        "black_wins": 6,
+        "draws": 1
+      },
+      {
+        "label": "Zukertort Opening",
+        "games": 22,
+        "white_wins": 15,
+        "black_wins": 6,
+        "draws": 1
+      },
+      {
+        "label": "Zukertort Opening: Arctic Defense",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Zukertort Opening: Black Mustang Defense",
+        "games": 17,
+        "white_wins": 10,
+        "black_wins": 7,
+        "draws": 0
+      },
+      {
+        "label": "Zukertort Opening: Drunken Cavalry Variation",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Zukertort Opening: Dutch Variation",
+        "games": 2,
+        "white_wins": 1,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Zukertort Opening: Kingside Fianchetto",
+        "games": 20,
+        "white_wins": 7,
+        "black_wins": 12,
+        "draws": 1
+      },
+      {
+        "label": "Zukertort Opening: Lemberger Gambit",
+        "games": 7,
+        "white_wins": 4,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Zukertort Opening: Lisitsyn Gambit",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Zukertort Opening: Nimzo-Larsen Variation",
+        "games": 3,
+        "white_wins": 3,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Zukertort Opening: Old Indian Attack",
+        "games": 11,
+        "white_wins": 8,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Zukertort Opening: Pirc Invitation",
+        "games": 22,
+        "white_wins": 14,
+        "black_wins": 8,
+        "draws": 0
+      },
+      {
+        "label": "Zukertort Opening: Queen's Gambit Invitation",
+        "games": 29,
+        "white_wins": 14,
+        "black_wins": 14,
+        "draws": 1
+      },
+      {
+        "label": "Zukertort Opening: Queenside Fianchetto Variation",
+        "games": 11,
+        "white_wins": 7,
+        "black_wins": 4,
+        "draws": 0
+      },
+      {
+        "label": "Zukertort Opening: Quiet System",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Zukertort Opening: Reversed Grünfeld",
+        "games": 5,
+        "white_wins": 4,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Zukertort Opening: Reversed Mexican Defense",
+        "games": 8,
+        "white_wins": 5,
+        "black_wins": 3,
+        "draws": 0
+      },
+      {
+        "label": "Zukertort Opening: Ross Gambit",
+        "games": 12,
+        "white_wins": 7,
+        "black_wins": 4,
+        "draws": 1
+      },
+      {
+        "label": "Zukertort Opening: Santasiere's Folly",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Zukertort Opening: Sicilian Invitation",
+        "games": 19,
+        "white_wins": 12,
+        "black_wins": 6,
+        "draws": 1
+      },
+      {
+        "label": "Zukertort Opening: Slav Invitation",
+        "games": 13,
+        "white_wins": 8,
+        "black_wins": 5,
+        "draws": 0
+      },
+      {
+        "label": "Zukertort Opening: Speelsmet Gambit",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Zukertort Opening: Tennison Gambit",
+        "games": 39,
+        "white_wins": 23,
+        "black_wins": 16,
+        "draws": 0
+      },
+      {
+        "label": "Zukertort Opening: Tennison Gambit, Brigg's Trap",
+        "games": 1,
+        "white_wins": 1,
+        "black_wins": 0,
+        "draws": 0
+      },
+      {
+        "label": "Zukertort Opening: The Potato",
+        "games": 1,
+        "white_wins": 0,
+        "black_wins": 1,
+        "draws": 0
+      },
+      {
+        "label": "Zukertort Opening: Vos Gambit",
+        "games": 5,
+        "white_wins": 3,
+        "black_wins": 2,
+        "draws": 0
+      },
+      {
+        "label": "Zukertort Opening: Wade Defense",
+        "games": 2,
+        "white_wins": 0,
+        "black_wins": 2,
+        "draws": 0
+      }
+    ],
+    "rating_bucket": [
+      {
+        "label": "1000-1199",
+        "games": 921,
+        "white_wins": 478,
+        "black_wins": 410,
+        "draws": 33
+      },
+      {
+        "label": "1200-1399",
+        "games": 1273,
+        "white_wins": 646,
+        "black_wins": 581,
+        "draws": 46
+      },
+      {
+        "label": "1400-1599",
+        "games": 1738,
+        "white_wins": 853,
+        "black_wins": 823,
+        "draws": 62
+      },
+      {
+        "label": "1600-1799",
+        "games": 1884,
+        "white_wins": 969,
+        "black_wins": 854,
+        "draws": 61
+      },
+      {
+        "label": "1800-1999",
+        "games": 1711,
+        "white_wins": 852,
+        "black_wins": 785,
+        "draws": 74
+      },
+      {
+        "label": "2000-2199",
+        "games": 1083,
+        "white_wins": 528,
+        "black_wins": 503,
+        "draws": 52
+      },
+      {
+        "label": "2200-2399",
+        "games": 487,
+        "white_wins": 239,
+        "black_wins": 222,
+        "draws": 26
+      },
+      {
+        "label": "2400-2599",
+        "games": 194,
+        "white_wins": 101,
+        "black_wins": 83,
+        "draws": 10
+      },
+      {
+        "label": "2600-2799",
+        "games": 45,
+        "white_wins": 22,
+        "black_wins": 18,
+        "draws": 5
+      },
+      {
+        "label": "2800-2999",
+        "games": 22,
+        "white_wins": 8,
+        "black_wins": 8,
+        "draws": 6
+      },
+      {
+        "label": "3000-3199",
+        "games": 9,
+        "white_wins": 1,
+        "black_wins": 2,
+        "draws": 6
+      },
+      {
+        "label": "400-599",
+        "games": 16,
+        "white_wins": 6,
+        "black_wins": 9,
+        "draws": 1
+      },
+      {
+        "label": "600-799",
+        "games": 149,
+        "white_wins": 82,
+        "black_wins": 61,
+        "draws": 6
+      },
+      {
+        "label": "800-999",
+        "games": 464,
+        "white_wins": 241,
+        "black_wins": 212,
+        "draws": 11
+      }
+    ],
+    "speed": [
+      {
+        "label": "blitz",
+        "games": 4671,
+        "white_wins": 2350,
+        "black_wins": 2113,
+        "draws": 208
+      },
+      {
+        "label": "bullet",
+        "games": 3632,
+        "white_wins": 1848,
+        "black_wins": 1680,
+        "draws": 104
+      },
+      {
+        "label": "classical",
+        "games": 44,
+        "white_wins": 23,
+        "black_wins": 18,
+        "draws": 3
+      },
+      {
+        "label": "rapid",
+        "games": 1649,
+        "white_wins": 805,
+        "black_wins": 760,
+        "draws": 84
+      }
+    ]
+  }
+}

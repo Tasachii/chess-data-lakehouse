@@ -1,72 +1,48 @@
-# Run evidence
+# Measured run evidence
 
-The following first-run evidence is historical v0.1.0 evidence. QA subsequently found four integrity/lineage defects; see the v0.2.0 remediation below and [DEV_HANDOFF.md](../DEV_HANDOFF.md) for current verification.
+All measurements below are from local runs on 27 November 2026 with Python 3.12. The publisher is the [Lichess Open Database](https://database.lichess.org/), and the source is the [October 2026 rated standard archive](https://database.lichess.org/standard/lichess_db_standard_rated_2026-10.pgn.zst), licensed CC0 1.0. Only bounded prefixes were downloaded; the full archive was not processed.
 
-Captured on 2026-11-27 (Asia/Bangkok host, Python 3.12). Commands were run from the project root.
+## Dashboard sample
 
-## Real bounded source
+| Measurement | Value |
+| --- | --- |
+| Requested and retrieved | 10,000 records |
+| Decompressed data size | 23,614,481 bytes |
+| Retrieval (UTC) | 2026-11-27 14:06:34 |
+| Validated game time range (UTC) | 2026-10-01 00:00:00–00:08:08 |
+| Source SHA-256 | `24a50c38d31691401b5ef3b5fa246c4941e56d4223c54d397d0ef6c9b13c3030` |
+| Download / local first run / local replay | 10.97 s / 0.57 s / 0.68 s wall clock |
+| Bronze / Silver / quarantine | 10,000 / 9,996 / 4 |
+| First insert / replay insert | 10,000 / 0 |
 
-Source: `https://database.lichess.org/standard/lichess_db_standard_rated_2026-10.pgn.zst`
+The four quarantined records have invalid time-control fields. The three Gold dimensions each sum to 9,996 valid games, with 5,026 white wins, 4,571 black wins and 399 draws. The exporter reconciled every group and white-win-rate value with Silver, and a second export after replay was byte-identical.
 
-```text
-$ /usr/bin/time -p .venv/bin/chess-lakehouse download ... --max-games 100
-games_written: 100
-bytes_written: 234489
-real: 2.16 s
+| Gold dimension | Groups |
+| --- | ---: |
+| Opening | 1,107 |
+| Average rating bucket | 14 |
+| Speed | 4 |
 
-$ /usr/bin/time -p .venv/bin/chess-lakehouse run ...
-input_games: 100
-inserted_bronze: 100
-valid_silver: 100
-quarantined: 0
-real: 0.06 s
+The [dashboard snapshot](assets/snapshot.json) includes the aggregate rows, receipt checksum, source retrieval timestamp and validated UTC time range. Its byte SHA-256 is `b299b5a7b654f0be438787cdb76f04ae7be9f78a825e1080a4b02ed76a6a8165`. The exact reproduction commands are in [README.md](../README.md#reproduce-the-snapshot).
 
-$ /usr/bin/time -p .venv/bin/chess-lakehouse run ...  # identical replay
-input_games: 100
-inserted_bronze: 0
-valid_silver: 100
-quarantined: 0
-real: 0.06 s
-```
+## Pipeline validation sample (100 games)
 
-Decompressed sample SHA-256:
-`d2675dd2381bcf736422367ea8800474939a067f05e7a949aa3b52fbd41b60f6`.
+The local pipeline and PySpark/Delta implementation were validated on a smaller prefix before the dashboard was built. The download wrote 100 records and 234,489 bytes; repeated downloads matched SHA-256 `d2675dd2381bcf736422367ea8800474939a067f05e7a949aa3b52fbd41b60f6`. The first corrected local run inserted 100 games; replay inserted zero. All 100 games were valid and had canonical eight-character Lichess IDs.
 
-Observed speed aggregate after the run:
+| Speed | Games | White wins | Draws |
+| --- | ---: | ---: | ---: |
+| Blitz | 56 | 31 | 3 |
+| Bullet | 27 | 11 | 2 |
+| Rapid | 17 | 10 | 1 |
 
-| speed | games | white wins | draws |
-|---|---:|---:|---:|
-| blitz | 56 | 31 | 3 |
-| bullet | 27 | 11 | 2 |
-| rapid | 17 | 10 | 1 |
+There were 82 opening groups, 10 rating buckets and three speeds. Local Spark matched all 100 Silver records and all 95 Gold groups. The managed Delta test created and replayed tables for this real sample and the synthetic fixture, with no duplicate keys. With PySpark 3.5.3, Delta 3.3.2 and Java 21, the corrected full suite passed 27 tests in 47.22 s. The 100-game sample is not the dashboard sample.
 
-These are sample observations only. Network and runtime measurements will vary.
+Independent QA approved the local pipeline at commit `94f58a11304cc11c92e102f3894aabcbdcc80ce9`. The regression cases covered alternate game URLs, incomplete PGN boundaries, truncated Zstandard input, missing fields, overlap and empty delivery, and run lineage. Original independent reproduction scripts passed eight cases; three deliberately truncated files were rejected without publication. The local fixture and real replays preserved all aggregate results.
 
-## Cloud status
+## Dashboard release verification
 
-`src/databricks_job.py` and the Asset Bundle configuration were checked locally. They were not run
-against Databricks because no existing authorized workspace session was used. Therefore this
-repository makes no claim about a successful cloud run or cloud performance.
+The local base suite, including two aggregate-export tests, passed 21 tests with the optional Spark module skipped. The full local Spark/Delta suite passed 29 tests in 47.33 s (47.65 s wall clock), using the original 100-game validation sample. Browser checks exercised the 10,000-game dashboard at 1,440, 390 and 320 pixel widths, including opening search, filters, sorting, rating selection and absence of JavaScript errors. The pipeline source and Databricks configuration are unchanged from the independently approved version.
 
-## Dev1 verification (same date, fresh independent runs)
+## Limitations
 
-A second bounded download wrote 100 games / 234,489 bytes in 2.77 s and reproduced the exact
-SHA-256 above. A fresh local output (`output/dev1-real`) inserted 100 games initially and zero on
-replay (0.06 s each). The synthetic fixture inserted 2 distinct games from 3 records, 1 valid and
-1 quarantined, then inserted zero on replay (0.05 s each). A new isolated environment installed
-`.[dev]` successfully; 9 tests passed, with only the optional Spark module skipped. The six
-data-layer outputs from that environment and the fresh local run were byte-identical.
-
-Real Gold contains 82 opening groups, 10 rating groups, 3 speed groups. Each dimension totals
-100 games, 52 white wins, 6 draws. All records and group metrics matched the local Spark path.
-With PySpark 3.5.3, Delta Lake 3.3.2 and Java 21.0.2, the full optional suite passed **15 tests in
-30.33 s** (30.66 s wall clock), including locally managed Delta tables created and replayed twice:
-real Bronze/Silver/quarantine remained 100/100/0; synthetic remained 2/1/1. Distinct key counts
-and persisted Gold counts were verified. No Databricks run or CLI validation was performed.
-See [DEV_HANDOFF.md](../DEV_HANDOFF.md) for exact commands and limitations.
-
-## v0.2.0 — TEST1-01–04 remediation (2026-11-27)
-
-New bounded public download: 100 games / 234,489 bytes / 1.89 s wall clock, identical SHA-256 to the earlier sample. Real Bronze now uses 100 canonical eight-character Lichess IDs and zero content fallbacks. The exact Test1 metadata-alternate first game replays to one Bronze / one Silver / one draw in Gold. The exact header-only input attempts two records, quarantines one and produces `Unknown` opening for the valid sibling. All three 1/10/30-byte compressed truncations exit 1 without publishing new output.
-
-Fresh developer-run copy of both unmodified QA scripts: eight independent cases passed, no failures, three truncated inputs rejected, one logical game retained. Clean base environment: 19 passed and only the optional module skipped. Full PySpark/Delta suite: 27 passed in 47.22 s (47.61 s wall clock), including real and fixture managed Delta replay, logical ID replay, empty receipt and per-run lineage. Real ordinary Gold group counts remain 82/10/3, 100 games in every dimension. Source receipt and durable run-history counts reconcile. No cloud run or CLI validation performed. Exact commands and all batch counts: [DEV_HANDOFF.md](../DEV_HANDOFF.md). QA retest remains pending.
+Runtime depends on the machine and network; these measurements are not a scale benchmark. The archive prefix is not a random or representative sample. Databricks bundle YAML and script references were checked locally, but the CLI and workspace execution were not verified. No cloud services or billing changes were used.
