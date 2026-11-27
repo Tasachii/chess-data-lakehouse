@@ -9,3 +9,4 @@ data/*.pgn
 .databricks/
 data/*.receipt.json
 data/*.zst
+.sample-download-*/
