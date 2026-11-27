@@ -1,27 +1,65 @@
 # Chess Data Lakehouse
 
-A data engineering project that turns public Lichess PGN exports into Bronze, Silver, quarantine and Gold datasets. Version 0.3 adds opening analysis by ECO, rating and time control, plus rating-gap, termination and game-length metrics. It uses Python for a small local pipeline and PySpark/Delta Lake for larger samples and managed tables. The accompanying dashboard explores verified aggregate metrics without publishing player names, game IDs or raw PGN.
+I enjoy chess and wanted to see how different openings fare at different ratings. I built a data pipeline for one million rated games from Lichess so I could explore this question. Pick an opening in the dashboard to see how often White won, Black won, or the game ended in a draw.
 
-I enjoy chess, and I wanted to see if I could build a repeatable data pipeline using real game data. This project grew out of that curiosity.
+**Try it now:** [Live dashboard](https://tasachii.github.io/chess-data-lakehouse/) · [Dashboard source](docs/index.html) · [Download aggregate data (JSON)](docs/assets/snapshot.json)
 
-**Dashboard:** [Live dashboard](https://tasachii.github.io/chess-data-lakehouse/) · [Dashboard source](docs/index.html) · [1,000,000-game aggregate data](docs/assets/snapshot.json) · [Passing one-million-game release CI](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46038266966)
-
-![Dashboard preview: one million games from the October 2026 archive](docs/assets/dashboard-preview.png)
-
-![Opening study: Italian Game filtered by Elo and time control with White, Black and draw results](docs/assets/opening-study.png)
+| One million games at a glance | Italian Game study by rating and time control |
+| --- | --- |
+| ![Dashboard showing one million sampled games](docs/assets/dashboard-preview.png) | ![Italian Game filtered by rating and time control, with White wins, Black wins and draws](docs/assets/opening-study.png) |
 
 ## Contents
 
+- [Explore the dashboard](#explore-the-dashboard)
+- [The data](#the-data)
 - [Quick start](#quick-start)
-- [Real data and dashboard](#real-data-and-dashboard)
 - [Architecture](#architecture)
-- [Tests](#tests)
 - [Databricks](#databricks)
+- [Tests](#tests)
 - [Source, license and limits](#source-license-and-limits)
+
+## Explore the dashboard
+
+- Search for openings such as Italian Game, Ruy Lopez or Sicilian Defense. You can also search by ECO, a standard chess opening classification code such as `C50`.
+- Compare White wins, Black wins and draws for an opening. Switch the color perspective to emphasize the side you play.
+- Filter by average Elo (the mean of both players' ratings), time control and minimum game count. For example, try Italian Game with an average Elo of 1600–1799, Blitz and at least 20 games.
+- Explore how rating differences, game lengths and reasons for game endings relate to outcomes across the whole sample.
+
+The opening family groups variations by the name before the first colon. Win rates use all games in the selected opening group and rating/time-control slice, even when a result filter is applied. The opening suggestions are search shortcuts, not recommendations or exclusive assignments to one color.
+
+The dashboard is a static website built with HTML, CSS and JavaScript. It needs no account, API or live database connection.
+
+## The data
+
+I used the first 1,000,000 games from Lichess's [October 2026 rated standard archive](https://database.lichess.org/standard/lichess_db_standard_rated_2026-10.pgn.zst). The validated games started between 00:00:00 and 10:45:58 UTC on October 1, 2026.
+
+| Measurement | Result |
+| --- | ---: |
+| Unique games received | 1,000,000 |
+| Validated games | 998,976 |
+| Rejected games | 1,024 |
+| Distinct opening names | 2,675 |
+| White wins | 497,294 |
+| Black wins | 463,906 |
+| Draws | 37,776 |
+
+For example, searching for Italian Game matches 40,544 games, Ruy Lopez matches 16,814, and Sicilian Defense matches 96,289. These counts include matching variations. The dashboard contains only grouped counts and source information, not player names or individual game records.
 
 ## Quick start
 
-**Requirements:** Python 3.11 or 3.12. Commands below use Python 3.12 and a Unix-style shell.
+To view the saved dashboard locally, clone the repository and start a small web server:
+
+```bash
+git clone https://github.com/Tasachii/chess-data-lakehouse.git
+cd chess-data-lakehouse
+python3 -m http.server 8765 --directory docs
+```
+
+Open [http://localhost:8765/](http://localhost:8765/). No build or data download is needed.
+
+### Run the pipeline on a small example
+
+Use Python 3.11 or 3.12. The commands below use Python 3.12 and a Unix-style shell.
 
 ```bash
 python3.12 -m venv .venv
@@ -32,29 +70,11 @@ python3.12 -m venv .venv
   --source-url fixture://sample.pgn
 ```
 
-The synthetic fixture contains three records (one duplicate and one malformed game). The first run produces two Bronze records, one valid Silver record and one quarantined record. Repeat the same command to confirm `inserted_bronze: 0`. The fixture is not real Lichess data.
-
-## Real data and dashboard
-
-The current dashboard uses the first **1,000,000 games** from the October 2026 Lichess rated standard archive. The validated games have start times between 00:00:00 and 10:45:58 UTC on October 1, 2026. This is a static archive snapshot, not a live feed or random sample.
-
-| Metric | Measured value |
-| --- | ---: |
-| Unique Bronze records | 1,000,000 |
-| Valid Silver games | 998,976 |
-| Quarantined | 1,024 |
-| Opening labels / rating buckets / speeds | 2,675 / 15 / 4 |
-| Opening / ECO / rating / speed combinations | 42,618 |
-| Games with valid ECO / known mainline length | 997,485 / 997,485 |
-| White wins / Black wins / draws | 497,294 / 463,906 / 37,776 |
-
-Local Spark processed all 100 source files (10,000 games each). A separate streaming Python pass matched every group and rounded rate in all seven Gold marts, totaling 45,332 groups. The dashboard exports aggregate labels, counts and source metadata only. For example, the literal Italian Game search matches 40,544 validated games (20,212 White wins), Ruy Lopez matches 16,814 (8,421 White wins), and Sicilian Defense matches 96,289 (46,148 Black wins). These totals include matching variations.
-
-The one-million-game scale check took 300.13 seconds including receipt checks, Spark transformations and independent Python verification. The previous 100,000-game sample also reproduced the exact earlier dashboard bytes. See the [checkpoint measurements](docs/assets/scale-run-report.json) and [one-million-game chunk manifest](docs/assets/sample-chunks-1m-manifest.json).
+The included synthetic PGN file (Portable Game Notation, a text format for chess games) contains three records: two unique games, one of which is invalid. The first run retains two raw records, validates one and quarantines one. Run the same command again to check that `inserted_bronze` is `0`. This file is only a test fixture, not real Lichess data.
 
 ### Reproduce the snapshot
 
-Install a compatible JDK (Java 17 or 21) and the Spark extra. The following commands download a bounded sample, split it and build a verified aggregate snapshot locally, without a workspace or cloud credentials.
+Install a compatible JDK (Java 17 or 21) and the Spark extra. The commands below download, split and process the real one-million-game sample locally.
 
 ```bash
 .venv/bin/python -m pip install -e '.[dev,spark]'
@@ -70,54 +90,50 @@ SPARK_LOCAL_IP=127.0.0.1 PYSPARK_PYTHON="$PWD/.venv/bin/python" \
     --output output/scale-1m/checkpoint-1000000
 ```
 
-Use new output directories. The generated candidate is `output/scale-1m/checkpoint-1000000/snapshot.json`; the checked-in snapshot is preserved. The raw PGN and chunks together occupy about 4.64 GB, plus Spark scratch space; the runner requires at least 15 GiB free at its stage checks. The measured local machine has 16 GiB RAM and used a 4 GiB Spark driver with two local cores. Start with 100,000 and 250,000-game checkpoints as described in the [operations notes](DEV_HANDOFF.md#local-spark-scale-check). A re-download creates a new retrieval timestamp; the source checksum and group metrics identify the underlying sample.
-
-### Preview the dashboard locally
-
-```bash
-.venv/bin/python -m http.server 8765 --directory docs
-```
-
-Open [http://localhost:8765/](http://localhost:8765/). Search opening names, family names or ECO codes (for example `C50`). White opening ideas and Black defenses are shortcuts to real Lichess labels. Select an average-Elo bucket, speed and minimum games to compare a meaningful slice. The table explicitly shows White wins, Black wins and draws with counts and rates. Select a color perspective to emphasize its win rate, or a result filter to count only matching outcomes. Rates always divide by all games in the selected opening group and slice. Family means the label before the first colon; it is not an official taxonomy or an exclusive assignment to one color. The separate rating-gap, termination and length charts show the full sample.
-
-The site uses plain HTML, CSS and JavaScript. It requires no build step, server API or account. The one-million-game dashboard is published on GitHub Pages from `main:/docs`. The [Pages build](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46038266738) succeeded and the served aggregate snapshot matched the committed bytes.
+The result is `output/scale-1m/checkpoint-1000000/snapshot.json`; it does not overwrite the published snapshot. Use new output directories for repeated runs. Input files and their chunks occupy about 4.64 GB, plus Spark scratch space. The runner checks for at least 15 GiB of free storage. The measured machine had 16 GiB RAM and ran Spark on two local cores with a 4 GiB driver. Start with smaller samples if needed; see [local Spark instructions](DEV_HANDOFF.md#local-spark-scale-check).
 
 ## Architecture
 
 ```text
-Lichess PGN.zst → bounded download and receipt → Bronze (raw, deduplicated)
-                                                   │
-                                                   ├── Quarantine (invalid)
-                                                   ↓
-                                                Silver (typed)
-                                                   ↓
-                   Dashboard JSON ← Gold (opening context, rating, speed,
-                                            rating gap, termination, length)
+Lichess PGN → streaming download → 100 files of 10,000 games
+                                        ↓
+                          Bronze: unique raw records
+                                        ↓
+                       Validate → Quarantine: rejected games
+                                        ↓
+                          Silver: valid, typed records
+                                        ↓
+                          Gold: grouped statistics
+                                        ↓
+                             Dashboard (JSON)
 ```
 
-| Layer | Grain | Storage / update |
-| --- | --- | --- |
-| Bronze | One record per unique game ID | JSONL or Delta; insert only |
-| Silver | One validated game | JSONL or Delta; local rebuild, Delta insert only |
-| Quarantine | One invalid unique game | JSONL or Delta; retained with errors |
-| Gold | One row per opening, rating bucket or speed | CSV or Delta; full aggregate rebuild |
-| Opening context | One row per opening, ECO, rating bucket and speed | Exact slice counts; stable cross-filtering |
-| Additional Gold | One row per signed rating-gap bucket, termination or mainline-length bucket | Outcome counts; length also stores known-game and total-ply counts |
-| Run history | One source file per successful invocation | JSON manifests or `ingestion_runs` Delta table; append only |
-
-| Decision | Reason |
+| Layer | What it does |
 | --- | --- |
-| Stable ID from the Lichess `Site` URL | Recognizes both `/game/<id>` and `/<id>`; a content hash is used for nonmatching URLs. Prevents replay double counts. |
-| Split on each Event tag | Keeps incomplete records from contaminating valid ones. |
-| Validate before aggregation | Required fields, integer Elo within 100–4000, UTC timestamp, result, time control and move-text presence. |
-| Durable batch identity | Source URL and exact file SHA-256 identify a batch; each Bronze row refers to its first batch. |
-| Aggregate-only export | Dashboard never needs the raw source or individual game records. |
+| Bronze | Keeps raw game records and removes duplicates by stable game ID. |
+| Silver | Validates results, ratings, dates, time controls and the presence of moves. |
+| Quarantine | Keeps rejected records separate, with validation errors. |
+| Gold | Aggregates opening, rating, speed, opening context, rating difference, game ending and game length. |
+| Run history | Records source URLs, SHA-256 file checksums and counts so each delivery can be traced. |
 
-For the one-million-game local scale check, Spark uses the same deduplication, Silver validation and Gold functions as the managed-table job, but does not write full Bronze/Silver tables. It retains a compact temporary analytics projection and verifies the exported Gold groups against a streaming Python pass. The regular Python JSONL and managed Delta paths remain available for smaller samples and persistent ingestion.
+The small local pipeline uses Python, JSONL and CSV. The large-sample path uses PySpark to process bounded files and writes only aggregate results locally. Databricks uses the same transformations with managed Delta tables. An independent streaming Python pass checked every local Gold group and rounded rate; the one-million-game local check took 300.13 seconds. See the [checkpoint report](docs/assets/scale-run-report.json) and [source file checksums](docs/assets/sample-chunks-1m-manifest.json).
 
-A rating bucket is the integer mean of White and Black Elo, grouped by 200 points. Speed uses an estimated duration of `initial seconds + 40 × increment`: under 180 is bullet (including ultrabullet), under 600 blitz, under 1,800 rapid, otherwise classical. The outcome rate divides the relevant count by validated games in the group. Stored rates are rounded to four decimal places with half-even ties in Python and Spark; the dashboard recomputes rates directly from integer counts, not other rounded rates. A signed rating gap is White Elo minus Black Elo before the game. Valid ECO and recognized termination tags are preserved; unsupported or missing values are `Unknown`. Mainline length counts SAN-shaped half-moves after removing simple PGN comments, without testing move legality; result-only or unsupported move text is null and grouped as `Unknown`. Clock/eval annotations are audited for coverage but not used as performance measures.
+## Databricks
 
-More on the data contracts, replay behavior and cloud configuration: [Operations and validation notes](DEV_HANDOFF.md).
+The same serverless job that processed and replayed the first 100,000 games was extended to one million by adding 90 files. The incremental run completed in 324.55 seconds. SQL checks confirmed the following results:
+
+| Verification | Result |
+| --- | ---: |
+| New games inserted | 900,000 |
+| Existing games skipped | 100,000 |
+| Total unique games | 1,000,000 |
+| Managed Delta tables | 11 |
+| Gold tables | 7 |
+| Gold rows matching local results | 45,332 / 45,332 |
+| Source file hashes and attempted counts matched | 100 / 100 |
+| Run history rows | 120 |
+
+Each Gold table sums to 998,976 validated games. The earlier 100,000-game replay inserted zero records; the one-million-game run verified overlapping input but was not followed by a full replay at that scale. The public dashboard remains the locally exported snapshot, verified against the cloud results. For exact counts, group checks and deployment details, see [run evidence](docs/run-evidence.md#databricks-cloud-verification) and [Databricks instructions](DEV_HANDOFF.md#databricks-run-instructions).
 
 ## Tests
 
@@ -127,9 +143,9 @@ More on the data contracts, replay behavior and cloud configuration: [Operations
 .venv/bin/ruff format --check src tests scripts
 ```
 
-The [Chess Lakehouse CI workflow](.github/workflows/ci.yml) runs on pushes, pull requests and manual dispatch using GitHub-hosted Ubuntu runners. It checks the base Python tests, including the aggregate export, Ruff lint and formatting, and JavaScript syntax. A separate job runs Spark/Delta fixture tests with Python 3.12 and Java 17; it needs no credentials, real archive download or Databricks workspace. Both hosted jobs passed for the one-million-game dashboard release in [this CI run](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46038266966). Real-data Spark parity is tested locally, and browser interactions have passed independent live-site checks.
+The final [GitHub Actions CI run](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46043147019) passed both the Python/dashboard and Spark/Delta fixture jobs. The final [GitHub Pages build](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46043146869) also passed. Independent checks matched the live files to the committed files and tested opening filters on desktop and mobile.
 
-The default local suite tests ingestion, validation, deduplication, corrupted/truncated inputs, lineage and aggregate export. Spark tests are optional. To run the full suite, install a compatible JDK and the pinned Spark/Delta extra (PySpark 3.5.3, Delta 3.3.2):
+To include the optional Spark/Delta tests with a bounded 100-game real sample, install Java and run:
 
 ```bash
 .venv/bin/python -m pip install -e '.[dev,spark]'
@@ -141,33 +157,12 @@ SPARK_LOCAL_IP=127.0.0.1 CHESS_TEST_DELTA=1 \
   .venv/bin/python -m pytest -s -ra
 ```
 
-Independent testing confirmed the local pipeline at commit `94f58a11304cc11c92e102f3894aabcbdcc80ce9`. The dashboard does not change pipeline behavior. The measured test and run evidence is in [Run evidence](docs/run-evidence.md). The optional locally executed Delta JAR route and browser test commands are in [Operations and validation notes](DEV_HANDOFF.md) and [Publication notes](PUBLICATION_HANDOFF.md).
-
-## Databricks
-
-The v0.3 [Databricks bundle](databricks.yml) passed official CLI validation and deployment. After two successful 100,000-game runs, the same serverless job and schema were extended to one million games by adding the remaining 90 files and reading all 100 files through one glob. The incremental job completed successfully in 324.55 seconds. Direct SQL queries confirmed:
-
-| Cloud verification | Result |
-| --- | ---: |
-| Bronze rows / distinct game IDs | 1,000,000 / 1,000,000 |
-| Silver rows / quarantine rows | 998,976 / 1,024 |
-| Managed Delta tables | 11 |
-| Sum of games in each of the seven Gold marts | 998,976 |
-| Gold groups matching local results | 45,332 / 45,332 |
-| Latest file hashes and attempted counts matching manifest | 100 / 100 |
-| Latest attempted / inserted / duplicate records | 1,000,000 / 900,000 / 100,000 |
-| New Silver / quarantine records | 899,101 / 899 |
-| Run history rows | 120 (20 earlier + 100 incremental) |
-
-All Gold rows matched the local Spark/Python results, including outcome counts, known game lengths and exact rounded rates. The earlier 100,000-game replay inserted zero records and skipped 100,000 duplicate attempts; the one-million-game incremental run likewise skipped the existing prefix. A full replay at one million games has not been run. See the [cloud run instructions](DEV_HANDOFF.md#databricks-run-instructions), [one-million-game chunk manifest](docs/assets/sample-chunks-1m-manifest.json) and [measured SQL results](docs/run-evidence.md#databricks-cloud-verification).
-
-The dashboard remains a locally exported static snapshot, independently matched against the cloud results. The job processes bounded batches, not continuous ingestion or the full archive.
-
-The earlier v0.2 cloud runs remain separate historical evidence: two successful runs on 10,000 games produced 10,000 unique Bronze records, 9,996 Silver records, 4 quarantined records and seven Delta tables. Each of three Gold marts summed to 9,996, with two history rows and zero inserts / 10,000 duplicate attempts on replay.
+See [test and run measurements](docs/run-evidence.md) and [alternative local Spark setup](DEV_HANDOFF.md#local-spark-and-delta-tests).
 
 ## Source, license and limits
 
-- **Data:** [Lichess Open Database](https://database.lichess.org/) · [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/). The [October 2026 archive](https://database.lichess.org/standard/lichess_db_standard_rated_2026-10.pgn.zst) is a monthly export; only a bounded prefix was downloaded.
-- **Code:** [MIT License](LICENSE).
-- **Limits:** This is a bounded micro-batch pipeline, not a continuous stream or full-month analysis. The small Python pipeline materializes its input; the scalable Spark path reads bounded chunks and uses disk-backed scratch space. Serial ingestion and stable input files are required. It does not validate chess move legality or provide cross-table atomic transactions. Unknown optional fields stay unknown; the average length excludes unknown lengths. Rates are descriptive, not causal estimates of player skill.
-- **Privacy:** Raw PGN, local environments, receipts and generated lakehouse outputs are ignored by Git. The public dashboard contains only grouped statistics and source metadata.
+- Data: [Lichess Open Database](https://database.lichess.org/), released under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/). Project code: [MIT License](LICENSE).
+- The sample is an early part of one monthly archive, not a random sample or a live feed. Its results do not prove that one opening is stronger than another.
+- Average Elo groups use 200-point bands. Time-control speeds are estimated from the initial seconds plus 40 times the increment. Rating differences use White's pre-game Elo minus Black's.
+- Game length counts half-moves (one player’s turn) from the recorded notation, without checking move legality. Unknown lengths are excluded from average length; other unknown fields remain visible as `Unknown`.
+- The pipeline runs bounded batches with stable input files and serial ingestion. It does not provide continuous ingestion or cross-table atomic transactions. Raw game files, local receipts and generated tables are not published.
