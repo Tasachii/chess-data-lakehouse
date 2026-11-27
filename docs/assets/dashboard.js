@@ -98,29 +98,49 @@ function overview(data) {
   }
 }
 
-function horizontalRow(row, maxGames, metric = "games") {
+function matchingGames(row, result) {
+  return result === "all" ? row.games : row[result];
+}
+
+function horizontalRow(row, maxGames, metric = "games", result = "all") {
+  const count = matchingGames(row, result);
+  const selected = outcomes.find((outcome) => outcome.key === result);
   const container = node("div", "opening-row");
   const chart = node("div");
   const title = node("p", "row-name", row.label);
   const lane = node("div", "bar-lane");
   const bar = node("div", "bar-value");
-  bar.style.width = percent(row.games / maxGames);
+  bar.style.width = percent(count / maxGames);
+  const description = selected
+    ? `${fmt(count)} ${selected.label.toLowerCase()} in ${gameDescription(row)}`
+    : gameDescription(row);
   bar.setAttribute("role", "img");
-  bar.setAttribute("aria-label", gameDescription(row));
-  bar.title = gameDescription(row);
-  outcomes.forEach((o) => segment(bar, o, row[o.key], row.games));
+  bar.setAttribute("aria-label", description);
+  bar.title = description;
+  const segments = selected ? [selected] : outcomes;
+  segments.forEach((o) => segment(bar, o, row[o.key], count));
   lane.append(bar);
   chart.append(title, lane);
   const value = node("div", "row-value");
   if (metric === "games") {
     value.append(
-      node("strong", null, fmt(row.games)),
-      node("small", null, `${percent(row.white_wins / row.games)} W`),
+      node("strong", null, fmt(count)),
+      node(
+        "small",
+        null,
+        selected
+          ? `${percent(count / row.games)} of total`
+          : `${percent(row.white_wins / row.games)} W`,
+      ),
     );
   } else {
     value.append(
       node("strong", null, percent(row[metric] / row.games)),
-      node("small", null, `${fmt(row.games)} games`),
+      node(
+        "small",
+        null,
+        selected ? `${fmt(count)} matching` : `${fmt(row.games)} games`,
+      ),
     );
   }
   container.append(chart, value);
@@ -129,20 +149,49 @@ function horizontalRow(row, maxGames, metric = "games") {
 
 function initOpeningExplorer(rows) {
   const search = $("opening-search");
+  const resultControl = $("opening-result");
   const sort = $("opening-sort");
   const minimum = $("min-games");
   const limit = $("opening-limit");
   const list = $("opening-list");
+  const shortcuts = $("opening-quick-picks");
+  const families = [
+    "Italian Game",
+    "Ruy Lopez",
+    "Queen's Gambit",
+    "London System",
+    "English Opening",
+    "Scotch Game",
+  ];
+  const buttons = [];
+  for (const family of families) {
+    const matching = rows.filter((row) =>
+      row.label.toLowerCase().includes(family.toLowerCase()),
+    );
+    if (!matching.length) continue;
+    const button = node("button", "quick-pick", family);
+    button.type = "button";
+    button.title = `${fmt(matching.reduce((sum, row) => sum + row.games, 0))} games across ${fmt(matching.length)} labels`;
+    button.addEventListener("click", () => {
+      search.value = family;
+      render();
+    });
+    shortcuts.append(button);
+    buttons.push(button);
+  }
   function render() {
     const query = search.value.trim().toLowerCase();
     const metric = sort.value;
+    const result = resultControl.value;
+    const countFor = (row) => matchingGames(row, result);
     const matches = rows.filter(
       (row) =>
         row.label.toLowerCase().includes(query) &&
-        row.games >= Number(minimum.value),
+        row.games >= Number(minimum.value) &&
+        countFor(row) > 0,
     );
     const measure = (row) =>
-      metric === "games" ? row.games : row[metric] / row.games;
+      metric === "games" ? countFor(row) : row[metric] / row.games;
     matches.sort(
       (a, b) =>
         measure(b) - measure(a) ||
@@ -150,22 +199,35 @@ function initOpeningExplorer(rows) {
         a.label.localeCompare(b.label),
     );
     const displayed = matches.slice(0, Number(limit.value));
+    const resultLabel =
+      outcomes.find((outcome) => outcome.key === result)?.label.toLowerCase() ||
+      "games";
+    const matchingTotal = matches.reduce((sum, row) => sum + countFor(row), 0);
     $("opening-summary").textContent =
-      `Showing ${fmt(displayed.length)} of ${fmt(matches.length)} matching openings`;
+      `Showing ${fmt(displayed.length)} of ${fmt(matches.length)} matching openings · ${fmt(matchingTotal)} ${resultLabel}`;
+    sort.options[0].textContent =
+      result === "all" ? "Most played" : "Most matching results";
+    for (const button of buttons) {
+      button.setAttribute(
+        "aria-pressed",
+        String(button.textContent.toLowerCase() === query),
+      );
+    }
     $("opening-empty").hidden = matches.length !== 0;
     list.replaceChildren();
     if (!matches.length) return;
-    const maxGames = Math.max(...matches.map((row) => row.games));
+    const maxGames = Math.max(...matches.map(countFor));
     list.append(
-      ...displayed.map((row) => horizontalRow(row, maxGames, metric)),
+      ...displayed.map((row) => horizontalRow(row, maxGames, metric, result)),
     );
   }
   search.addEventListener("input", render);
-  [sort, minimum, limit].forEach((control) =>
+  [sort, minimum, resultControl, limit].forEach((control) =>
     control.addEventListener("change", render),
   );
   $("reset-filters").addEventListener("click", () => {
     search.value = "";
+    resultControl.value = "all";
     sort.value = "games";
     minimum.value = "1";
     limit.value = "10";

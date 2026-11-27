@@ -127,9 +127,17 @@
                 >Search opening<input
                   id="opening-search"
                   type="search"
-                  placeholder="e.g. Sicilian"
+                  placeholder="e.g. Italian Game or Ruy Lopez"
                   autocomplete="off"
               /></label>
+              <label for="opening-result"
+                >Game result<select id="opening-result">
+                  <option value="all">All games</option>
+                  <option value="white_wins">White wins</option>
+                  <option value="black_wins">Black wins</option>
+                  <option value="draws">Draws</option>
+                </select></label
+              >
               <label for="opening-sort"
                 >Sort by<select id="opening-sort">
                   <option value="games">Most played</option>
@@ -139,13 +147,20 @@
                 </select></label
               >
               <label for="min-games"
-                >Minimum games<select id="min-games">
+                >Minimum total games<select id="min-games">
                   <option value="1">Any</option>
                   <option value="5">5+</option>
                   <option value="20">20+</option>
                   <option value="50">50+</option>
                 </select></label
               >
+            </div>
+            <div
+              class="opening-shortcuts"
+              aria-label="Opening search shortcuts"
+            >
+              <span>Explore openings</span>
+              <div class="quick-picks" id="opening-quick-picks"></div>
             </div>
             <div class="chart-toolbar">
               <span id="opening-summary" role="status" aria-live="polite"></span
@@ -170,8 +185,10 @@
               <button id="reset-filters" type="button">Reset filters</button>
             </div>
             <p class="panel-foot">
-              Bar widths compare game counts with the most-played matching
-              opening; colors show outcomes. Small groups are noisy.
+              Bar widths compare matching game counts. The result filter selects
+              wins for White, wins for Black, or draws; rates always use all
+              games in each opening. Opening labels describe the game, not an
+              exclusive opening for either side. Small groups are noisy.
             </p>
           </section>
           <div class="side-stack">

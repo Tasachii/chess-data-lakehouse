@@ -95,6 +95,56 @@ async function main() {
       await page.locator("#opening-list .row-name").first().innerText(),
       most.label,
     );
+    for (const [family, outcome] of [
+      ["Italian Game", "white_wins"],
+      ["Ruy Lopez", "black_wins"],
+      ["Italian Game", "draws"],
+    ]) {
+      const matches = snapshot.groups.opening.filter((row) =>
+        row.label.toLowerCase().includes(family.toLowerCase()),
+      );
+      assert.ok(
+        matches.length > 0,
+        `Missing real opening labels for ${family}`,
+      );
+      const shortcut = page
+        .locator("#opening-quick-picks")
+        .getByRole("button", { name: family, exact: true });
+      await shortcut.click();
+      assert.equal(await shortcut.getAttribute("aria-pressed"), "true");
+      assert.equal(await page.locator("#opening-search").inputValue(), family);
+      await page.locator("#opening-result").selectOption(outcome);
+      const matchingRows = matches
+        .filter((row) => row[outcome] > 0)
+        .sort(
+          (a, b) =>
+            b[outcome] - a[outcome] ||
+            b.games - a.games ||
+            a.label.localeCompare(b.label),
+        );
+      assert.ok(matchingRows.length > 0);
+      const visible = matchingRows.slice(0, 10);
+      assert.deepEqual(
+        await page.locator("#opening-list .row-name").allTextContents(),
+        visible.map((row) => row.label),
+      );
+      assert.deepEqual(
+        await page.locator("#opening-list .row-value strong").allTextContents(),
+        visible.map((row) => fmt(row[outcome])),
+      );
+      assert.ok(
+        (await page.locator("#opening-summary").innerText()).includes(
+          fmt(matchingRows.reduce((sum, row) => sum + row[outcome], 0)),
+        ),
+      );
+    }
+    await page.locator("#opening-search").fill("no-such-opening-zzzz");
+    await page.locator("#reset-filters").click();
+    assert.equal(await page.locator("#opening-result").inputValue(), "all");
+    assert.equal(
+      await page.locator("#opening-quick-picks [aria-pressed=true]").count(),
+      0,
+    );
     await page.locator("#opening-search").fill("Sicilian");
     assert.ok(
       (await page.locator("#opening-list .row-name").allTextContents()).every(
@@ -173,7 +223,7 @@ async function main() {
     }
     assert.deepEqual(errors, []);
     console.log(
-      "PASS desktop/mobile: snapshot, counts, search, filter, sort, limit, reset, rating metric, bar selection, responsive widths, outcome caption layout, no console errors",
+      "PASS desktop/mobile: snapshot, counts, opening shortcuts, result filters, search, sort, limit, reset, rating metric, bar selection, responsive widths, outcome caption layout, no console errors",
     );
   } finally {
     await browser.close();
