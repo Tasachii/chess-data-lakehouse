@@ -1,6 +1,6 @@
 # Publication notes — one-million-game snapshot
 
-The one-million-game dashboard is published from `main:/docs`. The [Pages build](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46038266738) at commit `7f45e0e` and [hosted CI](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46038266966) passed; the live snapshot matched the committed bytes. The subsequent Databricks incremental run also passed direct SQL verification against the local one-million-game results.
+The one-million-game dashboard is published from `main:/docs`. The [Pages build](https://github.com/Tasachii/Chess-Data-Lakehouse/actions/runs/46038266738) at commit `7f45e0e` and [hosted CI](https://github.com/Tasachii/Chess-Data-Lakehouse/actions/runs/46038266966) passed; the live snapshot matched the committed bytes. The subsequent Databricks incremental run also passed direct SQL verification against the local one-million-game results.
 
 ## Measured local results
 
@@ -70,7 +70,7 @@ In another terminal:
 ```bash
 NODE_PATH="$PWD/output/dashboard-browser/node_modules" \
 DASHBOARD_BROWSER_CHANNEL=chrome \
-DASHBOARD_URL=http://127.0.0.1:18767/chess-data-lakehouse/ \
+DASHBOARD_URL=http://127.0.0.1:18767/Chess-Data-Lakehouse/ \
 node scripts/test_dashboard.cjs
 ```
 

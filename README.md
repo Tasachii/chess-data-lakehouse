@@ -2,7 +2,7 @@
 
 I enjoy chess and wanted to see how different openings fare at different ratings. I built a data pipeline for one million rated games from Lichess so I could explore this question. Pick an opening in the dashboard to see how often White won, Black won, or the game ended in a draw.
 
-**Try it now:** [Live dashboard](https://tasachii.github.io/chess-data-lakehouse/) · [Dashboard source](docs/index.html) · [Download aggregate data (JSON)](docs/assets/snapshot.json)
+**Try it now:** [Live dashboard](https://tasachii.github.io/Chess-Data-Lakehouse/) · [Dashboard source](docs/index.html) · [Download aggregate data (JSON)](docs/assets/snapshot.json)
 
 | Search and compare openings | Italian Game study by rating and time control |
 | --- | --- |
@@ -50,7 +50,7 @@ For example, searching for Italian Game matches 40,544 games, Ruy Lopez matches 
 To view the saved dashboard locally, clone the repository and start a small web server:
 
 ```bash
-git clone https://github.com/Tasachii/chess-data-lakehouse.git
+git clone https://github.com/Tasachii/Chess-Data-Lakehouse.git
 cd chess-data-lakehouse
 python3 -m http.server 8765 --directory docs
 ```
@@ -143,7 +143,7 @@ Each Gold table sums to 998,976 validated games. The earlier 100,000-game replay
 .venv/bin/ruff format --check src tests scripts
 ```
 
-The final [GitHub Actions CI run](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46043147019) passed both the Python/dashboard and Spark/Delta fixture jobs. The final [GitHub Pages build](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46043146869) also passed. Independent checks matched the live files to the committed files and tested opening filters on desktop and mobile.
+The final [GitHub Actions CI run](https://github.com/Tasachii/Chess-Data-Lakehouse/actions/runs/46043147019) passed both the Python/dashboard and Spark/Delta fixture jobs. The final [GitHub Pages build](https://github.com/Tasachii/Chess-Data-Lakehouse/actions/runs/46043146869) also passed. Independent checks matched the live files to the committed files and tested opening filters on desktop and mobile.
 
 To include the optional Spark/Delta tests with a bounded 100-game real sample, install Java and run:
 

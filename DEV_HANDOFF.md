@@ -1,6 +1,6 @@
 # Operations and validation notes
 
-These notes explain how to run, inspect and reproduce the lakehouse. The local pipeline passed independent testing at commit `94f58a11304cc11c92e102f3894aabcbdcc80ce9`. The v0.3 dashboard adds optional Silver fields and four Gold marts while retaining the original validation and deduplication behavior. The v0.3 Databricks bundle passed CLI validation and deployment, two serverless job runs on the 100,000-game sample, and the subsequent SQL checks. The previous 10,000-game [live dashboard](https://tasachii.github.io/chess-data-lakehouse/) and [hosted CI](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046) both passed verification. The one-million-game dashboard was exported and verified locally with Spark, then the existing Databricks schema was extended to the same one-million-game sample. Direct SQL checks matched every Gold group with the local results.
+These notes explain how to run, inspect and reproduce the lakehouse. The local pipeline passed independent testing at commit `94f58a11304cc11c92e102f3894aabcbdcc80ce9`. The v0.3 dashboard adds optional Silver fields and four Gold marts while retaining the original validation and deduplication behavior. The v0.3 Databricks bundle passed CLI validation and deployment, two serverless job runs on the 100,000-game sample, and the subsequent SQL checks. The previous 10,000-game [live dashboard](https://tasachii.github.io/Chess-Data-Lakehouse/) and [hosted CI](https://github.com/Tasachii/Chess-Data-Lakehouse/actions/runs/46021313046) both passed verification. The one-million-game dashboard was exported and verified locally with Spark, then the existing Databricks schema was extended to the same one-million-game sample. Direct SQL checks matched every Gold group with the local results.
 
 ## Local replay and lineage
 
@@ -48,7 +48,7 @@ CHESS_REAL_SAMPLE="$PWD/data/real_sample_100.pgn" \
 .venv/bin/python -m pytest -s -ra tests --basetemp output/spark-tests
 ```
 
-Generate `data/real_sample_100.pgn` using the 100-game download command in the README before running. The local tests create temporary managed Delta tables and compare the real Silver fields and all Gold metrics. The fresh optional Spark/Delta installation and explicit matching JAR route also passed for the earlier release in [hosted CI](https://github.com/Tasachii/chess-data-lakehouse/actions/runs/46021313046). The automatic Maven resolver was not separately tested.
+Generate `data/real_sample_100.pgn` using the 100-game download command in the README before running. The local tests create temporary managed Delta tables and compare the real Silver fields and all Gold metrics. The fresh optional Spark/Delta installation and explicit matching JAR route also passed for the earlier release in [hosted CI](https://github.com/Tasachii/Chess-Data-Lakehouse/actions/runs/46021313046). The automatic Maven resolver was not separately tested.
 
 ## Local Spark scale check
 
